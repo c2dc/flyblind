@@ -1,0 +1,35 @@
+# ORANSlice TM — nr-UE runtime image (RFsimulator only)
+FROM ran-build:latest AS nr-ue-build
+
+FROM ubuntu:jammy AS oai-nr-ue
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        bash procps net-tools iproute2 iputils-ping \
+        libsctp1 libconfig9 libblas3 liblapacke openssl \
+        libboost-chrono1.74.0 libboost-date-time1.74.0 libboost-filesystem1.74.0 \
+        libboost-regex1.74.0 libboost-serialization1.74.0 libboost-thread1.74.0 \
+        libboost-system1.74.0 libboost-program-options1.74.0 \
+        python3 python3-six ca-certificates && \
+    apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/oai-nr-ue/bin
+COPY --from=nr-ue-build /oai-ran/cmake_targets/ran_build/build/nr-uesoftmodem ./
+
+COPY --from=nr-ue-build \
+    /oai-ran/cmake_targets/ran_build/build/librfsimulator.so \
+    /oai-ran/cmake_targets/ran_build/build/libcoding.so \
+    /oai-ran/cmake_targets/ran_build/build/libparams_libconfig.so \
+    /oai-ran/cmake_targets/ran_build/build/libdfts.so \
+    /usr/local/lib/
+
+COPY --from=nr-ue-build /oai-ran/cmake_targets/ran_build/build/libldpc*.so /usr/local/lib/
+
+RUN ln -sf /usr/local/lib/librfsimulator.so /usr/local/lib/liboai_device.so && \
+    ldconfig && \
+    ldd /opt/oai-nr-ue/bin/nr-uesoftmodem
+
+WORKDIR /opt/oai-nr-ue
+CMD ["/opt/oai-nr-ue/bin/nr-uesoftmodem"]

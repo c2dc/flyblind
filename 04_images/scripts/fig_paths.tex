@@ -1,0 +1,27 @@
+% Standalone: instrumented paths probe vs telemetry (fig:paths).
+% Build: ./build_fig_paths.sh → ../pdfs/fig_paths.pdf
+\documentclass[tikz,border=1.5pt]{standalone}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,fit,positioning,shapes.geometric,shapes.symbols}
+
+\graphicspath{{../icons/}{icons/}}
+
+\definecolor{sliceB}{HTML}{1A5FB4}
+\definecolor{sliceA}{HTML}{C45C00}
+\definecolor{probeG}{HTML}{1B7A3A}
+\definecolor{freshR}{HTML}{C62828}
+\definecolor{videoP}{HTML}{6A1B9A}
+\definecolor{rogueO}{HTML}{E65100}
+\definecolor{gnbGrey}{HTML}{5B6573}
+\definecolor{boxFill}{HTML}{F7F8FA}
+\definecolor{ink}{HTML}{1F2933}
+\definecolor{muted}{HTML}{5B6573}
+
+\begin{document}
+\input{fig_paths_body}
+\end{document}

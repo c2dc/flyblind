@@ -1,0 +1,74 @@
+{
+  "clock_methodology": "CLOCK_MONOTONIC single-host Kind (GCS+UAV co-located, shared time ns); OWD = rx_uav - tx_gcs (no NTP correction on asymmetric PDU)",
+  "gcs_ip": "12.1.1.130",
+  "uav_ip": "12.1.1.131",
+  "duration_s": 600,
+  "warmup_discarded_s": 10,
+  "samples": 472423,
+  "clock_sanity": {
+    "time_namespace_gcs": "time:[4026532905]",
+    "time_namespace_uav": "time:[4026532905]",
+    "time_namespace_match": true,
+    "loopback_gcs_pdu": {
+      "samples": 503937,
+      "median_us": 2.388,
+      "p99_us": 74.223,
+      "max_us": 3240.988
+    },
+    "loopback_median_max_us": 5000.0,
+    "handshake_4ts": {
+      "samples": 100,
+      "ntp_theta_median_us": -1255.861,
+      "ntp_theta_mean_us": -1205.6138899999996,
+      "ntp_theta_min_us": -7230.706,
+      "ntp_theta_max_us": 6083.22,
+      "rtt_median_us": 16890.714,
+      "ordering_violations": 0,
+      "note": "NTP theta on asymmetric PDU path \u2014 path asymmetry, not clock skew"
+    },
+    "ordering_violations_max": 0,
+    "negative_owd_samples": 0,
+    "clock_offset_applied_us": 0.0,
+    "offset_correction_note": "Shared time namespace \u2014 no subtraction; handshake ntp_theta_median_us is PDU path-asymmetry diagnostic"
+  },
+  "owd_us": {
+    "min": 3187.25,
+    "median": 11062.366,
+    "p99": 20867.325,
+    "p99_9": 24084.907,
+    "max": 38350.271
+  },
+  "ipdv_us": {
+    "median": 1210.299,
+    "p99": 13630.907,
+    "p99_9": 17685.847,
+    "max": 25324.898999999998
+  },
+  "owd_temporal_trend_us": {
+    "first_decile_mean_us": 11316.511141209094,
+    "last_decile_mean_us": 11555.120029930993,
+    "delta_us": 238.60888872189935,
+    "max_abs_delta_us": 10000.0,
+    "exceeds_cap": false,
+    "gate_action": "informational (shared time namespace \u2014 trend is path/attack signal, not skew)",
+    "note": "Time-ordered 1st vs last decile \u2014 clock contamination only if clock can drift"
+  },
+  "owd_spread_sorted_deciles_us": {
+    "delta_us": 11670.952979361587,
+    "note": "Fastest vs slowest deciles after sorting \u2014 distribution spread, NOT clock drift"
+  },
+  "availability": {
+    "packets_sent": 482423,
+    "packets_received_total": 482423,
+    "packets_received_post_warmup": 472423,
+    "expected_sent_post_warmup": 472423,
+    "availability_post_warmup_pct": 100.0,
+    "packet_loss_post_warmup_pct": 0.0,
+    "do377a_min_availability_pct": 0.0,
+    "do377a_compliant": null
+  },
+  "do377a_thresholds_us": {
+    "owd_p99_max": null,
+    "ipdv_p99_max": null
+  }
+}

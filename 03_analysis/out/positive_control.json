@@ -1,0 +1,119 @@
+{
+  "schema": "flyblind_positive_control_v1",
+  "alert_severity_max": 4,
+  "control": {
+    "status": "present",
+    "run_dir": "02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1",
+    "injection": {
+      "leg": "command (GCS -> UAV)",
+      "pod": "oai-ue-gcs",
+      "dest": "12.1.1.133/32",
+      "method": "ip route add/del blackhole (no iptables, no qdisc change)",
+      "cut_duration_s": 10.159060075
+    },
+    "cut_t_rel_s": [
+      218.375037523,
+      228.534097598
+    ],
+    "mavlink_t_rel_offset_s": 90.336229111,
+    "failsafe": {
+      "triggered": true,
+      "mode": "RTL",
+      "t_rel_s_mavlink_base": 132.9230681439949,
+      "t_rel_s": 223.2592972549949,
+      "latency_after_cut_s": 4.884259731994888
+    },
+    "causally_attributed": true,
+    "mode_transitions": [
+      {
+        "t_rel_s": 12.052,
+        "from": "LAND",
+        "to": "GUIDED",
+        "steady_state": false
+      },
+      {
+        "t_rel_s": 132.923,
+        "from": "GUIDED",
+        "to": "RTL",
+        "steady_state": true
+      },
+      {
+        "t_rel_s": 615.204,
+        "from": "RTL",
+        "to": "LAND",
+        "steady_state": true
+      }
+    ],
+    "alerts": [
+      {
+        "t_rel_s": 90.553229111,
+        "phase": null,
+        "severity": 4,
+        "text": "GCS Failsafe Cleared"
+      },
+      {
+        "t_rel_s": 223.259001698,
+        "phase": "ATTACK",
+        "severity": 4,
+        "text": "GCS Failsafe"
+      },
+      {
+        "t_rel_s": 229.240628575,
+        "phase": "ATTACK",
+        "severity": 4,
+        "text": "GCS Failsafe Cleared"
+      }
+    ],
+    "telemetry_aoi_p50_ms": 18.318,
+    "valid": false,
+    "valid_note": "VALID=NO is expected: a tripped failsafe fails the baseline mission gates by construction. This run is read as a control, not as a scored run."
+  },
+  "attack": {
+    "condition": "a_atk_n4",
+    "label": "Attack N=4, video 12 Mb/s (headline)",
+    "n_runs": 5,
+    "telemetry_aoi_p50_ms": {
+      "n": 5,
+      "mean": 13013.855,
+      "sd": 35.16098763544661,
+      "min": 12966.237,
+      "max": 13065.243
+    },
+    "failsafe_triggered": {
+      "true": 0,
+      "of": 5
+    },
+    "alerts_in_attack_window": {
+      "n": 5,
+      "mean": 0.0,
+      "sd": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "alert_texts": []
+  },
+  "baseline": {
+    "condition": "a_baseline",
+    "label": "Baseline, video 12 Mb/s",
+    "n_runs": 3,
+    "telemetry_aoi_p50_ms": {
+      "n": 3,
+      "mean": 18.541999999999998,
+      "sd": 0.29754159373102895,
+      "min": 18.272,
+      "max": 18.861
+    },
+    "failsafe_triggered": {
+      "true": 0,
+      "of": 3
+    },
+    "alerts_in_attack_window": {
+      "n": 3,
+      "mean": 0.0,
+      "sd": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "alert_texts": []
+  }
+}

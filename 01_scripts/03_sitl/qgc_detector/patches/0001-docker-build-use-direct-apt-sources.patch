@@ -1,0 +1,20 @@
+diff --git a/deploy/docker/lib/setup-base.sh b/deploy/docker/lib/setup-base.sh
+index 71e3267..bd0e976 100644
+--- a/deploy/docker/lib/setup-base.sh
++++ b/deploy/docker/lib/setup-base.sh
+@@ -13,9 +13,12 @@ Acquire::http::Timeout "30";
+ Acquire::https::Timeout "30";
+ EOF
+ 
+-for f in /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
+-    [ -f "$f" ] && sed -i 's|https\?://archive.ubuntu.com/ubuntu|mirror://mirrors.ubuntu.com/mirrors.txt|g' "$f"
+-done
++# FlyBlind build fix: the mirror:// redirector (mirrors.ubuntu.com/mirrors.txt)
++# cannot fetch its mirror list in this build network, so keep the default direct
++# archive.ubuntu.com sources (reachable). Original switch disabled below.
++# for f in /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
++#     [ -f "$f" ] && sed -i 's|https\?://archive.ubuntu.com/ubuntu|mirror://mirrors.ubuntu.com/mirrors.txt|g' "$f"
++# done
+ 
+ apt-get update
+ # shellcheck disable=SC2086

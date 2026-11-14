@@ -1,0 +1,191 @@
+{
+  "schema": "flyblind_drain_recovery_v1",
+  "criterion": {
+    "window_s": 10.0,
+    "step_s": 1.0,
+    "delta_abs_s": 0.05,
+    "delta_factor": 1.5,
+    "belief_abs_m": 0.3,
+    "belief_factor": 1.5,
+    "baseline": "p50 of the PRE window of the same run",
+    "delta": "telemetry AoI (GCS arrival - SITL egress), s",
+    "recovery_time": "end of the first in-band window after attack_end (>= window_s)",
+    "last_aoi_sample_out_of_band": "sample-level diagnostic: last AoI sample above the band, seconds after attack_end (not the harness criterion)"
+  },
+  "rows": [
+    {
+      "condition": "g_drain_video_on",
+      "label": "DRAIN, video continues",
+      "n_runs": 3,
+      "recovered": {
+        "true": 3,
+        "of": 3
+      },
+      "recovery_time_s": {
+        "n": 3,
+        "mean": 25.666666666666668,
+        "sd": 0.5773502691896257,
+        "min": 25.0,
+        "max": 26.0
+      },
+      "aoi_in_band_after_s": {
+        "n": 3,
+        "mean": 25.666666666666668,
+        "sd": 0.5773502691896257,
+        "min": 25.0,
+        "max": 26.0
+      },
+      "belief_in_band_after_s": {
+        "n": 3,
+        "mean": 25.333333333333332,
+        "sd": 0.5773502691896257,
+        "min": 25.0,
+        "max": 26.0
+      },
+      "last_aoi_sample_out_of_band_s": {
+        "n": 3,
+        "mean": 17.709519939,
+        "sd": 0.4004402119831585,
+        "min": 17.35917149799991,
+        "max": 18.146026019000033
+      },
+      "drain_window_s": {
+        "n": 3,
+        "mean": 174.97266666666664,
+        "sd": 0.2537406812738935,
+        "min": 174.67999999999995,
+        "max": 175.13099999999997
+      },
+      "baseline_delta_p50_s": {
+        "n": 3,
+        "mean": 0.018186666666666667,
+        "sd": 0.000527875300931322,
+        "min": 0.017635,
+        "max": 0.018687000000000002
+      },
+      "baseline_belief_p50_m": {
+        "n": 3,
+        "mean": 0.999,
+        "sd": 0.004358898943540652,
+        "min": 0.994,
+        "max": 1.002
+      }
+    },
+    {
+      "condition": "g_drain_video_off",
+      "label": "DRAIN, video stops at attack end",
+      "n_runs": 3,
+      "recovered": {
+        "true": 3,
+        "of": 3
+      },
+      "recovery_time_s": {
+        "n": 3,
+        "mean": 26.0,
+        "sd": 0.0,
+        "min": 26.0,
+        "max": 26.0
+      },
+      "aoi_in_band_after_s": {
+        "n": 3,
+        "mean": 26.0,
+        "sd": 0.0,
+        "min": 26.0,
+        "max": 26.0
+      },
+      "belief_in_band_after_s": {
+        "n": 3,
+        "mean": 26.0,
+        "sd": 0.0,
+        "min": 26.0,
+        "max": 26.0
+      },
+      "last_aoi_sample_out_of_band_s": {
+        "n": 3,
+        "mean": 18.061150908666644,
+        "sd": 0.13560478021049746,
+        "min": 17.945048652999958,
+        "max": 18.21019025599992
+      },
+      "drain_window_s": {
+        "n": 3,
+        "mean": 174.4423333333333,
+        "sd": 0.19038207198507326,
+        "min": 174.23699999999997,
+        "max": 174.61299999999994
+      },
+      "baseline_delta_p50_s": {
+        "n": 3,
+        "mean": 0.018419333333333333,
+        "sd": 7.506219643291572e-05,
+        "min": 0.018375,
+        "max": 0.018506
+      },
+      "baseline_belief_p50_m": {
+        "n": 3,
+        "mean": 1.0016666666666667,
+        "sd": 0.0015275252316518995,
+        "min": 1.0,
+        "max": 1.003
+      }
+    },
+    {
+      "condition": "a_atk_n4",
+      "label": "Attack N=4, video 12 Mb/s (headline)",
+      "n_runs": 5,
+      "recovered": {
+        "true": 0,
+        "of": 5
+      },
+      "recovery_time_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "min": null,
+        "max": null
+      },
+      "aoi_in_band_after_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "min": null,
+        "max": null
+      },
+      "belief_in_band_after_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "min": null,
+        "max": null
+      },
+      "last_aoi_sample_out_of_band_s": {
+        "n": 5,
+        "mean": 4.418585921600015,
+        "sd": 0.294226401070589,
+        "min": 3.9747151480000866,
+        "max": 4.775909572999922
+      },
+      "drain_window_s": {
+        "n": 5,
+        "mean": 4.668000000000006,
+        "sd": 0.2174074515741963,
+        "min": 4.488000000000056,
+        "max": 5.025999999999954
+      },
+      "baseline_delta_p50_s": {
+        "n": 5,
+        "mean": 0.018062799999999997,
+        "sd": 0.0006014147487383401,
+        "min": 0.017391999999999998,
+        "max": 0.018916
+      },
+      "baseline_belief_p50_m": {
+        "n": 5,
+        "mean": 1.0033999999999998,
+        "sd": 0.0020736441353327363,
+        "min": 1.002,
+        "max": 1.007
+      }
+    }
+  ]
+}

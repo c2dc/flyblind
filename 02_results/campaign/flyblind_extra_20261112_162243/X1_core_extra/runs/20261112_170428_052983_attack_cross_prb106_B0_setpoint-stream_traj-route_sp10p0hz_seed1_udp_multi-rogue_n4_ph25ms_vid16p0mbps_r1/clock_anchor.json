@@ -1,0 +1,9 @@
+{
+  "schema": "flyblind_clock_anchor_v2",
+  "T0_mono_ns": 64050069373893,
+  "T0_unix_ns": 1794513954663026602,
+  "written_unix_ns": 1794513954663029471,
+  "event_markers_clock": "host monotonic; t_rel_s = (t_mono - T0_mono_ns)/1e9",
+  "proxy_link_clock": "pod monotonic == host when time_namespace_match; t_rel_s = (t_arrival_ns - T0_mono_ns)/1e9",
+  "t0_unix_ns_role": "metadata only (not used for phase slice of proxy_link)"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "trk_truth_v1",
+  "ok": true,
+  "note": "REPORT ONLY \u2014 SITL egress NED vs planned setpoint ref; complements trk_err (GCS belief vs plan). Not scored by VALID/DAMAGE.",
+  "clock_offset_applied_ns": 1213000,
+  "clock_offset_median_ms": 1.213,
+  "ned_samples_uav": 2838,
+  "setpoints_joined": 5710,
+  "setpoints_skipped_ref": 0,
+  "setpoints_skipped_gap": 0,
+  "max_join_gap_ms": 500.0,
+  "tracking_error_truth_m": {
+    "p50": 7.896,
+    "p95": 9.644,
+    "p99": 50.647,
+    "p99_9": 96.903,
+    "max": 97.117,
+    "mean": 8.567,
+    "n": 5710,
+    "median": 7.896
+  },
+  "tracking_error_truth_xy_m": {
+    "p50": 7.896,
+    "p95": 9.644,
+    "p99": 50.485,
+    "p99_9": 96.585,
+    "max": 96.696,
+    "mean": 8.564,
+    "n": 5710,
+    "median": 7.896
+  },
+  "steady_tracking_error_truth_m": {
+    "p50": null,
+    "p95": null,
+    "p99": null,
+    "p99_9": null,
+    "max": null,
+    "mean": null,
+    "n": 0
+  },
+  "metric_definitions": {
+    "tracking_error_truth_m": "||pos_SITL_egress \u2212 pos_planned|| (m) at each setpoint generation; truth = latest c2_telemetry_uav NED with t_uav \u2264 t_generation_gcs. Compare to flight_state.tracking_error_m (trk_err = GCS belief vs plan).",
+    "steady_tracking_error_truth_m": "Same as tracking_error_truth_m restricted to trajectory_window=steady."
+  }
+}

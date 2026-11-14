@@ -1,0 +1,86 @@
+{
+  "schema_version": "telemetry_downlink_v2",
+  "message": "LOCAL_POSITION_NED",
+  "nominal_hz": 20.0,
+  "ned_samples_gcs": 2122,
+  "ned_samples_uav": 2889,
+  "ned_samples_expected_approx": 11420,
+  "capture_ratio": 0.1858,
+  "uav_to_gcs_delivery_ratio": 0.7345,
+  "matched_uav_gcs": 2122,
+  "belief_matched": 2121,
+  "belief_vs_truth_m": {
+    "p50": 11.973,
+    "p95": 13.452,
+    "p99": 18.27,
+    "p99_9": 28.365,
+    "max": 28.472,
+    "mean": 11.042,
+    "n": 2121
+  },
+  "telemetry_arrival_delay_ms": {
+    "p50": 2864.388,
+    "p95": 3020.975,
+    "p99": 3093.056,
+    "p99_9": 3120.817,
+    "max": 3135.931,
+    "mean": 2868.621,
+    "n": 2122
+  },
+  "inter_arrival_gap_ms": {
+    "p50": 243.014,
+    "p95": 512.937,
+    "p99": 762.509,
+    "p99_9": 1057.88,
+    "max": 1277.261,
+    "mean": 281.188,
+    "n": 2121
+  },
+  "miss_ratio_delay": {
+    "50": 1.0,
+    "100": 1.0,
+    "150": 1.0
+  },
+  "miss_ratio_gap": {
+    "50": 1.0,
+    "100": 1.0,
+    "150": 0.9901
+  },
+  "metric_definitions": {
+    "telemetry_arrival_delay_ms": "One-way downlink delay: t_arrival_gcs \u2212 t_egress_uav (ms), matched by (system_id, time_boot_ms) or sequence. Diagnostic only.",
+    "inter_arrival_gap_ms": "Gap between consecutive LOCAL_POSITION_NED arrivals at GCS (ms).",
+    "capture_ratio": "ned_samples_gcs / (nominal_hz \u00d7 active_duration_s).",
+    "uav_to_gcs_delivery_ratio": "ned_samples_gcs / ned_samples_uav (5G downlink delivery of NED).",
+    "belief_vs_truth_m": "At each GCS NED arrival i: ||pos_belief \u2212 pos_truth|| (m), where belief is the previous GCS sample (frozen GCS state) and truth is the latest SITL-egress NED in c2_telemetry_uav.csv with t_uav_mono \u2264 t_gcs_arrival. Report-only; not scored by VALID/DAMAGE. Requires comparable pod CLOCK_MONOTONIC. [DOWNGRADED to diagnostic: FLAG: belief p50=11.973m exceeds physical max 12.40m (belief age 3.11s \u00d7 speed, capped by trajectory \u00d8 434.8 m) \u2014 likely skew/artifact; clock offset |median|=0.363 ms, spread=25.447 ms (\u2264 100.0/250.0 ms)]"
+  },
+  "belief_validation": {
+    "status": "diagnostic_only",
+    "physical_consistent": false,
+    "clock_ok": true,
+    "speed_mps": 3.99,
+    "belief_p50_m": 11.973,
+    "belief_p99_m": 18.27,
+    "gap_p50_ms": 243.014,
+    "gap_p99_ms": 762.509,
+    "aoi_p50_ms": 2864.388,
+    "aoi_p99_ms": 3093.056,
+    "belief_age_p50_s": 3.107,
+    "belief_age_p99_s": 3.856,
+    "trajectory_diameter_m": 434.817,
+    "anchor": "delivery_AoI+gap",
+    "belief_expected_p50_m": 12.399,
+    "belief_expected_p99_m": 15.384,
+    "clock_skew_abs_median_ms": 0.363,
+    "clock_jitter_spread_ms": 25.447,
+    "thresholds": {
+      "clock_skew_max_ms": 100.0,
+      "clock_jitter_max_ms": 250.0,
+      "phys_factor": 3.0,
+      "phys_abs_floor_m": 2.0,
+      "geom_tol": 1.15
+    },
+    "reason": "FLAG: belief p50=11.973m exceeds physical max 12.40m (belief age 3.11s \u00d7 speed, capped by trajectory \u00d8 434.8 m) \u2014 likely skew/artifact; clock offset |median|=0.363 ms, spread=25.447 ms (\u2264 100.0/250.0 ms)",
+    "appendix_line": "belief_vs_truth_m: DIAGNOSTIC ONLY \u2014 failed integrity check (FLAG: belief p50=11.973m exceeds physical max 12.40m (belief age 3.11s \u00d7 speed, capped by trajectory \u00d8 434.8 m) \u2014 likely skew/artifact; clock offset |median|=0.363 ms, spread=25.447 ms (\u2264 100.0/250.0 ms))",
+    "clock_appendix_line": "measured inter-pod CLOCK_MONOTONIC offset (UAV\u2212GCS): median 0.363 ms, spread(p95\u2212p5) 25.447 ms (N=10)"
+  }
+}

@@ -1,0 +1,757 @@
+{
+  "run_id": "20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1",
+  "run_slug": "baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps",
+  "run_index": 1,
+  "attack_seed": null,
+  "setpoint_seed": 1,
+  "condition": "baseline",
+  "topology": "cross",
+  "gnb_prb": 106,
+  "attack": null,
+  "reservation": 0,
+  "min_ratio_slice_a": 0,
+  "mitigations": {
+    "rate_limit_a": false,
+    "aqm_ul": false,
+    "ul_rrmpolicy": true,
+    "runtime_tc_audit": {
+      "schema_version": "runtime_mitigation_v1",
+      "enabled": false,
+      "pass": true,
+      "rate_limit_a": null,
+      "aqm_ul": null
+    }
+  },
+  "workload": "setpoint-stream",
+  "c2_proxy": false,
+  "c2_transport": "udp",
+  "require_prb": true,
+  "companion_video_mbps": 32.0,
+  "attack_path": null,
+  "mean_rate_mbps": null,
+  "burst_size_bytes": null,
+  "period_ms": null,
+  "attack_start_after_s": null,
+  "attack_burst_duration_s": null,
+  "duration_s": 600,
+  "warmup_s": 10,
+  "timing": {
+    "requested_duration_s": 600,
+    "network_measurement_duration_s": 600,
+    "warmup_s": 10,
+    "envelope_s": 761.0,
+    "mission_len_s": 420,
+    "trajectory_active_duration_s": 571.0,
+    "proxy_watchdog_s": null,
+    "wall_runtime_s": 802.046,
+    "proxy_runtime_s": null,
+    "proxy_shutdown": null,
+    "prb_capture_grace_s": 15.0,
+    "prb_wait_timeout_s": 14.53,
+    "prb_wait_status": "completed"
+  },
+  "port_check": {
+    "proxy_port_5760": "free",
+    "sitl_port_5761": "busy"
+  },
+  "cleanup_audit": {
+    "port_check": {
+      "proxy_port_5760": "free",
+      "sitl_port_5761": "busy"
+    },
+    "gcs_mission_alive": "dead",
+    "companion_iperf_gcs_alive": "dead",
+    "companion_iperf_uav_alive": "dead",
+    "companion_iperf_alive": "dead",
+    "proxy_alive": "dead",
+    "clean": true
+  },
+  "mission_len_s": null,
+  "mission_commands": null,
+  "setpoint_rate_hz": 10.0,
+  "trajectory_duration_s": 571.0,
+  "setpoints_generated": 5710,
+  "proxy_match_ratio": 1.0,
+  "centralization_margin_s": 90.0,
+  "T0_mono_ns": 32666393610338,
+  "T0_unix_ns": 1794482570987263005,
+  "layer_offsets_ns": {
+    "sidecars_ns": 290442,
+    "host_telemetry_ns": 1055989,
+    "upf_telemetry_ns": 1306072,
+    "network_ns": 1771177,
+    "probe_ready_ns": 14028819328,
+    "c2_arrival_capture_ns": 14777115823,
+    "prb_ns": 14778694766,
+    "companion_video_ns": 14779306596,
+    "attack_ns": null,
+    "mission_ns": 90000266316
+  },
+  "layer_offsets_s": {
+    "sidecars_ns": 0.000290442,
+    "host_telemetry_ns": 0.001055989,
+    "upf_telemetry_ns": 0.001306072,
+    "network_ns": 0.001771177,
+    "probe_ready_ns": 14.028819328,
+    "c2_arrival_capture_ns": 14.777115823,
+    "prb_ns": 14.778694766,
+    "companion_video_ns": 14.779306596,
+    "attack_ns": null,
+    "mission_ns": 90.000266316
+  },
+  "returncodes": {
+    "probe": 0,
+    "prb": 0,
+    "mission": 0,
+    "proxy": null,
+    "host_telemetry": 0,
+    "upf_telemetry": 0,
+    "attack": null,
+    "sink": null,
+    "companion_video": 0
+  },
+  "host_loadavg1": {
+    "before": 5.11,
+    "after": 8.72,
+    "nproc": 16
+  },
+  "upf_telemetry": {
+    "schema_version": "upf_telemetry_v1",
+    "deploy": "oai-upf",
+    "core_namespace": "core",
+    "samples": 654,
+    "samples_ok": 654,
+    "sample_errors": 0,
+    "cpu_pct_max": 1.42,
+    "cpu_pct_p50": 0.0,
+    "cpu_pct_p95": 1.26,
+    "cpu_pct_p99": 1.3747000000000003,
+    "cpu_pct_mean": 0.149,
+    "saturate_pct_threshold": 85.0,
+    "saturated": false,
+    "mechanism_hint": "upf_headroom_ok"
+  },
+  "sync_open_loop": null,
+  "sync_phase_ms": null,
+  "sync_skew": null,
+  "gates": {
+    "clock": {
+      "pass": true,
+      "probe_rc": 0,
+      "ordering_violations": 0,
+      "negative_owd_samples": 0,
+      "temporal_trend_us": 175.5668286160435,
+      "temporal_trend_cap_us": 10000.0,
+      "time_namespace_match": true,
+      "temporal_trend_note": "shared time namespace: OWD trend is path/attack signal, not skew",
+      "reason": null
+    },
+    "host": {
+      "pass": true,
+      "gate_type": "host_quality",
+      "enforced": true,
+      "host_telemetry_rc": 0,
+      "loadavg1_max": 13.64,
+      "cpu_busy_pct_max": 59.22,
+      "cpu_busy_max_pct_threshold": 90.0,
+      "loadavg1_before": 5.11,
+      "loadavg1_after": 8.72,
+      "nproc": 16
+    },
+    "upf_cpu": {
+      "pass": true,
+      "enforced": false,
+      "upf_telemetry_rc": 0,
+      "cpu_pct_max": 1.42,
+      "cpu_pct_p50": 0.0,
+      "cpu_pct_p99": 1.3747000000000003,
+      "saturated": false,
+      "saturate_pct_threshold": 85.0,
+      "mechanism_hint": "upf_headroom_ok",
+      "samples_ok": 654,
+      "note": "soft: UPF busy \u21d2 do not claim pure PRB/MAC; UPF headroom + PRB correlation supports RAN attribution"
+    },
+    "host_instrumentation_integrity": {
+      "pass": true,
+      "enforced": true,
+      "probe_rc": 0,
+      "host_rc": 0,
+      "prb_rc": 0,
+      "mission_rc": 0,
+      "proxy_rc": null,
+      "attack_rc": null,
+      "host_samples": 761,
+      "host_min_samples": 684,
+      "oom_or_kill": [],
+      "subchecks": {
+        "clock": {
+          "pass": true
+        },
+        "probe_rc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "host_telemetry_proc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "host_telemetry_span": {
+          "pass": true,
+          "detail": "samples=761 min=684"
+        },
+        "prb_capture_rc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "prb_capture_gate": {
+          "pass": true
+        },
+        "proxy_rc": {
+          "pass": true,
+          "detail": "rc=None"
+        },
+        "proxy_gate": {
+          "pass": true
+        },
+        "freshness_gate": {
+          "pass": true
+        },
+        "stream_gate": {
+          "pass": true
+        },
+        "attack_rc": {
+          "pass": true,
+          "detail": "rc=None"
+        },
+        "oom_or_kill": {
+          "pass": true
+        }
+      },
+      "failed_subchecks": [],
+      "failures": []
+    },
+    "mission_integrity": {
+      "pass": true,
+      "mission_started": true,
+      "mission_rc": 0,
+      "summary_valid": true,
+      "artifacts_required": [
+        "setpoints.csv",
+        "freshness_summary.json"
+      ],
+      "artifacts_missing": [],
+      "silent_crash": false
+    },
+    "mission_success": {
+      "pass": true,
+      "mission_rc": 0,
+      "reason": null
+    },
+    "prb": {
+      "pass": true,
+      "required": true,
+      "dump_samples": 6192,
+      "window_s": 759.3,
+      "per_slice_slices": [
+        "A"
+      ],
+      "roles_mapped": [
+        "gcs",
+        "rogue",
+        "rogue2",
+        "rogue3",
+        "rogue4",
+        "uav"
+      ],
+      "capture_meta": {
+        "schema_version": "prb_capture_v2",
+        "requested_duration_s": 761.0,
+        "capture_process_started_mono": 32681.216954927,
+        "first_dump_mono": 32681.93169707,
+        "last_dump_mono": 33442.186957883,
+        "raw_lines": 85135,
+        "kubectl_restarts": 0,
+        "idle_restarts": 0,
+        "idle_restart_threshold_s": 15.0,
+        "max_silence_s": 1.485,
+        "restart_events": [],
+        "stderr_path": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S1_core/runs/20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1/mac-prb-raw.log.kubectl.err",
+        "termination_reason": "duration_elapsed",
+        "effective_capture_span_s": 760.255,
+        "wall_capture_span_s": 761.004,
+        "run_id": "20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1"
+      },
+      "run_id": "20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1",
+      "slice_source": "gnb_native_active_slices",
+      "role_identity_source": "companion_video_signature_colocated",
+      "kubectl_restarts": 0,
+      "idle_restarts": 0,
+      "max_silence_s": 1.485,
+      "run_id_match": true,
+      "envelope_s": 761.0,
+      "min_window_s": 684.9,
+      "span_ok": true,
+      "identity_ok": true,
+      "uav_ul_mbps": 29.964,
+      "gcs_dl_mbps": 19.058,
+      "identity_floor_mbps": 6.4,
+      "roles_ok": true,
+      "scheduler_ok": true,
+      "rogue_rnti": "2a38",
+      "gcs_rnti": "96fe",
+      "uav_rnti": "4f3e",
+      "audit_checklist": {
+        "run_scoped_artifacts": "yes \u2014 mac-prb-raw.log + capture_meta.run_id per run",
+        "experimental_window_overlap": "yes \u2014 span >= 90% envelope when --require-prb",
+        "parser_no_error": "partial \u2014 dump_samples>0 and per_slice populated",
+        "rnti_role_map": "yes \u2014 rogue/gcs/uav with RNTI when --require-prb",
+        "rnti_slice_map": "partial \u2014 per_slice shares; reservation via preflight",
+        "topology_reservation_match": "preflight + stamp on run_meta"
+      },
+      "pilot_completed": {
+        "intra_B0_gnb106_180s_N1": true
+      }
+    },
+    "availability": {
+      "pass": false,
+      "availability_post_warmup_pct": 98.5822,
+      "min_pct": 99.9,
+      "enforced_on_baseline_only": true
+    },
+    "drone_integrity": {
+      "pass": true,
+      "position_samples": 2222,
+      "setpoint_track_samples": 5710,
+      "flight_state_csv": false,
+      "setpoints_csv": true,
+      "heartbeats_seen": 531,
+      "max_heartbeat_gap_s": 3.908,
+      "bootstrap_land_then_guided": true,
+      "physics_metrics_complete": true
+    },
+    "baseline_drone_quality": {
+      "pass": false,
+      "baseline_only": true,
+      "mission_rc": 0,
+      "heartbeat_gaps_over_threshold": 61,
+      "commands_lost": 0,
+      "failsafe": false,
+      "trajectory_acquisition_completed": true,
+      "cross_track_p99_steady_m": 14.98,
+      "cross_track_p99_m": 14.98,
+      "cross_track_gate_m": 14.98,
+      "max_deviation_m": 18.47,
+      "mode_transition_integrity": true,
+      "land_to_guided": true,
+      "guided_to_land": true,
+      "normal_land": true,
+      "reason": "heartbeat_gaps"
+    },
+    "drone_outcome": {
+      "mission_success": true,
+      "mission_rc": 0,
+      "acquisition_completed": true,
+      "acquisition_time_s": 2.001,
+      "acquisition_cross_track_max_m": 3.83,
+      "paper_comparable": false,
+      "paper_comparable_reasons": [
+        "stream_start_radius_m=101.03 not within 5.0m of R=30.0"
+      ],
+      "stream_start_radius_m": 101.027,
+      "cross_track_p99_steady_m": 14.98,
+      "cross_track_p99_m": 14.98,
+      "tracking_error_p99_m": 74.56,
+      "failsafe": false,
+      "failsafe_mode": null,
+      "landing_requested": true,
+      "landing_normal": true,
+      "final_mode": "LAND",
+      "final_armed": false,
+      "max_deviation_m": 18.47,
+      "landing_completed": true,
+      "mode_transitions": [
+        {
+          "t_rel_s": 18.052,
+          "from": "LAND",
+          "to": "GUIDED",
+          "steady_state": false
+        },
+        {
+          "t_rel_s": 630.067,
+          "from": "GUIDED",
+          "to": "LAND",
+          "steady_state": true
+        }
+      ]
+    },
+    "paper_comparable_orbit": {
+      "pass": false,
+      "enforced": false,
+      "paper_comparable": false,
+      "reasons": [
+        "stream_start_radius_m=101.03 not within 5.0m of R=30.0"
+      ],
+      "stream_start_radius_m": 101.027,
+      "acquisition_duration_s": 2.001,
+      "note": "false if stream started far from circle or acq > 2.5s; enable PREPOSITION_ORBIT_ENTRY=1 for new repros"
+    },
+    "mitigation_integrity": {
+      "pass": true,
+      "runtime_tc": {
+        "schema_version": "runtime_mitigation_v1",
+        "enabled": false,
+        "pass": true,
+        "rate_limit_a": null,
+        "aqm_ul": null
+      },
+      "testbed": {
+        "enabled": true,
+        "pass": true,
+        "ul_rrmpolicy_stamp": {
+          "enabled": "1"
+        },
+        "ul_rrmpolicy_runtime": {
+          "enabled": true,
+          "pass": true,
+          "policy_path": "/tmp/tm_ul_rrmpolicy.conf",
+          "keying": "s_nssai",
+          "ratios_source": "/opt/oai-gnb/etc/rrmPolicy.json",
+          "rrm_policy_ratio": [
+            {
+              "sst": 1,
+              "sd": 16777215,
+              "min_ratio": 0,
+              "max_ratio": 100,
+              "dedicated_ratio": 0
+            },
+            {
+              "sst": 1,
+              "sd": 1,
+              "min_ratio": 0,
+              "max_ratio": 100,
+              "dedicated_ratio": 0
+            }
+          ],
+          "scheduler_ack": "[TM_UL_RRMPOLICY] active",
+          "semantics": "3gpp_ts28541_dedicated_prioritized_shared_two_level_pf",
+          "policy": "enabled=1\n"
+        }
+      }
+    },
+    "freshness_measurement_integrity": {
+      "pass": true,
+      "gate_type": "measurement_integrity",
+      "n_setpoints": 5710,
+      "delivery_ratio": 0.9865148861646235,
+      "capture_ratio": 0.9865148861646235,
+      "correlation_ratio": 1.0,
+      "proxy_match_ratio": 1.0,
+      "min_delivery_ratio": null,
+      "min_capture_ratio": null,
+      "min_correlation_ratio": null,
+      "merge_ok": true,
+      "setpoint_accounting": null,
+      "freshness_sanity": {}
+    },
+    "freshness": {
+      "pass": true,
+      "gate_type": "measurement_integrity",
+      "n_setpoints": 5710,
+      "delivery_ratio": 0.9865148861646235,
+      "capture_ratio": 0.9865148861646235,
+      "correlation_ratio": 1.0,
+      "proxy_match_ratio": 1.0,
+      "min_delivery_ratio": null,
+      "min_capture_ratio": null,
+      "min_correlation_ratio": null,
+      "merge_ok": true,
+      "setpoint_accounting": null,
+      "freshness_sanity": {}
+    },
+    "stream": {
+      "pass": true,
+      "rate_hz_requested": 10.0,
+      "rate_hz_achieved": 10.0,
+      "setpoints_expected": 5710,
+      "setpoints_generated": 5710,
+      "stream_cut_validation": null
+    },
+    "c2_health": {
+      "pass": false,
+      "heartbeat_gaps_over_threshold": 61,
+      "unexpected_failsafe": false,
+      "unexpected_mode_transitions": [],
+      "position_samples": 2222,
+      "normal_land": true,
+      "min_position_samples": 10
+    },
+    "enforced": [
+      "clock",
+      "host",
+      "host_instrumentation_integrity",
+      "mission_integrity",
+      "drone_integrity",
+      "freshness",
+      "stream",
+      "c2_health",
+      "prb",
+      "mitigation_integrity",
+      "availability",
+      "mission_success",
+      "baseline_drone_quality"
+    ],
+    "valid": false
+  },
+  "valid": false,
+  "testbed": {
+    "git": null
+  },
+  "topology_stamp": {
+    "TOPOLOGY": "cross",
+    "GNB_PRB": "106",
+    "MIN_RATIO_SLICE_A": "0",
+    "MIN_RATIO_SLICE_B": "0",
+    "PIN_CORES": "0",
+    "CORES_GNB": "0-4",
+    "CORES_GCS": "5",
+    "CORES_UAV": "6",
+    "CORES_ROGUE": "7-9",
+    "CORES_ATTACK": "10-13",
+    "SITL_TCP_PORT": "5760",
+    "ACK_PROBE_SOCAT": "1",
+    "ACK_PROBE_UDP_PORT": "5763",
+    "ACK_PROBE_SITL_TCP": "5762",
+    "EXTRA_ROGUE_COUNT": "3",
+    "ROGUE_5QI": "9",
+    "C2_5QI": "82",
+    "VICTIM_IN_EMBB": "1",
+    "VICTIM_5QI": "9",
+    "EQUAL_5QI": "0",
+    "MITIGATION_AQM": "0",
+    "MITIGATION_UL_RRMPOLICY": "1",
+    "ATTACKER_LABEL": "A0",
+    "PRB_LABEL": "B0"
+  },
+  "pinning": {
+    "TOPOLOGY": "cross",
+    "GNB_PRB": "106",
+    "MIN_RATIO_SLICE_A": "0",
+    "MIN_RATIO_SLICE_B": "0",
+    "PIN_CORES": "0",
+    "CORES_GNB": "0-4",
+    "CORES_GCS": "5",
+    "CORES_UAV": "6",
+    "CORES_ROGUE": "7-9",
+    "CORES_ATTACK": "10-13",
+    "SITL_TCP_PORT": "5760",
+    "ACK_PROBE_SOCAT": "1",
+    "ACK_PROBE_UDP_PORT": "5763",
+    "ACK_PROBE_SITL_TCP": "5762",
+    "EXTRA_ROGUE_COUNT": "3",
+    "ROGUE_5QI": "9",
+    "C2_5QI": "82",
+    "VICTIM_IN_EMBB": "1",
+    "VICTIM_5QI": "9",
+    "EQUAL_5QI": "0",
+    "MITIGATION_AQM": "0",
+    "MITIGATION_UL_RRMPOLICY": "1",
+    "ATTACKER_LABEL": "A0",
+    "PRB_LABEL": "B0"
+  },
+  "attack_summary": null,
+  "receiver_summary": null,
+  "companion_video_summary": {
+    "offered_mbps": 32.0,
+    "port": 5202,
+    "direction": "uav_to_gcs",
+    "path": "uav_ul_gcs_dl",
+    "protocol": "udp",
+    "ok": true,
+    "achieved_mbps": 32.0,
+    "lost_percent": 0.0,
+    "iperf_end_keys": [
+      "sum"
+    ],
+    "returncode": 0,
+    "gcs_ip": "12.1.1.135",
+    "uav_ip": "12.1.1.131"
+  },
+  "outcomes": {
+    "mission_success": true,
+    "mission_rc": 0,
+    "acquisition_completed": true,
+    "acquisition_time_s": 2.001,
+    "acquisition_cross_track_max_m": 3.83,
+    "paper_comparable": false,
+    "paper_comparable_reasons": [
+      "stream_start_radius_m=101.03 not within 5.0m of R=30.0"
+    ],
+    "stream_start_radius_m": 101.027,
+    "cross_track_p99_steady_m": 14.98,
+    "cross_track_p99_m": 14.98,
+    "tracking_error_p99_m": 74.56,
+    "failsafe": false,
+    "failsafe_mode": null,
+    "landing_requested": true,
+    "landing_normal": true,
+    "final_mode": "LAND",
+    "final_armed": false,
+    "max_deviation_m": 18.47,
+    "landing_completed": true,
+    "mode_transitions": [
+      {
+        "t_rel_s": 18.052,
+        "from": "LAND",
+        "to": "GUIDED",
+        "steady_state": false
+      },
+      {
+        "t_rel_s": 630.067,
+        "from": "GUIDED",
+        "to": "LAND",
+        "steady_state": true
+      }
+    ],
+    "companion_video": {
+      "offered_mbps": 32.0,
+      "port": 5202,
+      "direction": "uav_to_gcs",
+      "path": "uav_ul_gcs_dl",
+      "protocol": "udp",
+      "ok": true,
+      "achieved_mbps": 32.0,
+      "lost_percent": 0.0,
+      "iperf_end_keys": [
+        "sum"
+      ],
+      "returncode": 0,
+      "gcs_ip": "12.1.1.135",
+      "uav_ip": "12.1.1.131"
+    }
+  },
+  "timestamp_utc": "2026-11-12T11:36:13.935210+00:00",
+  "paper_artifacts": {
+    "schema_version": "paper_artifacts_v1",
+    "multi_rogue_count": null,
+    "companion_video_mbps": 32.0,
+    "capture": {
+      "c2_arrival_capture": true,
+      "telemetry_arrival_capture": true,
+      "delivery_aoi_ready": true,
+      "note": "delivery AoI (UAV egress \u2192 GCS arrival) needs both flags; gap-only needs --telemetry-arrival-capture"
+    },
+    "attack_onset": null,
+    "offered_attack_load": null,
+    "artifact_paths": {
+      "telemetry_downlink_gcs_csv": "telemetry_downlink_gcs.csv",
+      "c2_telemetry_uav_csv": "c2_telemetry_uav.csv",
+      "c2_arrival_csv": "c2_arrival.csv",
+      "prb_csv": "prb.csv",
+      "prb_raw_log": "mac-prb-raw.log",
+      "prb_json": "prb.json",
+      "event_markers_csv": "event_markers.csv",
+      "analysis_params_json": "analysis_params.json",
+      "host_telemetry_csv": "host_timeseries.csv",
+      "run_meta_json": "run_meta.json"
+    },
+    "analysis_params": {
+      "schema_version": "analysis_params_v1",
+      "T_safe_ms": 500.0,
+      "E_safe_m": 5.0,
+      "geofence_radius_m": 50.0,
+      "landing_radius_m": 5.0,
+      "notes": "Constants for post-processing only. T_safe_ms / E_safe_m feed Semantic Availability offline; geofence/landing radii feed HMI detectors offline."
+    },
+    "event_markers": [
+      {
+        "event": "run_start",
+        "t_rel_s": 0.0,
+        "note": "T0"
+      },
+      {
+        "event": "mission_start",
+        "t_rel_s": 90.0,
+        "note": "centralization margin / mission launch"
+      },
+      {
+        "event": "run_end",
+        "t_rel_s": 802.046,
+        "note": "wall runtime"
+      }
+    ],
+    "written": {
+      "analysis_params_json": "analysis_params.json",
+      "event_markers_csv": "event_markers.csv"
+    }
+  },
+  "multi_rogue_count": null,
+  "schedule_optc": {
+    "schema": "flyblind_schedule_optc_v1",
+    "time_base": "s since T0",
+    "duration_s": 600.0,
+    "warmup_s": 10.0,
+    "mission_start_s": 90.0,
+    "base_envelope_s": 630.0,
+    "legacy_onset_delay_s": 120.0,
+    "burst_s": 510,
+    "onset_anchor_s": 188.3,
+    "onset_delay_s": 174.3,
+    "planned_onset_s": [
+      188.3,
+      192.3
+    ],
+    "planned_attack_end_s": [
+      698.3,
+      702.3
+    ],
+    "virtual_attack_onset_s": 188.3,
+    "virtual_attack_end_s": 698.3,
+    "orbit_acquired_nominal_s": 143.3,
+    "orbit_acquired_bound_s": 158.3,
+    "trajectory_start_nominal_s": 141.3,
+    "trajectory_end_s": 712.3,
+    "trajectory_duration_s": 571.0,
+    "trajectory_tail_s": 10.0,
+    "drain_ceiling_s": 0.0,
+    "capture_end_s": 760.3,
+    "capture_envelope_s": 761,
+    "constants": {
+      "T_TRAJ_START_FROM_LAUNCH_S": 51.3,
+      "T_ORBIT_FROM_LAUNCH_S": 53.3,
+      "ORBIT_MARGIN_S": 15.0,
+      "P_PRE_S": 30.0,
+      "POST_ATTACK_TAIL_S": 10.0,
+      "LAND_BOUND_S": 28.0,
+      "CAPTURE_SLACK_S": 5.0,
+      "ATTACK_LAUNCH_MIN_S": 14.0,
+      "ATTACK_LAUNCH_MAX_S": 18.0,
+      "takeoff_guard_s": 30.0
+    }
+  },
+  "c2_arrival_capture": true,
+  "telemetry_arrival_capture": true,
+  "sidecars": {
+    "profile": "FULL",
+    "duration_s": 761.0
+  },
+  "drain_policy": {
+    "schema": "flyblind_drain_policy_v2",
+    "enabled": false,
+    "video_mode": "a_continue",
+    "window_s": 10.0,
+    "delta_abs_s": 0.05,
+    "delta_factor": 1.5,
+    "belief_abs_m": 0.3,
+    "belief_factor": 1.5,
+    "drain_ceiling_s": 180.0,
+    "baseline_delta_p50_s": null,
+    "baseline_belief_p50_m": null,
+    "baseline_ref_run": null,
+    "baseline_source": "unset",
+    "baseline_source_note": "source not resolved yet; filled in during post-processing",
+    "criterion_text": "Back to baseline when, in a sliding window of 10 s after attack_end, delta_p50 <= max(baseline_delta_p50 + 0.05s, baseline_delta_p50 * 1.5) AND belief_p50 <= max(baseline_belief_p50 + 0.3m, baseline_belief_p50 * 1.5), or when the ceiling drain_ceiling_s=180s is reached. Baseline source: unset.",
+    "live_early_stop": "envelope extended by drain_ceiling_s; live early-stop requires telemetry polling (NOT VERIFIED on the offline bench)",
+    "drain_ceiling_applied_s": 0.0
+  },
+  "video_stop_t_rel_s": null
+}

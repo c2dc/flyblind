@@ -1,0 +1,289 @@
+{
+  "requested_runs": 1,
+  "executed_runs": 1,
+  "valid_runs": 1,
+  "min_valid_runs": 1,
+  "all_runs": [
+    "20261112_080637_141905_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1"
+  ],
+  "run_slug": "attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps",
+  "condition": "attack",
+  "topology": "cross",
+  "gnb_prb": 106,
+  "workload": "setpoint-stream",
+  "attack": "multi-rogue",
+  "duration_s": 600,
+  "wall_total_s": 943.2,
+  "aggregate": {
+    "n_valid": 1,
+    "metrics": {
+      "owd_p50_us": {
+        "values": [
+          17801.237
+        ],
+        "median": 17801.237,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "owd_p99_us": {
+        "values": [
+          34304.195
+        ],
+        "median": 34304.195,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "owd_p99_9_us": {
+        "values": [
+          40550.533
+        ],
+        "median": 40550.533,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "ipdv_p50_us": {
+        "values": [
+          1209.2810000000009
+        ],
+        "median": 1209.2810000000009,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "ipdv_p99_us": {
+        "values": [
+          11119.73
+        ],
+        "median": 11119.73,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "availability_pct": {
+        "values": [
+          99.9496
+        ],
+        "median": 99.9496,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "max_deviation_m": {
+        "values": [
+          53.32
+        ],
+        "median": 53.32,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_err_p99_m": {
+        "values": [
+          64.79
+        ],
+        "median": 64.79,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_truth_p99_m": {
+        "values": [
+          50.453
+        ],
+        "median": 50.453,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_truth_med_m": {
+        "values": [
+          7.874
+        ],
+        "median": 7.874,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "cross_track_p99_steady_m": {
+        "values": [
+          48.48
+        ],
+        "median": 48.48,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "acquisition_time_s": {
+        "values": [
+          2.0
+        ],
+        "median": 2.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p50_ms": {
+        "values": [
+          12998.232
+        ],
+        "median": 12998.232,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p99_ms": {
+        "values": [
+          13645.525
+        ],
+        "median": 13645.525,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p99_9_ms": {
+        "values": [
+          13735.453
+        ],
+        "median": 13735.453,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p50_ms": {
+        "values": [
+          244.076
+        ],
+        "median": 244.076,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p99_ms": {
+        "values": [
+          766.608
+        ],
+        "median": 766.608,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p99_9_ms": {
+        "values": [
+          1009.813
+        ],
+        "median": 1009.813,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "belief_p50_m": {
+        "values": [
+          42.17
+        ],
+        "median": 42.17,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "belief_p99_m": {
+        "values": [
+          55.866
+        ],
+        "median": 55.866,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "prb_share_A_pct": {
+        "values": [
+          100.0
+        ],
+        "median": 100.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "prb_share_B_pct": {
+        "values": [
+          null
+        ],
+        "median": null,
+        "spread": null,
+        "bootstrap_ci95": null
+      },
+      "uav_ul_mbps": {
+        "values": [
+          7.032
+        ],
+        "median": 7.032,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "gcs_ul_mbps": {
+        "values": [
+          0.265
+        ],
+        "median": 0.265,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "host_loadavg_max": {
+        "values": [
+          11.76
+        ],
+        "median": 11.76,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "host_cpu_busy_max_pct": {
+        "values": [
+          55.12
+        ],
+        "median": 55.12,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "upf_cpu_max_pct": {
+        "values": [
+          1.39
+        ],
+        "median": 1.39,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "rogue_count": {
+        "values": [
+          4
+        ],
+        "median": 4,
+        "spread": 0,
+        "bootstrap_ci95": null
+      },
+      "offered_aggregate_mbps": {
+        "values": [
+          80.0
+        ],
+        "median": 80.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "delivery_ratio": {
+        "values": [
+          0.999124343257443
+        ],
+        "median": 0.999124343257443,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "correlation_ratio": {
+        "values": [
+          1.0
+        ],
+        "median": 1.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "setpoint_rate_hz": {
+        "values": [
+          10.0
+        ],
+        "median": 10.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      }
+    },
+    "flags": {
+      "upf_saturated": {
+        "values": [
+          false
+        ]
+      }
+    },
+    "stable": null,
+    "stability_evaluated": false,
+    "owd_p99_relative_spread": 0.0,
+    "numpy": true
+  }
+}

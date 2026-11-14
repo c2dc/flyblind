@@ -1,0 +1,8 @@
+{
+  "schema_version": "analysis_params_v1",
+  "T_safe_ms": 500.0,
+  "E_safe_m": 5.0,
+  "geofence_radius_m": 50.0,
+  "landing_radius_m": 5.0,
+  "notes": "Constants for post-processing only. T_safe_ms / E_safe_m feed Semantic Availability offline; geofence/landing radii feed HMI detectors offline."
+}

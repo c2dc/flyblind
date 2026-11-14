@@ -1,0 +1,869 @@
+{
+  "schema_version": "setpoint_stream_v2",
+  "workload": "setpoint-stream",
+  "connection": "udp:12.1.1.131:5760",
+  "bind_ip": "12.1.1.135",
+  "rate_hz": 10.0,
+  "trajectory": {
+    "name": "route",
+    "duration_s": 571.0,
+    "speed_mps": 4.0,
+    "radius_m": 30.0,
+    "amplitude_m": 20.0,
+    "period_s": 44.0,
+    "seed": 1,
+    "phase_offset_rad": 0.0,
+    "initial_position_ned_m": [
+      55.846,
+      84.206,
+      -0.959
+    ],
+    "trajectory_t0_rel_s": 43.764,
+    "id": "route_571s_r30"
+  },
+  "duration_s": 638.77,
+  "n_setpoints": 5710,
+  "setpoint_accounting": {
+    "generated_setpoints": 5710,
+    "successful_send_calls": 5710,
+    "failed_send_calls": 0
+  },
+  "pre_arm_gate": {
+    "ok": true,
+    "checks": {
+      "heartbeat": true,
+      "heartbeat_age_s": 0.86,
+      "disarmed": true,
+      "on_ground": true,
+      "altitude_m": 0.01,
+      "altitude_ok": true,
+      "mode": "GUIDED",
+      "mode_known": true,
+      "failsafe_inactive": true,
+      "gps_home_ok": true
+    },
+    "failed": [],
+    "altitude_max_m": 1.0
+  },
+  "freshness": {
+    "schema_version": "freshness_v1",
+    "n_setpoints": 5710,
+    "n_aoi_samples": 57067,
+    "nominal_period_ms": 100.0,
+    "network_arrival_delay_ms": {
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "max": null
+    },
+    "inter_arrival_gap_ms": {
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "p99_9": null,
+      "max": null,
+      "above_1_5x_nominal": 0,
+      "above_2x_nominal": 0,
+      "above_5x_nominal": 0
+    },
+    "aoi_network_ms": {
+      "p50": 49.159893,
+      "p95": 94.542309,
+      "p99": 97.325918,
+      "p99_9": 99.18297,
+      "max": 115.239662,
+      "mean": 49.56694874221528
+    },
+    "proxy_delay_ms": {
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "p99_9": null,
+      "max": null,
+      "n": 0
+    },
+    "miss_ratio_network": {
+      "20": null,
+      "50": null,
+      "100": null,
+      "150": null,
+      "250": null
+    },
+    "miss_ratio_aoi_network": {
+      "20": 0.79662501971367,
+      "50": 0.4968370511854487,
+      "100": 0.0001752326213047821,
+      "150": 0.0,
+      "250": 0.0
+    },
+    "miss_ratio_acceptance": {
+      "100": null,
+      "150": null,
+      "250": null,
+      "500": null,
+      "1000": null
+    },
+    "miss_ratio_motion": {
+      "250": 0.0,
+      "500": 0.0,
+      "1000": 0.0,
+      "1500": 0.0
+    },
+    "metric_definitions": {
+      "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
+      "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
+      "miss_ratio_network": "Share of setpoints with network_arrival_delay_ms > D.",
+      "miss_ratio_aoi_network": "Share of 100 Hz AoI samples with aoi_network_ms > D."
+    },
+    "stale_intervals_ms": {
+      "20": {
+        "longest_continuous_stale_interval_ms": 176.128,
+        "number_of_stale_intervals": 5709
+      },
+      "50": {
+        "longest_continuous_stale_interval_ms": 73.922,
+        "number_of_stale_intervals": 5710
+      },
+      "100": {
+        "longest_continuous_stale_interval_ms": 10.51,
+        "number_of_stale_intervals": 10
+      },
+      "150": {
+        "longest_continuous_stale_interval_ms": 0.0,
+        "number_of_stale_intervals": 0
+      },
+      "250": {
+        "longest_continuous_stale_interval_ms": 0.0,
+        "number_of_stale_intervals": 0
+      }
+    },
+    "target_acceptance_delay_ms": {
+      "p50": null,
+      "p99": null,
+      "n_observed": 0,
+      "n_null": 5710,
+      "note": "proxy via POSITION_TARGET_LOCAL_NED when available"
+    },
+    "motion_onset_delay_ms": {
+      "p50": 0.093616,
+      "p99": 0.991323,
+      "n_observed": 5702
+    },
+    "note": "network_arrival_delay / aoi_arrival require post-run merge with c2_arrival_forwarder capture (--c2-arrival-capture)"
+  },
+  "measurement_window": {
+    "name": "post_climb_steady",
+    "started_at_s": 43.76,
+    "duration_s": 595.01,
+    "note": "C2 heartbeat gaps counted only after takeoff climb; bootstrap excluded"
+  },
+  "c2_metrics": {
+    "heartbeats_seen": 509,
+    "heartbeats_expected_approx": 595,
+    "heartbeat_gaps_over_threshold": 69,
+    "max_heartbeat_gap_s": 4.049,
+    "commands_sent": 0,
+    "commands_acked": 0,
+    "commands_lost": 0,
+    "commands_late": 0,
+    "command_latency_ms": {
+      "median": null,
+      "p99": null,
+      "max": null
+    },
+    "failsafe": {
+      "triggered": false,
+      "mode": null,
+      "time_s": null
+    }
+  },
+  "physics_metrics": {
+    "physics_metrics_complete": true,
+    "bootstrap_land_then_guided": true,
+    "max_deviation_m": 57.13,
+    "position_samples": 2191,
+    "trajectory_acquisition": {
+      "started_at_rel_s": 43.764,
+      "ended_at_rel_s": 45.764,
+      "duration_s": 2.001,
+      "completed": true,
+      "threshold_m": 10.0,
+      "hold_s": 2.0,
+      "orbit_entry_hold_t0": true,
+      "orbit_stream_started_at_rel_s": 45.764,
+      "cross_track_max_m": 3.83,
+      "samples": 20,
+      "preposition_orbit_entry": {
+        "enabled": false,
+        "env": "PREPOSITION_ORBIT_ENTRY",
+        "ok": null
+      },
+      "paper_comparable": false,
+      "paper_comparable_reasons": [
+        "stream_start_radius_m=101.04 not within 5.0m of R=30.0"
+      ],
+      "stream_start_radius_m": 101.041,
+      "radius_tol_m": 5.0,
+      "acq_duration_max_s": 2.5,
+      "radius_ok": false,
+      "acq_duration_ok": true
+    },
+    "steady_state_window": {
+      "started_at_rel_s": 45.764,
+      "ended_at_rel_s": 638.77,
+      "duration_s": 593.006,
+      "tracking_error_m": {
+        "median": 46.99,
+        "p99": 63.41,
+        "max": 93.71,
+        "samples": 5690
+      },
+      "cross_track_error_m": {
+        "median": 4.74,
+        "p99": 49.23,
+        "max": 57.13,
+        "samples": 5690
+      }
+    },
+    "flight_state": {
+      "mode_transitions": [
+        {
+          "t_rel_s": 12.061,
+          "from": "LAND",
+          "to": "GUIDED",
+          "steady_state": false
+        },
+        {
+          "t_rel_s": 624.899,
+          "from": "GUIDED",
+          "to": "LAND",
+          "steady_state": true
+        }
+      ],
+      "mode_transition_integrity": true,
+      "mode_transition_note": "LAND->GUIDED@12.061s before trajectory",
+      "final_mode": "LAND",
+      "armed": false,
+      "final_armed": false,
+      "tracking_error_m": {
+        "scope": "all_setpoints",
+        "median": 47.1,
+        "p99": 63.82,
+        "max": 97.12,
+        "samples": 5710
+      },
+      "cross_track_error_m": {
+        "scope": "all_setpoints",
+        "median": 4.67,
+        "p99": 49.23,
+        "max": 57.13,
+        "samples": 5710
+      }
+    }
+  },
+  "thresholds": {
+    "heartbeat_loss_gap_s": 1.5,
+    "command_ack_timeout_s": 3.0,
+    "command_late_ack_ms": 500,
+    "warmup_discard_s": 5.0
+  },
+  "landing": {
+    "requested": true,
+    "normal": true
+  },
+  "attack_sync": {
+    "trigger_endpoint": null,
+    "triggers_fired": 0,
+    "skew_gcs_samples": 0,
+    "skew_gcs_send_us_p50": null,
+    "skew_gcs_send_us_p99": null
+  },
+  "telemetry_downlink": {
+    "schema_version": "telemetry_downlink_v2",
+    "message": "LOCAL_POSITION_NED",
+    "nominal_hz": 20.0,
+    "ned_samples_gcs": 2109,
+    "ned_samples_uav": 2838,
+    "ned_samples_expected_approx": 11420,
+    "capture_ratio": 0.1847,
+    "uav_to_gcs_delivery_ratio": 0.7431,
+    "matched_uav_gcs": 2109,
+    "belief_matched": 2108,
+    "belief_vs_truth_m": {
+      "p50": 41.793,
+      "p95": 54.017,
+      "p99": 55.856,
+      "p99_9": 56.798,
+      "max": 56.929,
+      "mean": 33.56,
+      "n": 2108
+    },
+    "telemetry_arrival_delay_ms": {
+      "p50": 13081.467,
+      "p95": 13523.966,
+      "p99": 13713.777,
+      "p99_9": 13912.62,
+      "max": 13916.285,
+      "mean": 10876.847,
+      "n": 2109
+    },
+    "inter_arrival_gap_ms": {
+      "p50": 244.795,
+      "p95": 484.109,
+      "p99": 716.198,
+      "p99_9": 900.772,
+      "max": 1192.308,
+      "mean": 281.982,
+      "n": 2108
+    },
+    "miss_ratio_delay": {
+      "50": 0.8805,
+      "100": 0.872,
+      "150": 0.872
+    },
+    "miss_ratio_gap": {
+      "50": 0.9919,
+      "100": 0.9862,
+      "150": 0.9469
+    },
+    "metric_definitions": {
+      "telemetry_arrival_delay_ms": "One-way downlink delay: t_arrival_gcs \u2212 t_egress_uav (ms), matched by (system_id, time_boot_ms) or sequence. Diagnostic only.",
+      "inter_arrival_gap_ms": "Gap between consecutive LOCAL_POSITION_NED arrivals at GCS (ms).",
+      "capture_ratio": "ned_samples_gcs / (nominal_hz \u00d7 active_duration_s).",
+      "uav_to_gcs_delivery_ratio": "ned_samples_gcs / ned_samples_uav (5G downlink delivery of NED).",
+      "belief_vs_truth_m": "At each GCS NED arrival i: ||pos_belief \u2212 pos_truth|| (m), where belief is the previous GCS sample (frozen GCS state) and truth is the latest SITL-egress NED in c2_telemetry_uav.csv with t_uav_mono \u2264 t_gcs_arrival. Report-only; not scored by VALID/DAMAGE. Requires comparable pod CLOCK_MONOTONIC."
+    },
+    "belief_validation": {
+      "status": "validated",
+      "physical_consistent": true,
+      "clock_ok": true,
+      "speed_mps": 3.99,
+      "belief_p50_m": 41.793,
+      "belief_p99_m": 55.856,
+      "gap_p50_ms": 244.795,
+      "gap_p99_ms": 716.198,
+      "aoi_p50_ms": 13081.467,
+      "aoi_p99_ms": 13713.777,
+      "belief_age_p50_s": 13.326,
+      "belief_age_p99_s": 14.43,
+      "trajectory_diameter_m": 434.818,
+      "anchor": "delivery_AoI+gap",
+      "belief_expected_p50_m": 53.172,
+      "belief_expected_p99_m": 57.576,
+      "clock_skew_abs_median_ms": 1.213,
+      "clock_jitter_spread_ms": 31.726,
+      "thresholds": {
+        "clock_skew_max_ms": 100.0,
+        "clock_jitter_max_ms": 250.0,
+        "phys_factor": 3.0,
+        "phys_abs_floor_m": 2.0,
+        "geom_tol": 1.15
+      },
+      "reason": "validated (clock offset |median|=1.213 ms, spread=31.726 ms (\u2264 100.0/250.0 ms); belief p50=41.793m \u2264 physical max 53.17m (belief age 13.33s \u00d7 3.99 m/s, capped by trajectory \u00d8 434.8 m))",
+      "appendix_line": "belief_vs_truth_m validated (clock offset 1.213 ms; belief age \u2248 13.326 s from delivery AoI, physically consistent \u2014 p50 41.793 m \u2264 geometric max 53.172 m)",
+      "clock_appendix_line": "measured inter-pod CLOCK_MONOTONIC offset (UAV\u2212GCS): median 1.213 ms, spread(p95\u2212p5) 31.726 ms (N=10)"
+    }
+  },
+  "link_vivacity": {
+    "heartbeat_csv": "heartbeat.csv",
+    "mavlink_rx_gcs_csv": "mavlink_rx_gcs.csv",
+    "gcs_hb_sent_csv": "gcs_hb_sent.csv",
+    "statustext_gcs_csv": "statustext_gcs.csv",
+    "uav_heartbeat_at_gcs_rows": 526,
+    "mavlink_rx_gcs_rows": 38811,
+    "gcs_hb_sent_rows": 630,
+    "statustext_rows": 6,
+    "note": "UAV HEARTBEAT at GCS: heartbeat.csv. All UAV\u2192GCS msgs (K8): mavlink_rx_gcs.csv. GCS HEARTBEAT TX: gcs_hb_sent.csv; RX at UAV: proxy_link.csv."
+  },
+  "freshness_metrics": {
+    "schema_version": "freshness_v2",
+    "active_window_start_ns": 12388592881596,
+    "active_window_end_ns": 12959592881596,
+    "active_window_duration_s": 571.0,
+    "active_samples": 57093,
+    "post_stream_samples": 3001,
+    "post_stream_included_in_primary_stats": false,
+    "aoi_arrival_cut": {
+      "t_aoi_end_ns": 12959514565465,
+      "t_active_end_ns_original": 12959592881596,
+      "t_last_send_ns": 12959494046513,
+      "t_last_arrival_ns": 12959514565465,
+      "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send) (plan item 1.3b)"
+    },
+    "measurement_window_ns": {
+      "t_start_ns": 12388592881596,
+      "t_active_end_ns": 12959592881596,
+      "t_aoi_end_ns": 12959514565465,
+      "post_stream_end_ns": 12989592881596,
+      "trajectory_duration_s": 571.0
+    },
+    "n_setpoints": 5710,
+    "delivery_ratio": 1.0,
+    "capture_ratio": 1.0,
+    "correlation_ratio": 1.0,
+    "proxy_match_ratio": 1.0,
+    "correlation_method": "setpoint_id+accept_xyz",
+    "setpoint_accounting": {
+      "generated_setpoints": 5710,
+      "successful_send_calls": 5710,
+      "failed_send_calls": null,
+      "unique_setpoints_seen_by_proxy": 5710,
+      "proxy_forward_setpoint_frames": 5710,
+      "proxy_forward_preposition_frames_excluded": 0,
+      "proxy_duplicate_setpoint_frames": 0,
+      "correlated_setpoints": 5710,
+      "uncorrelated_setpoints": 0,
+      "accepted_setpoints": 0,
+      "delivery_ratio_denominator": "generated_setpoints",
+      "capture_ratio_denominator": "successful_send_calls",
+      "correlation_ratio_denominator": "unique_setpoints_seen_by_proxy"
+    },
+    "n_setpoints_generated_active": 5710,
+    "n_setpoints_arrived_active": 5710,
+    "n_setpoints_delivered_active": 5710,
+    "active_stream": {
+      "schema_version": "freshness_v1",
+      "n_setpoints": 5710,
+      "n_aoi_samples": 57093,
+      "nominal_period_ms": 100.0,
+      "network_arrival_delay_ms": {
+        "p50": 20.285835,
+        "p95": 35.055366,
+        "p99": 40.278592,
+        "max": 55.767188
+      },
+      "inter_arrival_gap_ms": {
+        "p50": 99.994078,
+        "p95": 113.385442,
+        "p99": 119.360812,
+        "p99_9": 129.66939,
+        "max": 133.76778,
+        "above_1_5x_nominal": 0,
+        "above_2x_nominal": 0,
+        "above_5x_nominal": 0
+      },
+      "aoi_network_ms": {
+        "p50": 69.536479,
+        "p95": 119.119076,
+        "p99": 128.895968,
+        "p99_9": 139.124202,
+        "max": 149.932577,
+        "mean": 71.63156283887128
+      },
+      "proxy_delay_ms": {
+        "p50": 0.012668,
+        "p95": 0.117411,
+        "p99": 0.48114,
+        "p99_9": 4.381022,
+        "max": 11.651648,
+        "n": 5710
+      },
+      "miss_ratio_network": {
+        "20": 0.5341506129597198,
+        "50": 0.0008756567425569177,
+        "100": 0.0,
+        "150": 0.0,
+        "250": 0.0
+      },
+      "miss_ratio_aoi_network": {
+        "20": 0.9623057925066998,
+        "50": 0.674887460370286,
+        "100": 0.17491373421379902,
+        "150": 0.0,
+        "250": 0.0
+      },
+      "miss_ratio_acceptance": {
+        "100": null,
+        "150": null,
+        "250": null,
+        "500": null,
+        "1000": null
+      },
+      "miss_ratio_motion": {
+        "250": 0.0,
+        "500": 0.0,
+        "1000": 0.0,
+        "1500": 0.0
+      },
+      "metric_definitions": {
+        "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
+        "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
+        "miss_ratio_network": "Share of setpoints with network_arrival_delay_ms > D.",
+        "miss_ratio_aoi_network": "Share of 100 Hz AoI samples with aoi_network_ms > D."
+      },
+      "stale_intervals_ms": {
+        "20": {
+          "longest_continuous_stale_interval_ms": 4990.0,
+          "number_of_stale_intervals": 2117
+        },
+        "50": {
+          "longest_continuous_stale_interval_ms": 190.0,
+          "number_of_stale_intervals": 5701
+        },
+        "100": {
+          "longest_continuous_stale_interval_ms": 50.0,
+          "number_of_stale_intervals": 5671
+        },
+        "150": {
+          "longest_continuous_stale_interval_ms": 0.0,
+          "number_of_stale_intervals": 0
+        },
+        "250": {
+          "longest_continuous_stale_interval_ms": 0.0,
+          "number_of_stale_intervals": 0
+        }
+      },
+      "target_acceptance_delay_ms": {
+        "p50": null,
+        "p99": null,
+        "n_observed": 0,
+        "n_null": 5710,
+        "note": "proxy via POSITION_TARGET_LOCAL_NED when available"
+      },
+      "motion_onset_delay_ms": {
+        "p50": 0.093616,
+        "p99": 0.991323,
+        "n_observed": 5702
+      }
+    },
+    "post_stream": {
+      "duration_s": 30.0,
+      "behavior": {
+        "aoi_network_ms": {
+          "p50": 15098.901696,
+          "p95": 28598.901696,
+          "p99": 29798.901696,
+          "p99_9": 30068.901696,
+          "max": 30098.901696,
+          "mean": 15098.901696
+        },
+        "miss_ratio_network": {
+          "20": 0.5341506129597198,
+          "50": 0.0008756567425569177,
+          "100": 0.0,
+          "150": 0.0,
+          "250": 0.0
+        },
+        "stale_intervals_ms": {
+          "20": {
+            "longest_continuous_stale_interval_ms": 30000.0,
+            "number_of_stale_intervals": 1
+          },
+          "50": {
+            "longest_continuous_stale_interval_ms": 30000.0,
+            "number_of_stale_intervals": 1
+          },
+          "100": {
+            "longest_continuous_stale_interval_ms": 29990.0,
+            "number_of_stale_intervals": 1
+          },
+          "150": {
+            "longest_continuous_stale_interval_ms": 29940.0,
+            "number_of_stale_intervals": 1
+          },
+          "250": {
+            "longest_continuous_stale_interval_ms": 29840.0,
+            "number_of_stale_intervals": 1
+          }
+        },
+        "n_aoi_samples": 3001,
+        "note": "observation only \u2014 not included in primary Gate A metrics"
+      }
+    },
+    "aoi_arrival_ms": {
+      "p50": 69.536479,
+      "p95": 119.119076,
+      "p99": 128.895968,
+      "p99_9": 139.124202,
+      "max": 149.932577,
+      "mean": 71.63156283887128
+    },
+    "miss_ratio_aoi_arrival": {
+      "20": 0.9623057925066998,
+      "50": 0.674887460370286,
+      "100": 0.17491373421379902,
+      "150": 0.0,
+      "250": 0.0
+    },
+    "aoi_network_ms": {
+      "p50": 49.159893,
+      "p95": 94.542309,
+      "p99": 97.325918,
+      "p99_9": 99.18297,
+      "max": 115.239662,
+      "mean": 49.56694874221528
+    },
+    "miss_ratio_network": {
+      "20": 0.5341506129597198,
+      "50": 0.0008756567425569177,
+      "100": 0.0,
+      "150": 0.0,
+      "250": 0.0
+    },
+    "miss_ratio_aoi_network": {
+      "20": 0.79662501971367,
+      "50": 0.4968370511854487,
+      "100": 0.0001752326213047821,
+      "150": 0.0,
+      "250": 0.0
+    },
+    "metric_definitions": {
+      "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
+      "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
+      "aoi_generation_ms": "AoI vs setpoint generation time (legacy direct-UDP path without arrival capture): t_sample \u2212 t_generation; structural ~10 Hz sawtooth, blind to network delay.",
+      "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) (plan item 1.3b). Not an alias of aoi_network_ms.",
+      "delivery_ratio": "correlated_setpoints / generated_setpoints (active window).",
+      "capture_ratio": "unique_setpoints_seen_by_proxy / successful_send_calls.",
+      "correlation_ratio": "correlated_setpoints / unique_setpoints_seen_by_proxy."
+    },
+    "stale_intervals_ms": {
+      "20": {
+        "longest_continuous_stale_interval_ms": 4990.0,
+        "number_of_stale_intervals": 2117
+      },
+      "50": {
+        "longest_continuous_stale_interval_ms": 190.0,
+        "number_of_stale_intervals": 5701
+      },
+      "100": {
+        "longest_continuous_stale_interval_ms": 50.0,
+        "number_of_stale_intervals": 5671
+      },
+      "150": {
+        "longest_continuous_stale_interval_ms": 0.0,
+        "number_of_stale_intervals": 0
+      },
+      "250": {
+        "longest_continuous_stale_interval_ms": 0.0,
+        "number_of_stale_intervals": 0
+      }
+    },
+    "network_arrival_delay_ms": {
+      "p50": 20.285835,
+      "p95": 35.055366,
+      "p99": 40.278592,
+      "max": 55.767188
+    },
+    "inter_arrival_gap_ms": {
+      "p50": 99.994078,
+      "p95": 113.385442,
+      "p99": 119.360812,
+      "p99_9": 129.66939,
+      "max": 133.76778,
+      "above_1_5x_nominal": 0,
+      "above_2x_nominal": 0,
+      "above_5x_nominal": 0
+    },
+    "proxy_delay_ms": {
+      "p50": 0.012668,
+      "p95": 0.117411,
+      "p99": 0.48114,
+      "p99_9": 4.381022,
+      "max": 11.651648,
+      "n": 5710
+    },
+    "metric_nature_network_arrival_delay": "owd",
+    "errata_aoi_alias": "Plan item M8: removed silent alias aoi_arrival_ms := aoi_network_ms. aoi_arrival_ms = cut arrival-path continuous AoI; aoi_network_ms / aoi_generation_ms = generation-based.",
+    "aoi_generation_ms": {
+      "p50": 49.159893,
+      "p95": 94.542309,
+      "p99": 97.325918,
+      "p99_9": 99.18297,
+      "max": 115.239662,
+      "mean": 49.56694874221528
+    },
+    "miss_ratio_aoi_generation": {
+      "20": 0.79662501971367,
+      "50": 0.4968370511854487,
+      "100": 0.0001752326213047821,
+      "150": 0.0,
+      "250": 0.0
+    },
+    "arrival_capture": true,
+    "aoi_alias_removed": true,
+    "merge_meta": {
+      "correlation_method": "setpoint_id+accept_xyz",
+      "correlation_selection": {
+        "logical_ids_embedded": true,
+        "selection": "logical_setpoint_id_exact",
+        "matches_by_method": {
+          "setpoint_id": 5710,
+          "stream_order": 5710,
+          "send_time": 5710,
+          "ordinal": 5710
+        }
+      },
+      "proxy_forward_matched": 5710,
+      "proxy_forward_total": 5710,
+      "acceptance_matched": 0,
+      "delivery_ratio": 1.0,
+      "capture_ratio": 1.0,
+      "correlation_ratio": 1.0,
+      "setpoint_accounting": {
+        "generated_setpoints": 5710,
+        "successful_send_calls": 5710,
+        "failed_send_calls": null,
+        "unique_setpoints_seen_by_proxy": 5710,
+        "proxy_forward_setpoint_frames": 5710,
+        "proxy_forward_preposition_frames_excluded": 0,
+        "proxy_duplicate_setpoint_frames": 0,
+        "correlated_setpoints": 5710,
+        "uncorrelated_setpoints": 0,
+        "accepted_setpoints": 0,
+        "delivery_ratio_denominator": "generated_setpoints",
+        "capture_ratio_denominator": "successful_send_calls",
+        "correlation_ratio_denominator": "unique_setpoints_seen_by_proxy"
+      },
+      "n_setpoints_generated_active": 5710,
+      "n_setpoints_arrived_active": 5710,
+      "n_setpoints_delivered_active": 5710,
+      "metric_definitions": {
+        "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
+        "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
+        "aoi_generation_ms": "AoI vs setpoint generation time (legacy direct-UDP path without arrival capture): t_sample \u2212 t_generation; structural ~10 Hz sawtooth, blind to network delay.",
+        "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) (plan item 1.3b). Not an alias of aoi_network_ms.",
+        "delivery_ratio": "correlated_setpoints / generated_setpoints (active window).",
+        "capture_ratio": "unique_setpoints_seen_by_proxy / successful_send_calls.",
+        "correlation_ratio": "correlated_setpoints / unique_setpoints_seen_by_proxy."
+      },
+      "aoi_arrival_cut": {
+        "t_aoi_end_ns": 12959514565465,
+        "t_active_end_ns_original": 12959592881596,
+        "t_last_send_ns": 12959494046513,
+        "t_last_arrival_ns": 12959514565465,
+        "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send) (plan item 1.3b)"
+      }
+    },
+    "telemetry_downlink": {
+      "schema_version": "telemetry_downlink_v2",
+      "message": "LOCAL_POSITION_NED",
+      "nominal_hz": 20.0,
+      "ned_samples_gcs": 2109,
+      "ned_samples_uav": 2838,
+      "ned_samples_expected_approx": 11420,
+      "capture_ratio": 0.1847,
+      "uav_to_gcs_delivery_ratio": 0.7431,
+      "matched_uav_gcs": 2109,
+      "belief_matched": 2108,
+      "belief_vs_truth_m": {
+        "p50": 41.793,
+        "p95": 54.017,
+        "p99": 55.856,
+        "p99_9": 56.798,
+        "max": 56.929,
+        "mean": 33.56,
+        "n": 2108
+      },
+      "telemetry_arrival_delay_ms": {
+        "p50": 13081.467,
+        "p95": 13523.966,
+        "p99": 13713.777,
+        "p99_9": 13912.62,
+        "max": 13916.285,
+        "mean": 10876.847,
+        "n": 2109
+      },
+      "inter_arrival_gap_ms": {
+        "p50": 244.795,
+        "p95": 484.109,
+        "p99": 716.198,
+        "p99_9": 900.772,
+        "max": 1192.308,
+        "mean": 281.982,
+        "n": 2108
+      },
+      "miss_ratio_delay": {
+        "50": 0.8805,
+        "100": 0.872,
+        "150": 0.872
+      },
+      "miss_ratio_gap": {
+        "50": 0.9919,
+        "100": 0.9862,
+        "150": 0.9469
+      },
+      "metric_definitions": {
+        "telemetry_arrival_delay_ms": "One-way downlink delay: t_arrival_gcs \u2212 t_egress_uav (ms), matched by (system_id, time_boot_ms) or sequence. Diagnostic only.",
+        "inter_arrival_gap_ms": "Gap between consecutive LOCAL_POSITION_NED arrivals at GCS (ms).",
+        "capture_ratio": "ned_samples_gcs / (nominal_hz \u00d7 active_duration_s).",
+        "uav_to_gcs_delivery_ratio": "ned_samples_gcs / ned_samples_uav (5G downlink delivery of NED).",
+        "belief_vs_truth_m": "At each GCS NED arrival i: ||pos_belief \u2212 pos_truth|| (m), where belief is the previous GCS sample (frozen GCS state) and truth is the latest SITL-egress NED in c2_telemetry_uav.csv with t_uav_mono \u2264 t_gcs_arrival. Report-only; not scored by VALID/DAMAGE. Requires comparable pod CLOCK_MONOTONIC."
+      },
+      "belief_validation": {
+        "status": "validated",
+        "physical_consistent": true,
+        "clock_ok": true,
+        "speed_mps": 3.99,
+        "belief_p50_m": 41.793,
+        "belief_p99_m": 55.856,
+        "gap_p50_ms": 244.795,
+        "gap_p99_ms": 716.198,
+        "aoi_p50_ms": 13081.467,
+        "aoi_p99_ms": 13713.777,
+        "belief_age_p50_s": 13.326,
+        "belief_age_p99_s": 14.43,
+        "trajectory_diameter_m": 434.818,
+        "anchor": "delivery_AoI+gap",
+        "belief_expected_p50_m": 53.172,
+        "belief_expected_p99_m": 57.576,
+        "clock_skew_abs_median_ms": 1.213,
+        "clock_jitter_spread_ms": 31.726,
+        "thresholds": {
+          "clock_skew_max_ms": 100.0,
+          "clock_jitter_max_ms": 250.0,
+          "phys_factor": 3.0,
+          "phys_abs_floor_m": 2.0,
+          "geom_tol": 1.15
+        },
+        "reason": "validated (clock offset |median|=1.213 ms, spread=31.726 ms (\u2264 100.0/250.0 ms); belief p50=41.793m \u2264 physical max 53.17m (belief age 13.33s \u00d7 3.99 m/s, capped by trajectory \u00d8 434.8 m))",
+        "appendix_line": "belief_vs_truth_m validated (clock offset 1.213 ms; belief age \u2248 13.326 s from delivery AoI, physically consistent \u2014 p50 41.793 m \u2264 geometric max 53.172 m)",
+        "clock_appendix_line": "measured inter-pod CLOCK_MONOTONIC offset (UAV\u2212GCS): median 1.213 ms, spread(p95\u2212p5) 31.726 ms (N=10)"
+      }
+    }
+  },
+  "trk_truth": {
+    "schema_version": "trk_truth_v1",
+    "ok": true,
+    "note": "REPORT ONLY \u2014 SITL egress NED vs planned setpoint ref; complements trk_err (GCS belief vs plan). Not scored by VALID/DAMAGE.",
+    "clock_offset_applied_ns": 1213000,
+    "clock_offset_median_ms": 1.213,
+    "ned_samples_uav": 2838,
+    "setpoints_joined": 5710,
+    "setpoints_skipped_ref": 0,
+    "setpoints_skipped_gap": 0,
+    "max_join_gap_ms": 500.0,
+    "tracking_error_truth_m": {
+      "p50": 7.896,
+      "p95": 9.644,
+      "p99": 50.647,
+      "p99_9": 96.903,
+      "max": 97.117,
+      "mean": 8.567,
+      "n": 5710,
+      "median": 7.896
+    },
+    "tracking_error_truth_xy_m": {
+      "p50": 7.896,
+      "p95": 9.644,
+      "p99": 50.485,
+      "p99_9": 96.585,
+      "max": 96.696,
+      "mean": 8.564,
+      "n": 5710,
+      "median": 7.896
+    },
+    "steady_tracking_error_truth_m": {
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "p99_9": null,
+      "max": null,
+      "mean": null,
+      "n": 0
+    },
+    "metric_definitions": {
+      "tracking_error_truth_m": "||pos_SITL_egress \u2212 pos_planned|| (m) at each setpoint generation; truth = latest c2_telemetry_uav NED with t_uav \u2264 t_generation_gcs. Compare to flight_state.tracking_error_m (trk_err = GCS belief vs plan).",
+      "steady_tracking_error_truth_m": "Same as tracking_error_truth_m restricted to trajectory_window=steady."
+    }
+  }
+}

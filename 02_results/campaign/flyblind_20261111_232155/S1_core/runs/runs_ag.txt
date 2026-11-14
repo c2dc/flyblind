@@ -1,0 +1,118 @@
+=================================================================================
+*     106 PRB - CROSS - 4 ROGUES - BASELINE + UL RRMPOLICY - 600S - 32MPBS      *
+=================================================================================
+[output] ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S1_core/runs/
+[preflight] PDU reachability 12.1.1.135 -> 12.1.1.131…
+[preflight] OK — GCS=12.1.1.135 UAV=12.1.1.131 node=tm-oranslice-mitigation-control-plane nproc=16
+[qgc] responder up: pod:14560 -> QGC 127.0.0.1:14550 (answers params/fence/rally)
+[qgc] mirror up: 12.1.1.131:5760 -> 172.18.0.1:14560 (via responder)
+[qgc] QGroundControl launched (ARTIFACT_ROOT/01_scripts/03_sitl/bin/QGroundControl.AppImage) — autoconnects on UDP 14550
+[preflight] SITL warm-up r1 (direct :5760 udp, after soft_reset)…
+[preflight] SITL warm-up OK — [sitl-warmup] OK (LAND)
+  [images] 9 imageIDs → 20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1/image_digests.json
+  [optc] plan onset>=188.3s sleep=174.3s burst=510s | effective=n/a (baseline, virtual onset) | traj_end=712.3s capture=761s (s since T0)
+
+ RUN 20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1 
+[output] ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S1_core/runs/20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1
+
+CONDITION = BASELINE                                 (experiment type)
+DURATION = 600s                                      (requested main window)
+TOPOLOGY = CROSS                                     (UE split across slices)
+PRB = 106                                            (NRB (106=40 MHz, 51=20 MHz @ 30 kHz))
+ATTACK = -                                           (adversarial traffic type)
+UAS WORKLOAD = SETPOINT-STREAM                       (UAS control workload)
+TRAJECTORY = ROUTE                                   (planned path shape)
+MINRATIO = A0 B0                                     (configured minimum reservation (slice A / slice B))
+SETPOINT-STREAM = 10 Hz                              (position commands sent per second)
+-----------------------------------[SCHEDULE]------------------------------------
+requested = 600s                                     (requested main window)
+network = 600s                                       (network probe window)
+warmup = 10s                                         (initial samples discarded)
+envelope = 761.0s                                    (maximum window of run layers)
+mission_len = 420s                                   (planned mission duration)
+trajectory_active = 571s                             (active trajectory segment)
+proxy_watchdog = 761s (maximum)                      (C2 process safety limit)
+
+Starting RUN 20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1 execution (please wait)...
+
+  [sidecars] profile=FULL duration=761s out=ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S1_core/runs/20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1/sidecars
+------------------------------------[RUNTIME]------------------------------------
+wall = 802.0s                                        (wall-clock time spent inside the run)
+------------------------------------[NETWORK]------------------------------------
+OWD p50/p99/p99.9 = 18668.8 / 38047.4 / 48363.1 µs   (one-way IP delay; 50th, 99th and 99.9th percentiles)
+IPDV p50/p99/p99.9 = 1209.5 / 15452.6 / 32359.8 µs   (IP delay variation (jitter))
+availability = 98.582% (461077/467708 packets)       (fraction of probe packets received)
+OWD trend = 175.6 µs                                 (delay change from start to end)
+-----------------------------------[HEARTBEAT]-----------------------------------
+seen/expected = 531/597                              (MAVLink heartbeats received and expected)
+gaps above threshold = 61                            (abnormal intervals between heartbeats)
+largest gap = 3.908s                                 (longest silence between heartbeats)
+------------------------------------[PHYSICS]------------------------------------
+max deviation = 18.47 m                              (largest physical distance observed)
+failsafe = no                                        (safety mode triggered by the autopilot)
+-------------------------------------[STATE]-------------------------------------
+trk_err med/p99 = 19.18 / 74.56 m                    (error between GCS-believed position and the plan)
+xtrack med/p99 = 0.42 / 14.98 m                      (physical lateral distance to the planned trajectory)
+xtrack steady p99 = 14.98 m                          (lateral error in the steady segment)
+trk_truth med/p99 = 7.89 / 52.34 m                   (error between SITL true position and the plan)
+trk_truth samples = 5710                             (number of samples used for physical truth)
+acquisition = 2.0s; cross_max=3.83 m; complete=yes   (time until the UAS reaches the trajectory)
+mode transitions = LAND→GUIDED@18.052s, GUIDED→LAND@630.067s (autopilot mode changes)
+-----------------------------------[MECHANISM]-----------------------------------
+share UL NPRB slice A = 100.0%                       (slice share of observed UL PRBs)
+share DL bytes slice A = 100.0%                      (slice share of observed DL MAC bytes)
+MAC dumps = 6192                                     (scheduler samples analyzed)
+observed UL total = 30.26 Mbps                       (observed aggregate UL traffic)
+gcs UL = rps=137.1; NPRB p50=9.0; 0.27 Mbps          (grants/s, median grant size and throughput)
+uav UL = rps=511.3; NPRB p50=106.0; 29.96 Mbps       (grants/s, median grant size and throughput)
+rogue UL = rps=8.7; NPRB p50=5.0; 0.01 Mbps          (grants/s, median grant size and throughput)
+rogue2 UL = rps=8.7; NPRB p50=5.0; 0.01 Mbps         (grants/s, median grant size and throughput)
+rogue3 UL = rps=8.7; NPRB p50=5.0; 0.01 Mbps         (grants/s, median grant size and throughput)
+rogue4 UL = rps=8.7; NPRB p50=5.0; 0.01 Mbps         (grants/s, median grant size and throughput)
+-----------------------------------[RESOURCES]-----------------------------------
+host loadavg1 before/after = 5.11 / 8.72             (host mean work queue)
+host loadavg1 maximum = 13.64                        (highest 1-minute mean load)
+host CPU busy maximum = 59.2% (threshold 90%)        (highest actual CPU occupancy)
+UPF CPU max/p50/p99 = 1.4 / 0.0 / 1.4%               (5G user-plane CPU usage)
+UPF saturated = no                                   (indicates a processing bottleneck on the UPF)
+-----------------------------------[SETPOINTS]-----------------------------------
+delivery/capture/correlation = 0.987 / 0.987 / 1.000 (command delivery, capture and matching)
+AoI setpoint gen/arrival p99 = 97.6 / 149.4 ms       (GCS→UAV control; context, not telemetry AoI)
+--------------------------------[TELEMETRY / AOI]--------------------------------
+GCS samples = 2122                                   (LOCAL_POSITION_NED positions received)
+AoI delivery p50/p99/p99.9 = 2864.4 / 3093.1 / 3120.8 ms (position age when the GCS receives it)
+gap p50/p99/p99.9 = 243.0 / 762.5 / 1057.9 ms        (interval between consecutive GCS positions)
+belief p50/p99 = 11.97 / 18.27 m                     (error between GCS belief and UAV truth)
+----------------------------------[MITIGATIONS]----------------------------------
+UL rrmPolicy = ACTIVE (S-NSSAI)                      (3GPP-faithful two-level UL: Dedicated/Prioritized/Shared via rrmPolicy.json)
+----------------------------------[VALIDATION]-----------------------------------
+clock = OK                                           (clock and probe integrity)
+host = OK                                            (host quality on baseline)
+host_instrumentation_integrity = OK                  (instrumentation processes and artefacts)
+mission_integrity = OK                               (mission executed without a silent crash)
+drone_integrity = OK                                 (sufficient telemetry and physics)
+freshness = OK                                       (freshness data present and correlatable)
+stream = OK                                          (stream rate within tolerance)
+c2_health = FAIL                                     (C2 health; mandatory on baseline only)
+prb = OK                                             (MAC/PRB evidence intact)
+mitigation_integrity = OK                            (requested mitigations applied and verified)
+availability = FAIL                                  (minimum availability on baseline)
+mission_success = OK                                 (mission completed on baseline)
+baseline_drone_quality = FAIL                        (baseline physical quality)
+reason = heartbeat_gaps                              (failure in baseline_drone_quality)
+VALID = NO                                           (all mandatory gates passed)
+--------------------------------[FLIGHT OUTCOME]---------------------------------
+mission completed = yes                              (operational result)
+acquisition completed = yes                          (trajectory reached)
+xtrack steady p99 = 14.98 m                          (physical lateral error in the steady segment)
+landing completed = yes                              (final landing state)
+final mode = LAND                                    (final autopilot mode)
+armed at end = no                                    (arming state at shutdown)
+  -> run 20261112_082134_004294_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid32p0mbps_r1 INVALID (metrics saved; continuing to r2)
+
+[RESULT]: 1/1 runs executed (0 valid - minimum 1).
+=================================================================================
+Results in: ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S1_core/runs/
+[TOTAL EXECUTION TIME]: 886s
+
+[qgc] operator view closed (QGroundControl, mirror, responder)

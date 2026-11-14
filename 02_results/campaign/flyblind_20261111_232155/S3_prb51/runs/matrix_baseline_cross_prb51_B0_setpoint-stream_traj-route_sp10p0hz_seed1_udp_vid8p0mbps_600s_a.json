@@ -1,0 +1,289 @@
+{
+  "requested_runs": 1,
+  "executed_runs": 1,
+  "valid_runs": 1,
+  "min_valid_runs": 1,
+  "all_runs": [
+    "20261112_112038_470212_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1"
+  ],
+  "run_slug": "baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps",
+  "condition": "baseline",
+  "topology": "cross",
+  "gnb_prb": 51,
+  "workload": "setpoint-stream",
+  "attack": null,
+  "duration_s": 600,
+  "wall_total_s": 888.4,
+  "aggregate": {
+    "n_valid": 1,
+    "metrics": {
+      "owd_p50_us": {
+        "values": [
+          11062.366
+        ],
+        "median": 11062.366,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "owd_p99_us": {
+        "values": [
+          20867.325
+        ],
+        "median": 20867.325,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "owd_p99_9_us": {
+        "values": [
+          24084.907
+        ],
+        "median": 24084.907,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "ipdv_p50_us": {
+        "values": [
+          1210.299
+        ],
+        "median": 1210.299,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "ipdv_p99_us": {
+        "values": [
+          13630.907
+        ],
+        "median": 13630.907,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "availability_pct": {
+        "values": [
+          100.0
+        ],
+        "median": 100.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "max_deviation_m": {
+        "values": [
+          7.79
+        ],
+        "median": 7.79,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_err_p99_m": {
+        "values": [
+          49.29
+        ],
+        "median": 49.29,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_truth_p99_m": {
+        "values": [
+          52.123
+        ],
+        "median": 52.123,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "track_truth_med_m": {
+        "values": [
+          7.864
+        ],
+        "median": 7.864,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "cross_track_p99_steady_m": {
+        "values": [
+          5.38
+        ],
+        "median": 5.38,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "acquisition_time_s": {
+        "values": [
+          2.001
+        ],
+        "median": 2.001,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p50_ms": {
+        "values": [
+          13.266
+        ],
+        "median": 13.266,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p99_ms": {
+        "values": [
+          51.264
+        ],
+        "median": 51.264,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_delay_p99_9_ms": {
+        "values": [
+          64.847
+        ],
+        "median": 64.847,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p50_ms": {
+        "values": [
+          250.226
+        ],
+        "median": 250.226,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p99_ms": {
+        "values": [
+          263.753
+        ],
+        "median": 263.753,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "tel_gap_p99_9_ms": {
+        "values": [
+          302.591
+        ],
+        "median": 302.591,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "belief_p50_m": {
+        "values": [
+          0.999
+        ],
+        "median": 0.999,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "belief_p99_m": {
+        "values": [
+          1.568
+        ],
+        "median": 1.568,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "prb_share_A_pct": {
+        "values": [
+          100.0
+        ],
+        "median": 100.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "prb_share_B_pct": {
+        "values": [
+          null
+        ],
+        "median": null,
+        "spread": null,
+        "bootstrap_ci95": null
+      },
+      "uav_ul_mbps": {
+        "values": [
+          8.506
+        ],
+        "median": 8.506,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "gcs_ul_mbps": {
+        "values": [
+          0.277
+        ],
+        "median": 0.277,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "host_loadavg_max": {
+        "values": [
+          11.67
+        ],
+        "median": 11.67,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "host_cpu_busy_max_pct": {
+        "values": [
+          60.63
+        ],
+        "median": 60.63,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "upf_cpu_max_pct": {
+        "values": [
+          3.36
+        ],
+        "median": 3.36,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "rogue_count": {
+        "values": [
+          null
+        ],
+        "median": null,
+        "spread": null,
+        "bootstrap_ci95": null
+      },
+      "offered_aggregate_mbps": {
+        "values": [
+          null
+        ],
+        "median": null,
+        "spread": null,
+        "bootstrap_ci95": null
+      },
+      "delivery_ratio": {
+        "values": [
+          1.0
+        ],
+        "median": 1.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "correlation_ratio": {
+        "values": [
+          1.0
+        ],
+        "median": 1.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      },
+      "setpoint_rate_hz": {
+        "values": [
+          10.0
+        ],
+        "median": 10.0,
+        "spread": 0.0,
+        "bootstrap_ci95": null
+      }
+    },
+    "flags": {
+      "upf_saturated": {
+        "values": [
+          false
+        ]
+      }
+    },
+    "stable": null,
+    "stability_evaluated": false,
+    "owd_p99_relative_spread": 0.0,
+    "numpy": true
+  }
+}

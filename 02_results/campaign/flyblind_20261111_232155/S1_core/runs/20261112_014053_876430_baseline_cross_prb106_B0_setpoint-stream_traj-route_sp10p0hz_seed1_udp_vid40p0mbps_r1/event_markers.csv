@@ -1,0 +1,9 @@
+event,t_rel_s,note
+run_start,0.0,T0
+mission_start,90.0,centralization margin / mission launch
+orbit_acquired,147.423,c2.json orbit_stream_started_at_rel_s mapped via first logical setpoint
+virtual_attack_onset,188.3,"option C virtual onset (baseline, same schedule as attack)"
+virtual_attack_end,698.3,option C virtual attack_end (onset + burst)
+land_command,716.322,last logical setpoint generated; LAND is sent right after the stream
+guided_to_land_observed,719.657,observed mode transition (informational)
+run_end,801.627,wall runtime

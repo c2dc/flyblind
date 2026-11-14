@@ -1,0 +1,48 @@
+{
+  "schema": "flyblind_phase_windows_v2",
+  "markers": {
+    "run_start": 0.0,
+    "mission_start": 90.0,
+    "orbit_acquired": 136.108,
+    "attack_onset": 190.229,
+    "attack_end": 700.229,
+    "land_command": 705.009,
+    "guided_to_land_observed": 714.416,
+    "run_end": 802.858
+  },
+  "windows": {
+    "PRE": {
+      "t_rel_lo_s": 136.108,
+      "t_rel_hi_s": 190.229,
+      "anchor": "orbit_acquired → attack_onset",
+      "interval": "[lo, hi)"
+    },
+    "ATTACK": {
+      "t_rel_lo_s": 190.229,
+      "t_rel_hi_s": 700.229,
+      "anchor": "attack_onset → attack_end",
+      "interval": "[lo, hi)"
+    },
+    "DRAIN": {
+      "t_rel_lo_s": 700.229,
+      "t_rel_hi_s": 705.009,
+      "anchor": "attack_end → land_command",
+      "interval": "[lo, hi)"
+    }
+  },
+  "virtual_attack": false,
+  "schedule_check": {
+    "virtual_attack": false,
+    "pre_stable_orbit_s": 54.121,
+    "attack_within_orbit_and_trajectory": true
+  },
+  "ok": true,
+  "boundary_convention": "[lo, hi); sample at attack_onset → ATTACK",
+  "note": "t_rel_s is relative to T0 in event_markers (four_layer T0_mono_ns). Do not treat attack_start_after_s as absolute time from T0. Half-open intervals [lo, hi).",
+  "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S5_aqm/runs/20261112_132906_785533_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid12p0mbps_r1",
+  "markers_added": [
+    "orbit_acquired",
+    "land_command",
+    "guided_to_land_observed"
+  ]
+}

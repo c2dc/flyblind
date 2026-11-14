@@ -1,0 +1,11 @@
+# Generated at runtime — do not commit
+01_testbeds/runtime/
+01_testbeds/runtime-mitigation/
+01_testbeds/vendor/
+01_testbeds/images/**/*.tar
+
+# Python bytecode (regenerates on unittest / import)
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/

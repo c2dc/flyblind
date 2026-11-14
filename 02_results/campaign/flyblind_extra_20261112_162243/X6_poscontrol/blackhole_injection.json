@@ -1,0 +1,46 @@
+{
+  "control": "positive_control_fs_gcs",
+  "leg": "command (GCS -> UAV)",
+  "pod": "oai-ue-gcs",
+  "dest": "12.1.1.133/32",
+  "method": "ip route add/del blackhole (no iptables, no qdisc change)",
+  "cut_start_unix_ns": 1794522248893330874,
+  "cut_end_unix_ns": 1794522259052390949,
+  "cut_duration_s": 10.159060075,
+  "cut_target_t_rel_s": 300.0,
+  "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1",
+  "T0_unix_ns": 1794522030518293351,
+  "T0_mono_ns": 72125924640901,
+  "cut_start_t_rel_s": 218.375037523,
+  "cut_end_t_rel_s": 228.534097598,
+  "observed": {
+    "failsafe": true,
+    "failsafe_mode": "RTL",
+    "mode_transitions": [
+      {
+        "t_rel_s": 12.052,
+        "from": "LAND",
+        "to": "GUIDED",
+        "steady_state": false
+      },
+      {
+        "t_rel_s": 132.923,
+        "from": "GUIDED",
+        "to": "RTL",
+        "steady_state": true
+      },
+      {
+        "t_rel_s": 615.204,
+        "from": "RTL",
+        "to": "LAND",
+        "steady_state": true
+      }
+    ],
+    "valid": false
+  },
+  "mavlink_t_rel_offset_s": 90.336229111,
+  "failsafe_t_rel_s_mavlink_base": 132.9230681439949,
+  "failsafe_t_rel_s": 223.2592972549949,
+  "failsafe_latency_after_cut_s": 4.884259731994888,
+  "causally_attributed": true
+}

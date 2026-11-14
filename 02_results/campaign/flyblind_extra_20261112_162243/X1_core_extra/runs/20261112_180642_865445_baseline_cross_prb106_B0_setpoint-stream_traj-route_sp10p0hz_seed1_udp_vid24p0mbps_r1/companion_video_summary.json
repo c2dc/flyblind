@@ -1,0 +1,16 @@
+{
+  "offered_mbps": 24.0,
+  "port": 5202,
+  "direction": "uav_to_gcs",
+  "path": "uav_ul_gcs_dl",
+  "protocol": "udp",
+  "ok": true,
+  "achieved_mbps": 24.0,
+  "lost_percent": 0.0,
+  "iperf_end_keys": [
+    "sum"
+  ],
+  "returncode": 0,
+  "gcs_ip": "12.1.1.133",
+  "uav_ip": "12.1.1.135"
+}

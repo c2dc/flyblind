@@ -1,0 +1,154 @@
+=================================================================================
+*      51 PRB - CROSS - 4 ROGUES - ATK N4 UL + UL RRMPOLICY - 600S - 8MPBS      *
+=================================================================================
+[output] ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/
+[preflight] PDU reachability 12.1.1.130 -> 12.1.1.131…
+[preflight] OK — GCS=12.1.1.130 UAV=12.1.1.131 node=tm-oranslice-mitigation-control-plane nproc=16
+[qgc] responder up: pod:14560 -> QGC 127.0.0.1:14550 (answers params/fence/rally)
+[qgc] mirror up: 12.1.1.131:5760 -> 172.18.0.1:14560 (via responder)
+[qgc] QGroundControl launched (ARTIFACT_ROOT/01_scripts/03_sitl/bin/QGroundControl.AppImage) — autoconnects on UDP 14550
+[preflight] SITL warm-up r1 (direct :5760 udp, after soft_reset)…
+[preflight] SITL warm-up OK — [sitl-warmup] OK (LAND)
+  [images] 9 imageIDs → 20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1/image_digests.json
+  [optc] plan onset>=188.3s sleep=174.3s burst=510s | effective sleep=174.3s burst=510s | traj_end=712.3s capture=761s (s since T0)
+
+ RUN 20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1 
+[output] ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1
+
+CONDITION = ATTACK                                   (experiment type)
+DURATION = 600s                                      (requested main window)
+TOPOLOGY = CROSS                                     (UE split across slices)
+PRB = 51                                             (NRB (106=40 MHz, 51=20 MHz @ 30 kHz))
+ATTACK = MULTI-ROGUE                                 (adversarial traffic type)
+UAS WORKLOAD = SETPOINT-STREAM                       (UAS control workload)
+TRAJECTORY = ROUTE                                   (planned path shape)
+MINRATIO = A0 B0                                     (configured minimum reservation (slice A / slice B))
+SETPOINT-STREAM = 10 Hz                              (position commands sent per second)
+-----------------------------------[SCHEDULE]------------------------------------
+requested = 600s                                     (requested main window)
+network = 600s                                       (network probe window)
+warmup = 10s                                         (initial samples discarded)
+envelope = 761.0s                                    (maximum window of run layers)
+mission_len = 420s                                   (planned mission duration)
+trajectory_active = 571s                             (active trajectory segment)
+proxy_watchdog = 761s (maximum)                      (C2 process safety limit)
+---------------------------------[ATTACK START]----------------------------------
+delay = 174.3s                                       (wait before starting the attack)
+burst = 510s                                         (attack duration)
+after mission start = 84.3s                          (attack instant relative to mission start)
+
+Starting RUN 20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1 execution (please wait)...
+
+  [sidecars] profile=FULL duration=761s out=ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1/sidecars
+------------------------------------[RUNTIME]------------------------------------
+wall = 804.5s                                        (wall-clock time spent inside the run)
+------------------------------------[NETWORK]------------------------------------
+OWD p50/p99/p99.9 = 11178.9 / 21805.8 / 25164.0 µs   (one-way IP delay; 50th, 99th and 99.9th percentiles)
+IPDV p50/p99/p99.9 = 1214.3 / 14314.9 / 19017.4 µs   (IP delay variation (jitter))
+availability = 100.000% (469864/469864 packets)      (fraction of probe packets received)
+OWD trend = 568.5 µs                                 (delay change from start to end)
+-----------------------------------[HEARTBEAT]-----------------------------------
+seen/expected = 433/594                              (MAVLink heartbeats received and expected)
+gaps above threshold = 135                           (abnormal intervals between heartbeats)
+largest gap = 5.099s                                 (longest silence between heartbeats)
+------------------------------------[PHYSICS]------------------------------------
+max deviation = 63.69 m                              (largest physical distance observed)
+failsafe = no                                        (safety mode triggered by the autopilot)
+-------------------------------------[STATE]-------------------------------------
+trk_err med/p99 = 51.13 / 73.85 m                    (error between GCS-believed position and the plan)
+xtrack med/p99 = 6.36 / 57.30 m                      (physical lateral distance to the planned trajectory)
+xtrack steady p99 = 57.30 m                          (lateral error in the steady segment)
+trk_truth med/p99 = 7.84 / 50.19 m                   (error between SITL true position and the plan)
+trk_truth samples = 5710                             (number of samples used for physical truth)
+acquisition = 2.0s; cross_max=3.83 m; complete=yes   (time until the UAS reaches the trajectory)
+mode transitions = LAND→GUIDED@12.056s, GUIDED→LAND@626.613s (autopilot mode changes)
+-----------------------------------[MECHANISM]-----------------------------------
+share UL NPRB slice A = 100.0%                       (slice share of observed UL PRBs)
+share DL bytes slice A = 100.0%                      (slice share of observed DL MAC bytes)
+MAC dumps = 11220                                    (scheduler samples analyzed)
+observed UL total = 20.93 Mbps                       (observed aggregate UL traffic)
+gcs UL = rps=224.9; NPRB p50=5.0; 0.27 Mbps          (grants/s, median grant size and throughput)
+uav UL = rps=310.2; NPRB p50=51.0; 6.32 Mbps         (grants/s, median grant size and throughput)
+rogue UL = rps=134.5; NPRB p50=51.0; 3.58 Mbps       (grants/s, median grant size and throughput)
+rogue2 UL = rps=134.5; NPRB p50=51.0; 3.59 Mbps      (grants/s, median grant size and throughput)
+rogue3 UL = rps=134.4; NPRB p50=51.0; 3.59 Mbps      (grants/s, median grant size and throughput)
+rogue4 UL = rps=134.4; NPRB p50=51.0; 3.59 Mbps      (grants/s, median grant size and throughput)
+-----------------------------------[RESOURCES]-----------------------------------
+host loadavg1 before/after = 6.16 / 8.84             (host mean work queue)
+host loadavg1 maximum = 13.47                        (highest 1-minute mean load)
+host CPU busy maximum = 55.0% (threshold 90%)        (highest actual CPU occupancy)
+UPF CPU max/p50/p99 = 1.5 / 0.0 / 1.4%               (5G user-plane CPU usage)
+UPF saturated = no                                   (indicates a processing bottleneck on the UPF)
+-----------------------------------[SETPOINTS]-----------------------------------
+delivery/capture/correlation = 1.000 / 1.000 / 1.000 (command delivery, capture and matching)
+AoI setpoint gen/arrival p99 = 95.2 / 118.7 ms       (GCS→UAV control; context, not telemetry AoI)
+--------------------------------[TELEMETRY / AOI]--------------------------------
+GCS samples = 1889                                   (LOCAL_POSITION_NED positions received)
+AoI delivery p50/p99/p99.9 = 15614.3 / 15972.0 / 16013.6 ms (position age when the GCS receives it)
+gap p50/p99/p99.9 = 258.9 / 800.5 / 1040.3 ms        (interval between consecutive GCS positions)
+belief p50/p99 = 43.92 / 65.89 m                     (error between GCS belief and UAV truth)
+------------------------------------[ATTACK]-------------------------------------
+offered/sender/delivered = 80.0 / 79.5 / n/a Mbps    (requested, sent and received load)
+active rogues = 4/4                                  (observed and requested attackers)
+----------------------------------[MITIGATIONS]----------------------------------
+UL rrmPolicy = ACTIVE (S-NSSAI)                      (3GPP-faithful two-level UL: Dedicated/Prioritized/Shared via rrmPolicy.json)
+----------------------------------[VALIDATION]-----------------------------------
+clock = OK                                           (clock and probe integrity)
+host_instrumentation_integrity = OK                  (instrumentation processes and artefacts)
+mission_integrity = OK                               (mission executed without a silent crash)
+drone_integrity = OK                                 (sufficient telemetry and physics)
+freshness = OK                                       (freshness data present and correlatable)
+stream = OK                                          (stream rate within tolerance)
+prb = OK                                             (MAC/PRB evidence intact)
+mitigation_integrity = OK                            (requested mitigations applied and verified)
+attack_integrity = OK                                (attack actually executed)
+VALID = YES                                          (all mandatory gates passed)
+--------------------------------[FLIGHT OUTCOME]---------------------------------
+mission completed = yes                              (operational result)
+acquisition completed = yes                          (trajectory reached)
+xtrack steady p99 = 57.30 m                          (physical lateral error in the steady segment)
+landing completed = yes                              (final landing state)
+final mode = LAND                                    (final autopilot mode)
+armed at end = no                                    (arming state at shutdown)
+
+=========================== AGGREGATE (1 valid runs) ============================
+owd_p50_us                    median=11178.86     spread=0.00       vals=11178.9
+owd_p99_us                    median=21805.83     spread=0.00       vals=21805.8
+owd_p99_9_us                  median=25163.96     spread=0.00       vals=25164.0
+ipdv_p50_us                   median=1214.26      spread=0.00       vals=1214.3
+ipdv_p99_us                   median=14314.86     spread=0.00       vals=14314.9
+availability_pct              median=100.00       spread=0.00       vals=100.0
+max_deviation_m               median=63.69        spread=0.00       vals=63.7
+track_err_p99_m               median=73.85        spread=0.00       vals=73.8
+track_truth_p99_m             median=50.19        spread=0.00       vals=50.2
+track_truth_med_m             median=7.84         spread=0.00       vals=7.8
+cross_track_p99_steady_m      median=57.30        spread=0.00       vals=57.3
+acquisition_time_s            median=2.00         spread=0.00       vals=2.0
+tel_delay_p50_ms              median=15614.34     spread=0.00       vals=15614.3
+tel_delay_p99_ms              median=15972.00     spread=0.00       vals=15972.0
+tel_delay_p99_9_ms            median=16013.58     spread=0.00       vals=16013.6
+tel_gap_p50_ms                median=258.87       spread=0.00       vals=258.9
+tel_gap_p99_ms                median=800.46       spread=0.00       vals=800.5
+tel_gap_p99_9_ms              median=1040.30      spread=0.00       vals=1040.3
+belief_p50_m                  median=43.92        spread=0.00       vals=43.9
+belief_p99_m                  median=65.89        spread=0.00       vals=65.9
+prb_share_A_pct               median=100.00       spread=0.00       vals=100.0
+prb_share_B_pct               median=n/a          spread=n/a        vals=n/a
+uav_ul_mbps                   median=6.32         spread=0.00       vals=6.3
+gcs_ul_mbps                   median=0.27         spread=0.00       vals=0.3
+host_loadavg_max              median=13.47        spread=0.00       vals=13.5
+host_cpu_busy_max_pct         median=54.96        spread=0.00       vals=55.0
+upf_cpu_max_pct               median=1.48         spread=0.00       vals=1.5
+rogue_count                   median=4.00         spread=0.00       vals=4.0
+offered_aggregate_mbps        median=80.00        spread=0.00       vals=80.0
+delivery_ratio                median=1.00         spread=0.00       vals=1.0
+correlation_ratio             median=1.00         spread=0.00       vals=1.0
+setpoint_rate_hz              median=10.00        spread=0.00       vals=10.0
+upf_saturated                 vals=no
+
+[RESULT]: 1/1 runs executed (1 valid - minimum 1).
+=================================================================================
+Results in: ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/
+[TOTAL EXECUTION TIME]: 962s
+
+[qgc] operator view closed (QGroundControl, mirror, responder)

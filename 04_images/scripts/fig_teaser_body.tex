@@ -1,0 +1,139 @@
+% Body of fig:teaser — false-healthy contrast (CORECRISIS-like dashed panels).
+% No top title/subtitle.
+% Layout = paper version of 2026-10-22 (Paper Tex/pdfs/fig_teaser.pdf), reconstructed and
+% verified pixel-identical (build_fig_teaser.sh crops with pdfcrop --margins 2).
+% Numbers ≡ tab:false-healthy Atk N=4 (median over runs), generated from the run
+% artifacts by generate_fig_teaser_numbers.py into fig_teaser_numbers.tex (R2):
+%   \fbTeaserOWD (ms), \fbTeaserAvail (%), \fbTeaserDeltaMed / \fbTeaserDeltaTail (s),
+%   \fbTeaserBelief (m).
+% Icons via graphicspath in fig_teaser.tex → ../icons/
+\usetikzlibrary{arrows.meta,calc,positioning,backgrounds,fit}
+\input{fig_teaser_numbers}
+\ifdefined\fbGreen\else
+  \definecolor{fbGreen}{HTML}{1B7A3A}
+  \definecolor{fbGreenBorder}{HTML}{2E8B4F}
+  \definecolor{fbGreenFill}{HTML}{EDF7F0}
+  \definecolor{fbGreenNum}{HTML}{146C2E}
+  \definecolor{fbRed}{HTML}{A11D16}
+  \definecolor{fbRedBorder}{HTML}{C62828}
+  \definecolor{fbRedFill}{HTML}{FCF3F2}
+  \definecolor{fbNum}{HTML}{8B1A14}
+  \definecolor{fbBlue}{HTML}{1A5FB4}
+  \definecolor{fbOrange}{HTML}{B35C00}
+  \definecolor{fbMuted}{HTML}{5B6573}
+  \definecolor{fbInk}{HTML}{1F2933}
+  \definecolor{fbDash}{HTML}{6B7280}
+\fi
+
+\begin{tikzpicture}[
+  font=\sffamily\fontsize{7.0}{8.4}\selectfont,
+  >=Latex,
+  stepdot/.style={
+    circle, draw=white, line width=0.45pt, fill=#1,
+    minimum size=8.6pt, inner sep=0pt,
+    font=\sffamily\bfseries\fontsize{5.8}{6.8}\selectfont,
+    text=white,
+  },
+  steplab/.style={
+    font=\sffamily\fontsize{7.2}{8.5}\selectfont,
+    text=fbMuted, align=center,
+  },
+  foot/.style={
+    rounded corners=1.5pt,
+    fill=#1,
+    text=white,
+    font=\sffamily\bfseries\fontsize{7.2}{8.5}\selectfont,
+    inner xsep=3.8pt, inner ysep=1.6pt,
+  },
+  boxhead/.style={
+    font=\sffamily\bfseries\fontsize{7.2}{8.5}\selectfont,
+    align=center,
+  },
+  gbullet/.style={
+    font=\sffamily\fontsize{7.2}{8.6}\selectfont,
+    text=fbGreen,
+  },
+]
+
+% ===================== CENTER FLOW =====================
+\node (rogueI) at (0,2.50) {\includegraphics[height=1.00cm]{ues_rogues}};
+\node[stepdot=fbBlue] at ($(rogueI.north west)+(-0.04,0.04)$) {1};
+\node[steplab, below=1.6pt of rogueI] (lab1) {authorized\\co-tenant};
+
+\node (gnbI) at (0,0.20) {\includegraphics[height=0.88cm]{gnb}};
+\node[stepdot=fbOrange] at ($(gnbI.north west)+(-0.04,0.04)$) {2};
+\node[steplab, below=1.6pt of gnbI] (lab2) {authorized\\UL contention\\(gNB scheduler)};
+
+\node (clkI) at (0,-2.10) {\includegraphics[height=0.84cm]{delay}};
+\node[stepdot=fbRed] at ($(clkI.north west)+(-0.04,0.04)$) {3};
+\node[steplab, below=1.6pt of clkI] (lab3) {telemetry ages\\(PDU stays up)};
+
+\draw[fbBlue, line width=1.25pt, -{Latex[length=2.0mm, width=1.7mm]}]
+  (lab1.south) -- (gnbI.north);
+\draw[fbOrange, line width=1.25pt, -{Latex[length=2.0mm, width=1.7mm]}]
+  (lab2.south) -- (clkI.north);
+
+\coordinate (flowMid) at ($(rogueI.north)!0.5!(lab3.south)$);
+
+% ===================== LEFT =====================
+% Optical y-offset: heavy top icon → nudge down so box mid ≈ flow mid
+\begin{scope}[shift={($(flowMid)+(-3.55,-0.42)$)}]
+  \node[align=left, text width=3.10cm, text=fbInk,
+        font=\sffamily\fontsize{7.2}{8.6}\selectfont] (Lbul) at (0,0) {%
+    {\color{fbGreen}\scriptsize\textbullet}~~GUIDED mode\\[0.85pt]
+    {\color{fbGreen}\scriptsize\textbullet}~~failsafe inactive\\[0.85pt]
+    {\color{fbGreen}\scriptsize\textbullet}~~{\bfseries\color{fbGreenNum}OWD p99: \fbTeaserOWD\,ms}\\[0.85pt]
+    {\color{fbGreen}\scriptsize\textbullet}~~{\bfseries\color{fbGreenNum}cmd delivery: \fbTeaserAvail\%}\\[0.85pt]
+    {\color{fbGreen}\scriptsize\textbullet}~~telemetry still arriving\\[0.85pt]
+    {\color{fbGreen}\scriptsize\textbullet}~~link / flight appear OK%
+  };
+  \node[boxhead, text=fbGreen, above=5pt of Lbul] (Lhead)
+    {WHAT THE OPERATOR SEES};
+  \node[above=3pt of Lhead] (Lok) {\includegraphics[height=1.22cm]{drone_ok}};
+  \node[foot=fbGreen, below=7pt of Lbul] (Lfoot) {Apparent link / flight OK};
+\end{scope}
+
+\begin{scope}[on background layer]
+  \node[
+    draw=fbGreenBorder, dash pattern=on 2.0pt off 1.5pt, line width=1.0pt,
+    fill=fbGreenFill, rounded corners=3.2pt,
+    fit=(Lok)(Lhead)(Lbul)(Lfoot),
+    inner xsep=7.5pt, inner ysep=7pt,
+  ] (Lbox) {};
+\end{scope}
+
+% ===================== RIGHT =====================
+% Mirror left stack exactly: bullets @0, title +5pt, icons +3pt, foot -7pt
+\begin{scope}[shift={($(flowMid)+(3.55,-0.78)$)}]
+  \node[align=left, text width=3.10cm, text=fbInk,
+        font=\sffamily\fontsize{7.2}{8.6}\selectfont] (Rbul) at (0,0) {%
+    {\color{fbRed}\scriptsize\textbullet}~~Telemetry age $\delta$\\[0.20pt]
+    \hspace{0.95em}{\color{fbMuted}p50/p99:}~{\bfseries\color{fbNum}\fbTeaserDeltaMed{} / \fbTeaserDeltaTail\,s}\\[0.90pt]
+    {\color{fbRed}\scriptsize\textbullet}~~Belief-vs-truth error\\[0.20pt]
+    \hspace{0.95em}{\color{fbMuted}p50:}~{\bfseries\color{fbNum}\fbTeaserBelief\,m}\\[0.90pt]
+    {\color{fbRed}\scriptsize\textbullet}~~GCS state/map is stale%
+  };
+  \node[boxhead, text=fbRed, align=center, above=5pt of Rbul] (Rhead)
+    {GROUND TRUTH\\vs GCS BELIEF};
+  \node[above=3pt of Rhead] (Rmon)
+    {\includegraphics[height=1.28cm]{drone_delay}};
+  \node[anchor=east] (Rgcs) at ([xshift=0.04cm,yshift=-0.28cm]Rmon.west)
+    {\includegraphics[height=0.66cm]{gcs_laptop}};
+  \node[foot=fbRed, below=7pt of Rbul] (Rfoot) {State freshness failed};
+\end{scope}
+
+\begin{scope}[on background layer]
+  \node[
+    draw=fbRedBorder, dash pattern=on 2.0pt off 1.5pt, line width=1.0pt,
+    fill=fbRedFill, rounded corners=3.2pt,
+    fit=(Rmon)(Rgcs)(Rhead)(Rbul)(Rfoot),
+    inner xsep=7.5pt, inner ysep=7pt,
+  ] (Rbox) {};
+\end{scope}
+
+\draw[fbDash, line width=0.95pt, densely dashed, -{Latex[length=2.2mm, width=1.8mm]}]
+  (Lbox.east |- rogueI.center) -- (rogueI.west);
+\draw[fbRedBorder, line width=1.20pt, -{Latex[length=2.5mm, width=2.0mm]}]
+  (clkI.east) -- (Rbox.west |- clkI.center);
+
+\end{tikzpicture}

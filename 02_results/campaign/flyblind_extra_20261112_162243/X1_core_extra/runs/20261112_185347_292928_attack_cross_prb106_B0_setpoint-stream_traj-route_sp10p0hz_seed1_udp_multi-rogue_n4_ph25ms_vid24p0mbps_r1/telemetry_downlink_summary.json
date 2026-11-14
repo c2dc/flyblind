@@ -1,0 +1,86 @@
+{
+  "schema_version": "telemetry_downlink_v2",
+  "message": "LOCAL_POSITION_NED",
+  "nominal_hz": 20.0,
+  "ned_samples_gcs": 938,
+  "ned_samples_uav": 2840,
+  "ned_samples_expected_approx": 11420,
+  "capture_ratio": 0.0821,
+  "uav_to_gcs_delivery_ratio": 0.3303,
+  "matched_uav_gcs": 938,
+  "belief_matched": 937,
+  "belief_vs_truth_m": {
+    "p50": 31.066,
+    "p95": 57.944,
+    "p99": 63.673,
+    "p99_9": 68.844,
+    "max": 68.95,
+    "mean": 29.302,
+    "n": 937
+  },
+  "telemetry_arrival_delay_ms": {
+    "p50": 13075.34,
+    "p95": 14392.994,
+    "p99": 14717.143,
+    "p99_9": 15029.968,
+    "max": 15119.407,
+    "mean": 9383.165,
+    "n": 938
+  },
+  "inter_arrival_gap_ms": {
+    "p50": 270.522,
+    "p95": 1889.345,
+    "p99": 3557.248,
+    "p99_9": 4204.595,
+    "max": 4621.803,
+    "mean": 635.591,
+    "n": 937
+  },
+  "miss_ratio_delay": {
+    "50": 0.7591,
+    "100": 0.7591,
+    "150": 0.7591
+  },
+  "miss_ratio_gap": {
+    "50": 0.9925,
+    "100": 0.9915,
+    "150": 0.9744
+  },
+  "metric_definitions": {
+    "telemetry_arrival_delay_ms": "One-way downlink delay: t_arrival_gcs \u2212 t_egress_uav (ms), matched by (system_id, time_boot_ms) or sequence. Diagnostic only.",
+    "inter_arrival_gap_ms": "Gap between consecutive LOCAL_POSITION_NED arrivals at GCS (ms).",
+    "capture_ratio": "ned_samples_gcs / (nominal_hz \u00d7 active_duration_s).",
+    "uav_to_gcs_delivery_ratio": "ned_samples_gcs / ned_samples_uav (5G downlink delivery of NED).",
+    "belief_vs_truth_m": "At each GCS NED arrival i: ||pos_belief \u2212 pos_truth|| (m), where belief is the previous GCS sample (frozen GCS state) and truth is the latest SITL-egress NED in c2_telemetry_uav.csv with t_uav_mono \u2264 t_gcs_arrival. Report-only; not scored by VALID/DAMAGE. Requires comparable pod CLOCK_MONOTONIC."
+  },
+  "belief_validation": {
+    "status": "validated",
+    "physical_consistent": true,
+    "clock_ok": true,
+    "speed_mps": 3.992,
+    "belief_p50_m": 31.066,
+    "belief_p99_m": 63.673,
+    "gap_p50_ms": 270.522,
+    "gap_p99_ms": 3557.248,
+    "aoi_p50_ms": 13075.34,
+    "aoi_p99_ms": 14717.143,
+    "belief_age_p50_s": 13.346,
+    "belief_age_p99_s": 18.274,
+    "trajectory_diameter_m": 434.817,
+    "anchor": "delivery_AoI+gap",
+    "belief_expected_p50_m": 53.277,
+    "belief_expected_p99_m": 72.951,
+    "clock_skew_abs_median_ms": 0.241,
+    "clock_jitter_spread_ms": 29.037,
+    "thresholds": {
+      "clock_skew_max_ms": 100.0,
+      "clock_jitter_max_ms": 250.0,
+      "phys_factor": 3.0,
+      "phys_abs_floor_m": 2.0,
+      "geom_tol": 1.15
+    },
+    "reason": "validated (clock offset |median|=0.241 ms, spread=29.037 ms (\u2264 100.0/250.0 ms); belief p50=31.066m \u2264 physical max 53.28m (belief age 13.35s \u00d7 3.99 m/s, capped by trajectory \u00d8 434.8 m))",
+    "appendix_line": "belief_vs_truth_m validated (clock offset 0.241 ms; belief age \u2248 13.346 s from delivery AoI, physically consistent \u2014 p50 31.066 m \u2264 geometric max 53.277 m)",
+    "clock_appendix_line": "measured inter-pod CLOCK_MONOTONIC offset (UAV\u2212GCS): median -0.241 ms, spread(p95\u2212p5) 29.037 ms (N=10)"
+  }
+}

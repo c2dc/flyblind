@@ -1,0 +1,142 @@
+[2026-11-12 16:22:43] === FlyBlind campaign | mode=EXECUTE | root=ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243
+[2026-11-12 16:22:43]     sidecars=FULL | min_free=10GB | settle_load1=6.0
+FlyBlind TOP-UP plan (13 runs, 3 series) -- THROWAWAY: these conditions are also in campaign.sh
+
+Runs only what was added after the first 52-run campaign, so the existing results are not repeated.
+Same requirements as the full campaign: an active graphical session (every run opens QGroundControl,
+no screen lock / suspend during ~4 h) and the FULL sidecar profile on every run.
+
+  X1_core_extra  10 runs  ./start_testbed.sh                (default: co-located victim, 106 PRB, UL patch armed)
+                          video onset at the predicted share (6 Mb x3)
+                          | video plateau above the share (16 Mb x3, 24 Mb x3)
+                          | one 106 PRB capacity replicate (24 Mb x1, expected invalid)
+  X3_prb51_extra  2 runs  GNB_PRB=51 ./start_testbed.sh     51 PRB capacity lower bound (16 Mb x2) -- the first
+                          campaign got 0 valid here, leaving C(51) with no floor
+  X6_poscontrol   1 run   ./start_testbed.sh                positive control: the command leg is blackholed in
+                          steady flight for longer than FS_GCS_TIMEOUT, so the native failsafe MUST trip
+                          (GUIDED->RTL) -- expected invalid by construction, read as a control
+
+What the two video groups test (one model, two sides of the same boundary, AoI = (Q/C)(N+1)):
+  onset   -- measured UL capacity C ~= 24..32 Mb/s, so the share at N=4 is C/5 ~= 4.8..6.4 Mb/s. The attack is
+             absent at 4 Mb/s and present at 8 Mb/s, so 6 Mb/s sits on the predicted boundary.
+  plateau -- above the share the age is set by the buffer drained at the share, so it must NOT grow with the
+             victim's offered rate: 16 and 24 Mb/s must reproduce the 12 Mb/s headline (~13 s).
+
+N=5/N=6 is NOT included: start_testbed.sh accepts rogues=1..4 and only four rogue subscribers are provisioned,
+so more co-tenants would require changing the testbed. The model is probed along the victim's demand instead.
+
+Estimated wall time: ~4 h (13 x ~16 min + 3 bring-ups).
+[2026-11-12 16:22:43] sudo: asking the password once; kept alive in background for the whole campaign
+[2026-11-12 16:22:47] sudo: OK (keep-alive pid 2936611)
+[2026-11-12 16:22:47] disk free: 33 GB
+[2026-11-12 16:22:47] image OK: localhost/oai-gnb-oranslice-mitigation:2024w28
+[2026-11-12 16:22:47] image OK: localhost/oai-nr-ue-oranslice-mitigation:2024w28
+[2026-11-12 16:22:47] display OK: :0.0
+[2026-11-12 16:22:47] QGC OK: QGroundControl.AppImage
+[2026-11-12 16:22:47] preflight OK
+[2026-11-12 16:22:47] conditions generated and validated under ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/conditions
+[2026-11-12 16:22:47] ================ SERIES X1_core_extra:  ./start_testbed.sh  | conditions=x1_core_extra.json
+[2026-11-12 16:22:47] disk free: 33 GB
+[2026-11-12 16:22:47] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && ./stop_testbed.sh  (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X1_core_extra/stop.log)
+[2026-11-12 16:22:48] rc=0
+[2026-11-12 16:22:48] clean: no Kind cluster, no leftover campaign processes
+[2026-11-12 16:22:48] host load1=0.73 < 6.0 (settled)
+[2026-11-12 16:22:48] sudo: ticket still valid
+[2026-11-12 16:22:48] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && env ORANSLICE_SKIP_BUILD=1  ./start_testbed.sh   (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X1_core_extra/start.log)
+[2026-11-12 16:31:57] rc=0
+[2026-11-12 16:31:57] verify: all pods Ready (core, ran)
+[2026-11-12 16:31:57] verify: stamp TOPOLOGY=cross OK
+[2026-11-12 16:31:57] verify: stamp GNB_PRB=106 OK
+[2026-11-12 16:31:57] verify: stamp MIN_RATIO_SLICE_B=0 OK
+[2026-11-12 16:31:57] verify: stamp VICTIM_IN_EMBB=1 OK
+[2026-11-12 16:31:57] verify: stamp MITIGATION_UL_RRMPOLICY=1 OK
+[2026-11-12 16:31:58] verify: stamp MITIGATION_AQM=0 OK
+[2026-11-12 16:31:58] verify: SITL FS_GCS_ENABLE=1, FS_GCS_TIMEOUT=5 OK
+[2026-11-12 16:31:58] verify: C2 socat UDP:5760 alive
+[2026-11-12 16:31:58] verify: ACK probe relay UDP:5763 alive (FULL sidecars)
+[2026-11-12 16:31:58] host load1=2.95 < 6.0 (settled)
+[2026-11-12 16:31:58] series X1_core_extra: batch start (seed=20261121, conditions=x1_core_extra.json)
+[2026-11-12 19:08:39] series X1_core_extra: batch finished rc=0 (rc=1 means at least one invalid run; see the summary)
+
+### X1_core_extra (seed 20261121)
+
+| condition | planned | executed | valid | status |
+|---|---:|---:|---:|---|
+| b_atk_n4_vid6 | 3 | 3 | 3 | OK |
+| d_atk_n4_vid16 | 3 | 3 | 3 | OK |
+| d_atk_n4_vid24 | 3 | 3 | 3 | OK |
+| cap_base_vid24 | 1 | 1 | 1 | expected invalid allowed (evaluate by goodput) |
+[2026-11-12 19:08:39] ================ SERIES X6_poscontrol:  ./start_testbed.sh  | conditions=x6_poscontrol.json
+[2026-11-12 19:08:39] disk free: 25 GB
+[2026-11-12 19:08:39] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && ./stop_testbed.sh  (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/stop.log)
+[2026-11-12 19:08:45] rc=0
+[2026-11-12 19:08:45] clean: no Kind cluster, no leftover campaign processes
+[2026-11-12 19:09:00] host load1=5.19 < 6.0 (settled)
+[2026-11-12 19:09:00] sudo: ticket still valid
+[2026-11-12 19:09:00] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && env ORANSLICE_SKIP_BUILD=1  ./start_testbed.sh   (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/start.log)
+[2026-11-12 19:19:02] rc=0
+[2026-11-12 19:19:02] verify: all pods Ready (core, ran)
+[2026-11-12 19:19:02] verify: stamp TOPOLOGY=cross OK
+[2026-11-12 19:19:02] verify: stamp GNB_PRB=106 OK
+[2026-11-12 19:19:02] verify: stamp MIN_RATIO_SLICE_B=0 OK
+[2026-11-12 19:19:02] verify: stamp VICTIM_IN_EMBB=1 OK
+[2026-11-12 19:19:02] verify: stamp MITIGATION_UL_RRMPOLICY=1 OK
+[2026-11-12 19:19:02] verify: stamp MITIGATION_AQM=0 OK
+[2026-11-12 19:19:02] verify: SITL FS_GCS_ENABLE=1, FS_GCS_TIMEOUT=5 OK
+[2026-11-12 19:19:03] verify: C2 socat UDP:5760 alive
+[2026-11-12 19:19:03] verify: ACK probe relay UDP:5763 alive (FULL sidecars)
+[2026-11-12 19:19:03] host load1=5.26 < 6.0 (settled)
+[2026-11-12 19:19:03] X6_poscontrol: starting in-run hook poscontrol_injector
+[2026-11-12 19:19:03] series X6_poscontrol: batch start (seed=20261123, conditions=x6_poscontrol.json)
+[2026-11-12 19:24:19] poscontrol: command leg cut for 10159 ms at t_rel ~300s (12.1.1.133)
+[2026-11-12 19:33:54] series X6_poscontrol: batch finished rc=1 (rc=1 means at least one invalid run; see the summary)
+[2026-11-12 19:33:59] poscontrol: injection record written to ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/blackhole_injection.json
+[2026-11-12 19:33:59] poscontrol: WARN - the failsafe could not be causally attributed to the cut; inspect ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/blackhole_injection.json before using this run
+[2026-11-12 19:33:59] X6_poscontrol: in-run hook finished
+
+### X6_poscontrol (seed 20261123)
+
+| condition | planned | executed | valid | status |
+|---|---:|---:|---:|---|
+| pos_control_route | 1 | 1 | 0 | expected invalid allowed (evaluate by goodput) |
+- invalid: pos_control_route_r1 gates=[{'gate': 'c2_health', 'reason': {'pass': False, 'heartbeat_gaps_over_threshold': 0, 'unexpected_failsafe': True, 'unexpected_mode_transitions': [{'t_rel_s': 132.923, 'from': 'GUIDED', 'to': 'RTL', 'steady_state': True}], 'position_samples': 2407, 'normal_land': False, 'min_position_samples': 10}}, {'gate': 'baseline_drone_quality', 'reason': 'failsafe; spatial/acquisition; missing GUIDED->LAND; abnormal_land'}] dir=ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1
+[2026-11-12 19:33:59] ================ SERIES X3_prb51_extra: GNB_PRB=51 ./start_testbed.sh  | conditions=x3_prb51_extra.json
+[2026-11-12 19:33:59] disk free: 25 GB
+[2026-11-12 19:33:59] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && ./stop_testbed.sh  (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/stop.log)
+[2026-11-12 19:34:05] rc=0
+[2026-11-12 19:34:05] clean: no Kind cluster, no leftover campaign processes
+[2026-11-12 19:34:20] host load1=5.11 < 6.0 (settled)
+[2026-11-12 19:34:20] sudo: ticket still valid
+[2026-11-12 19:34:20] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && env ORANSLICE_SKIP_BUILD=1 GNB_PRB=51 ./start_testbed.sh   (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/start.log)
+[2026-11-12 19:42:53] rc=0
+[2026-11-12 19:42:53] verify: all pods Ready (core, ran)
+[2026-11-12 19:42:53] verify: stamp TOPOLOGY=cross OK
+[2026-11-12 19:42:53] verify: stamp GNB_PRB=51 OK
+[2026-11-12 19:42:54] verify: stamp MIN_RATIO_SLICE_B=0 OK
+[2026-11-12 19:42:54] verify: stamp VICTIM_IN_EMBB=1 OK
+[2026-11-12 19:42:54] verify: stamp MITIGATION_UL_RRMPOLICY=1 OK
+[2026-11-12 19:42:54] verify: stamp MITIGATION_AQM=0 OK
+[2026-11-12 19:42:54] verify: SITL FS_GCS_ENABLE=1, FS_GCS_TIMEOUT=5 OK
+[2026-11-12 19:42:54] verify: C2 socat UDP:5760 alive
+[2026-11-12 19:42:54] verify: ACK probe relay UDP:5763 alive (FULL sidecars)
+[2026-11-12 19:55:24] host load1=5.99 < 6.0 (settled)
+[2026-11-12 19:55:24] series X3_prb51_extra: batch start (seed=20261122, conditions=x3_prb51_extra.json)
+[2026-11-12 20:25:30] series X3_prb51_extra: batch finished rc=1 (rc=1 means at least one invalid run; see the summary)
+
+### X3_prb51_extra (seed 20261122)
+
+| condition | planned | executed | valid | status |
+|---|---:|---:|---:|---|
+| cap51_base_vid16 | 2 | 2 | 0 | expected invalid allowed (evaluate by goodput) |
+- invalid: cap51_base_vid16_r2 gates=[{'gate': 'host', 'reason': {'pass': False, 'gate_type': 'host_quality', 'enforced': True, 'host_telemetry_rc': 0, 'loadavg1_max': 16.44, 'cpu_busy_pct_max': 71.03, 'cpu_busy_max_pct_threshold': 90.0, 'loadavg1_before': 7.0, 'loadavg1_after': 11.18, 'nproc': 16}}] dir=ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/runs/20261112_195531_084895_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1
+- invalid: cap51_base_vid16_r1 gates=[{'gate': 'host', 'reason': {'pass': False, 'gate_type': 'host_quality', 'enforced': True, 'host_telemetry_rc': 0, 'loadavg1_max': 20.13, 'cpu_busy_pct_max': 80.07, 'cpu_busy_max_pct_threshold': 90.0, 'loadavg1_before': 5.75, 'loadavg1_after': 13.62, 'nproc': 16}}] dir=ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/runs/20261112_201028_837998_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1
+[2026-11-12 20:25:30] ================ END: stopping the testbed to leave the host clean
+[2026-11-12 20:25:30] RUN: bash -c cd 'ARTIFACT_ROOT/01_scripts/01_testbeds' && ./stop_testbed.sh  (log: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/_final/stop.log)
+[2026-11-12 20:25:36] rc=0
+[2026-11-12 20:25:36] clean: no Kind cluster, no leftover campaign processes
+[2026-11-12 20:25:36] ================ SERIES RESULTS
+[2026-11-12 20:25:36]   X1_core_extra: done
+[2026-11-12 20:25:36]   X6_poscontrol: done
+[2026-11-12 20:25:36]   X3_prb51_extra: done
+[2026-11-12 20:25:36] results: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243
+[2026-11-12 20:25:36] summary: ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/campaign_summary.md

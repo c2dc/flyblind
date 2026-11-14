@@ -1,0 +1,16 @@
+{
+  "schema_version": "upf_telemetry_v1",
+  "deploy": "oai-upf",
+  "core_namespace": "core",
+  "samples": 656,
+  "samples_ok": 656,
+  "sample_errors": 0,
+  "cpu_pct_max": 3.34,
+  "cpu_pct_p50": 0.0,
+  "cpu_pct_p95": 2.9125,
+  "cpu_pct_p99": 3.0990000000000006,
+  "cpu_pct_mean": 0.249,
+  "saturate_pct_threshold": 85.0,
+  "saturated": false,
+  "mechanism_hint": "upf_headroom_ok"
+}

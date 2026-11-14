@@ -1,0 +1,650 @@
+{
+  "schema": "flyblind_image_digests_v2",
+  "context": "kind-tm-oranslice-mitigation",
+  "namespaces": [
+    "ran",
+    "core"
+  ],
+  "namespace": "ran",
+  "core_namespace": "core",
+  "commands": [
+    "kubectl --context kind-tm-oranslice-mitigation get pods -n ran -o json",
+    "kubectl --context kind-tm-oranslice-mitigation get pods -n core -o json"
+  ],
+  "dry_run": false,
+  "ok": true,
+  "error": null,
+  "per_namespace": {
+    "ran": {
+      "namespace": "ran",
+      "command": "kubectl --context kind-tm-oranslice-mitigation get pods -n ran -o json",
+      "ok": true,
+      "error": null,
+      "digests": {
+        "n_pods": 7,
+        "n_unique_imageIDs": 4,
+        "imageIDs": [
+          "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+          "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+          "docker.io/library/import-2026-11-12@sha256:6567ca53780352348f8726c706506c6d53bbb8f807a2c4440dc43093d3407028",
+          "docker.io/library/ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5"
+        ],
+        "pods": [
+          {
+            "name": "oai-gnb-6597c78c48-lzp7k",
+            "labels": {
+              "app": "oai-gnb",
+              "pod-template-hash": "6597c78c48"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "gnb",
+                "image": "localhost/oai-gnb-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:6567ca53780352348f8726c706506c6d53bbb8f807a2c4440dc43093d3407028",
+                "ready": true
+              },
+              {
+                "name": "wait-amf-ngap",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              },
+              {
+                "name": "wait-ext-dn",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-gcs-6b9bd74fdc-gl7kw",
+            "labels": {
+              "app": "oai-ue-gcs",
+              "pod-template-hash": "6b9bd74fdc"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-rogue-75f9dcb7d7-6v5h8",
+            "labels": {
+              "app": "oai-ue-rogue",
+              "pod-template-hash": "75f9dcb7d7"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-rogue2-848b895df7-mbdl9",
+            "labels": {
+              "app": "oai-ue-rogue2",
+              "pod-template-hash": "848b895df7"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-rogue3-5c8f75c546-mkv54",
+            "labels": {
+              "app": "oai-ue-rogue3",
+              "pod-template-hash": "5c8f75c546"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-rogue4-7fd4f66d87-mxkvb",
+            "labels": {
+              "app": "oai-ue-rogue4",
+              "pod-template-hash": "7fd4f66d87"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ue-uav-5767547745-hd8wm",
+            "labels": {
+              "app": "oai-ue-uav",
+              "pod-template-hash": "5767547745"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "nr-ue",
+                "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+                "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+                "ready": true
+              },
+              {
+                "name": "sitl",
+                "image": "docker.io/library/ubuntu:24.04",
+                "imageID": "docker.io/library/ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+                "ready": true
+              },
+              {
+                "name": "wait-gnb-rfsim",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "core": {
+      "namespace": "core",
+      "command": "kubectl --context kind-tm-oranslice-mitigation get pods -n core -o json",
+      "ok": true,
+      "error": null,
+      "digests": {
+        "n_pods": 5,
+        "n_unique_imageIDs": 6,
+        "imageIDs": [
+          "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+          "docker.io/library/mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b",
+          "docker.io/oaisoftwarealliance/oai-amf@sha256:c6dee19b65b2bf29b73e6647f98e0381d96a2eb4c6f9a68f5c3bc70534afa14c",
+          "docker.io/oaisoftwarealliance/oai-smf@sha256:c1f1452edfc835c36aa96a2efca337da0149212a6561bbb5f9b1994356beee24",
+          "docker.io/oaisoftwarealliance/oai-upf@sha256:03985036c2477a75755ded9b7fe9508b62f49e4ce9e9f059bbb68af63932e7f7",
+          "docker.io/oaisoftwarealliance/trf-gen-cn5g@sha256:3f9ab2e401d2a010b568e78db087b5d1526b8756f1056087939116f6138340a6"
+        ],
+        "pods": [
+          {
+            "name": "oai-amf-d649f97cc-qcptf",
+            "labels": {
+              "app": "oai-amf",
+              "pod-template-hash": "d649f97cc"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "amf",
+                "image": "docker.io/oaisoftwarealliance/oai-amf:v2.2.1",
+                "imageID": "docker.io/oaisoftwarealliance/oai-amf@sha256:c6dee19b65b2bf29b73e6647f98e0381d96a2eb4c6f9a68f5c3bc70534afa14c",
+                "ready": true
+              },
+              {
+                "name": "wait-mysql",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-ext-dn-5655b98fc8-qrrnc",
+            "labels": {
+              "app": "oai-ext-dn",
+              "pod-template-hash": "5655b98fc8"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "ext-dn",
+                "image": "docker.io/oaisoftwarealliance/trf-gen-cn5g:latest",
+                "imageID": "docker.io/oaisoftwarealliance/trf-gen-cn5g@sha256:3f9ab2e401d2a010b568e78db087b5d1526b8756f1056087939116f6138340a6",
+                "ready": true
+              },
+              {
+                "name": "wait-upf",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-mysql-64b5b6fcf5-ndkbd",
+            "labels": {
+              "app": "oai-mysql",
+              "pod-template-hash": "64b5b6fcf5"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "mysql",
+                "image": "docker.io/library/mysql:8.0",
+                "imageID": "docker.io/library/mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-smf-5957bdf945-qmjg5",
+            "labels": {
+              "app": "oai-smf",
+              "pod-template-hash": "5957bdf945"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "smf",
+                "image": "docker.io/oaisoftwarealliance/oai-smf:v2.2.1",
+                "imageID": "docker.io/oaisoftwarealliance/oai-smf@sha256:c1f1452edfc835c36aa96a2efca337da0149212a6561bbb5f9b1994356beee24",
+                "ready": true
+              },
+              {
+                "name": "wait-mysql",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          },
+          {
+            "name": "oai-upf-8cc8f6bb-ps82r",
+            "labels": {
+              "app": "oai-upf",
+              "pod-template-hash": "8cc8f6bb"
+            },
+            "phase": "Running",
+            "nodeName": "tm-oranslice-mitigation-control-plane",
+            "containers": [
+              {
+                "name": "upf",
+                "image": "docker.io/oaisoftwarealliance/oai-upf:v2.2.1",
+                "imageID": "docker.io/oaisoftwarealliance/oai-upf@sha256:03985036c2477a75755ded9b7fe9508b62f49e4ce9e9f059bbb68af63932e7f7",
+                "ready": true
+              },
+              {
+                "name": "wait-smf",
+                "image": "docker.io/library/busybox:1.36",
+                "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "ready": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "digests": {
+    "n_pods": 12,
+    "n_unique_imageIDs": 9,
+    "imageIDs": [
+      "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+      "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+      "docker.io/library/import-2026-11-12@sha256:6567ca53780352348f8726c706506c6d53bbb8f807a2c4440dc43093d3407028",
+      "docker.io/library/mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b",
+      "docker.io/library/ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+      "docker.io/oaisoftwarealliance/oai-amf@sha256:c6dee19b65b2bf29b73e6647f98e0381d96a2eb4c6f9a68f5c3bc70534afa14c",
+      "docker.io/oaisoftwarealliance/oai-smf@sha256:c1f1452edfc835c36aa96a2efca337da0149212a6561bbb5f9b1994356beee24",
+      "docker.io/oaisoftwarealliance/oai-upf@sha256:03985036c2477a75755ded9b7fe9508b62f49e4ce9e9f059bbb68af63932e7f7",
+      "docker.io/oaisoftwarealliance/trf-gen-cn5g@sha256:3f9ab2e401d2a010b568e78db087b5d1526b8756f1056087939116f6138340a6"
+    ],
+    "pods": [
+      {
+        "name": "oai-gnb-6597c78c48-lzp7k",
+        "labels": {
+          "app": "oai-gnb",
+          "pod-template-hash": "6597c78c48"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "gnb",
+            "image": "localhost/oai-gnb-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:6567ca53780352348f8726c706506c6d53bbb8f807a2c4440dc43093d3407028",
+            "ready": true
+          },
+          {
+            "name": "wait-amf-ngap",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          },
+          {
+            "name": "wait-ext-dn",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-gcs-6b9bd74fdc-gl7kw",
+        "labels": {
+          "app": "oai-ue-gcs",
+          "pod-template-hash": "6b9bd74fdc"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-rogue-75f9dcb7d7-6v5h8",
+        "labels": {
+          "app": "oai-ue-rogue",
+          "pod-template-hash": "75f9dcb7d7"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-rogue2-848b895df7-mbdl9",
+        "labels": {
+          "app": "oai-ue-rogue2",
+          "pod-template-hash": "848b895df7"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-rogue3-5c8f75c546-mkv54",
+        "labels": {
+          "app": "oai-ue-rogue3",
+          "pod-template-hash": "5c8f75c546"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-rogue4-7fd4f66d87-mxkvb",
+        "labels": {
+          "app": "oai-ue-rogue4",
+          "pod-template-hash": "7fd4f66d87"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-ue-uav-5767547745-hd8wm",
+        "labels": {
+          "app": "oai-ue-uav",
+          "pod-template-hash": "5767547745"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "nr-ue",
+            "image": "localhost/oai-nr-ue-oranslice-mitigation:2024w28",
+            "imageID": "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+            "ready": true
+          },
+          {
+            "name": "sitl",
+            "image": "docker.io/library/ubuntu:24.04",
+            "imageID": "docker.io/library/ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+            "ready": true
+          },
+          {
+            "name": "wait-gnb-rfsim",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "ran"
+      },
+      {
+        "name": "oai-amf-d649f97cc-qcptf",
+        "labels": {
+          "app": "oai-amf",
+          "pod-template-hash": "d649f97cc"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "amf",
+            "image": "docker.io/oaisoftwarealliance/oai-amf:v2.2.1",
+            "imageID": "docker.io/oaisoftwarealliance/oai-amf@sha256:c6dee19b65b2bf29b73e6647f98e0381d96a2eb4c6f9a68f5c3bc70534afa14c",
+            "ready": true
+          },
+          {
+            "name": "wait-mysql",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "core"
+      },
+      {
+        "name": "oai-ext-dn-5655b98fc8-qrrnc",
+        "labels": {
+          "app": "oai-ext-dn",
+          "pod-template-hash": "5655b98fc8"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "ext-dn",
+            "image": "docker.io/oaisoftwarealliance/trf-gen-cn5g:latest",
+            "imageID": "docker.io/oaisoftwarealliance/trf-gen-cn5g@sha256:3f9ab2e401d2a010b568e78db087b5d1526b8756f1056087939116f6138340a6",
+            "ready": true
+          },
+          {
+            "name": "wait-upf",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "core"
+      },
+      {
+        "name": "oai-mysql-64b5b6fcf5-ndkbd",
+        "labels": {
+          "app": "oai-mysql",
+          "pod-template-hash": "64b5b6fcf5"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "mysql",
+            "image": "docker.io/library/mysql:8.0",
+            "imageID": "docker.io/library/mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b",
+            "ready": true
+          }
+        ],
+        "namespace": "core"
+      },
+      {
+        "name": "oai-smf-5957bdf945-qmjg5",
+        "labels": {
+          "app": "oai-smf",
+          "pod-template-hash": "5957bdf945"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "smf",
+            "image": "docker.io/oaisoftwarealliance/oai-smf:v2.2.1",
+            "imageID": "docker.io/oaisoftwarealliance/oai-smf@sha256:c1f1452edfc835c36aa96a2efca337da0149212a6561bbb5f9b1994356beee24",
+            "ready": true
+          },
+          {
+            "name": "wait-mysql",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "core"
+      },
+      {
+        "name": "oai-upf-8cc8f6bb-ps82r",
+        "labels": {
+          "app": "oai-upf",
+          "pod-template-hash": "8cc8f6bb"
+        },
+        "phase": "Running",
+        "nodeName": "tm-oranslice-mitigation-control-plane",
+        "containers": [
+          {
+            "name": "upf",
+            "image": "docker.io/oaisoftwarealliance/oai-upf:v2.2.1",
+            "imageID": "docker.io/oaisoftwarealliance/oai-upf@sha256:03985036c2477a75755ded9b7fe9508b62f49e4ce9e9f059bbb68af63932e7f7",
+            "ready": true
+          },
+          {
+            "name": "wait-smf",
+            "image": "docker.io/library/busybox:1.36",
+            "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "ready": true
+          }
+        ],
+        "namespace": "core"
+      }
+    ]
+  }
+}

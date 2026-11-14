@@ -1,0 +1,308 @@
+{
+  "window_s": 760.8,
+  "dump_samples": 10620,
+  "max_inter_dump_gap_s": 0.934,
+  "gaps_gt_2s": 0,
+  "rnti_role_map": {
+    "04e6": "gcs",
+    "ee7d": "uav",
+    "686c": "rogue",
+    "97c4": "rogue2",
+    "b325": "rogue3",
+    "74f0": "rogue4"
+  },
+  "role_slice_map": {
+    "rogue": "A",
+    "rogue2": "A",
+    "rogue3": "A",
+    "rogue4": "A",
+    "gcs": "A",
+    "uav": "A"
+  },
+  "slice_identity": {
+    "slice_source": "gnb_native_active_slices",
+    "role_identity_source": "companion_video_signature_colocated",
+    "native_slice_rntis": 6,
+    "role_reassignments": [
+      {
+        "rnti": "04e6",
+        "from": "rogue",
+        "to": "gcs"
+      },
+      {
+        "rnti": "686c",
+        "from": "rogue3",
+        "to": "rogue"
+      },
+      {
+        "rnti": "74f0",
+        "from": "uav",
+        "to": "rogue4"
+      },
+      {
+        "rnti": "97c4",
+        "from": "rogue4",
+        "to": "rogue2"
+      },
+      {
+        "rnti": "b325",
+        "from": "gcs",
+        "to": "rogue3"
+      },
+      {
+        "rnti": "ee7d",
+        "from": "rogue2",
+        "to": "uav"
+      }
+    ],
+    "slice_nssai": {
+      "1": "1.ffffff",
+      "2": "1.000001"
+    },
+    "rnti_slice_native": {
+      "04e6": "A",
+      "ee7d": "A",
+      "686c": "A",
+      "97c4": "A",
+      "b325": "A",
+      "74f0": "A"
+    }
+  },
+  "per_role": {
+    "gcs": {
+      "rnti": "04e6",
+      "slice": "A",
+      "ul_nprb_samples_sum": 7714,
+      "dl_rounds_last": 2046573,
+      "ul_rounds_last": 877297,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 164337,
+      "ul_rounds_per_s": 216.01,
+      "ul_bytes_delta": 25759268,
+      "ul_mbps": 0.271,
+      "last_nprb_p50": 5.0,
+      "last_nprb_p90": 17.6,
+      "dl_delta_bytes": 2282681869,
+      "dl_mbps": 24.003
+    },
+    "uav": {
+      "rnti": "ee7d",
+      "slice": "A",
+      "ul_nprb_samples_sum": 45038,
+      "dl_rounds_last": 874966,
+      "ul_rounds_last": 1992185,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 668236,
+      "ul_rounds_per_s": 878.33,
+      "ul_bytes_delta": 2285588474,
+      "ul_mbps": 24.034,
+      "last_nprb_p50": 51.0,
+      "last_nprb_p90": 51.0,
+      "dl_delta_bytes": 84301546,
+      "dl_mbps": 0.886
+    },
+    "rogue": {
+      "rnti": "686c",
+      "slice": "A",
+      "ul_nprb_samples_sum": 4425,
+      "dl_rounds_last": 28174,
+      "ul_rounds_last": 348957,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 11315,
+      "ul_rounds_per_s": 14.87,
+      "ul_bytes_delta": 1312540,
+      "ul_mbps": 0.014,
+      "last_nprb_p50": 5.0,
+      "last_nprb_p90": 5.0,
+      "dl_delta_bytes": 139113,
+      "dl_mbps": 0.001
+    },
+    "rogue2": {
+      "rnti": "97c4",
+      "slice": "A",
+      "ul_nprb_samples_sum": 4425,
+      "dl_rounds_last": 28209,
+      "ul_rounds_last": 348879,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 11315,
+      "ul_rounds_per_s": 14.87,
+      "ul_bytes_delta": 1312448,
+      "ul_mbps": 0.014,
+      "last_nprb_p50": 5.0,
+      "last_nprb_p90": 5.0,
+      "dl_delta_bytes": 139113,
+      "dl_mbps": 0.001
+    },
+    "rogue3": {
+      "rnti": "b325",
+      "slice": "A",
+      "ul_nprb_samples_sum": 4425,
+      "dl_rounds_last": 28155,
+      "ul_rounds_last": 348662,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 11315,
+      "ul_rounds_per_s": 14.87,
+      "ul_bytes_delta": 1312448,
+      "ul_mbps": 0.014,
+      "last_nprb_p50": 5.0,
+      "last_nprb_p90": 5.0,
+      "dl_delta_bytes": 139113,
+      "dl_mbps": 0.001
+    },
+    "rogue4": {
+      "rnti": "74f0",
+      "slice": "A",
+      "ul_nprb_samples_sum": 4425,
+      "dl_rounds_last": 28257,
+      "ul_rounds_last": 348701,
+      "dl_goodput_mbps_sum": 0.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "mac_dump_samples": 1770,
+      "ul_rounds_delta": 11319,
+      "ul_rounds_per_s": 14.88,
+      "ul_bytes_delta": 1312642,
+      "ul_mbps": 0.014,
+      "last_nprb_p50": 5.0,
+      "last_nprb_p90": 5.0,
+      "dl_delta_bytes": 139280,
+      "dl_mbps": 0.001
+    }
+  },
+  "per_slice": {
+    "A": {
+      "ul_nprb_sum": 70452,
+      "dl_rounds": 3034334,
+      "ul_rounds": 4264681,
+      "dl_goodput_sum": 0.0,
+      "ul_goodput_sum": 0.0,
+      "share_ul_nprb_pct": 100.0,
+      "share_ul_rounds_pct": 100.0,
+      "share_dl_rounds_pct": 100.0,
+      "ul_goodput_mbps_sum": 0.0,
+      "dl_goodput_mbps_sum": 0.0,
+      "dl_delta_bytes": 2367540034,
+      "share_dl_delta_pct": 100.0,
+      "ul_delta_bytes": 2316597820,
+      "share_ul_delta_pct": 100.0
+    }
+  },
+  "dl_delta_share_pct": {
+    "A": 100.0
+  },
+  "dl_delta_bytes_total": 2367540034,
+  "dl_delta_byte_source": {
+    "04e6": "mac_tx_bytes_dl",
+    "ee7d": "mac_tx_bytes_dl",
+    "686c": "mac_tx_bytes_dl",
+    "97c4": "mac_tx_bytes_dl",
+    "b325": "mac_tx_bytes_dl",
+    "74f0": "mac_tx_bytes_dl"
+  },
+  "ul_delta_share_pct": {
+    "A": 100.0
+  },
+  "ul_delta_bytes_total": 2316597820,
+  "cell_ul_activity": {
+    "window_s": 760.8,
+    "ul_slots_per_s_nominal": 400.0,
+    "ul_rounds_delta_total": 877837,
+    "ul_rounds_per_s_total": 1153.83,
+    "ul_bytes_delta_total": 2316597820,
+    "ul_bytes_per_s_total": 3044949.8,
+    "ul_mbps_total": 24.36,
+    "grant_activity_proxy_pct": 288.5,
+    "per_role": {
+      "gcs": {
+        "slice": "A",
+        "ul_rounds_delta": 164337,
+        "ul_rounds_per_s": 216.01,
+        "ul_bytes_delta": 25759268,
+        "ul_bytes_per_s": 33858.1,
+        "ul_mbps": 0.271,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 8.72,
+        "last_nprb_p50": 5.0,
+        "last_nprb_p90": 17.6,
+        "last_nprb_max": 49
+      },
+      "rogue": {
+        "slice": "A",
+        "ul_rounds_delta": 11315,
+        "ul_rounds_per_s": 14.87,
+        "ul_bytes_delta": 1312540,
+        "ul_bytes_per_s": 1725.2,
+        "ul_mbps": 0.014,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 5.0,
+        "last_nprb_p50": 5.0,
+        "last_nprb_p90": 5.0,
+        "last_nprb_max": 5
+      },
+      "rogue2": {
+        "slice": "A",
+        "ul_rounds_delta": 11315,
+        "ul_rounds_per_s": 14.87,
+        "ul_bytes_delta": 1312448,
+        "ul_bytes_per_s": 1725.1,
+        "ul_mbps": 0.014,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 5.0,
+        "last_nprb_p50": 5.0,
+        "last_nprb_p90": 5.0,
+        "last_nprb_max": 5
+      },
+      "rogue3": {
+        "slice": "A",
+        "ul_rounds_delta": 11315,
+        "ul_rounds_per_s": 14.87,
+        "ul_bytes_delta": 1312448,
+        "ul_bytes_per_s": 1725.1,
+        "ul_mbps": 0.014,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 5.0,
+        "last_nprb_p50": 5.0,
+        "last_nprb_p90": 5.0,
+        "last_nprb_max": 5
+      },
+      "rogue4": {
+        "slice": "A",
+        "ul_rounds_delta": 11319,
+        "ul_rounds_per_s": 14.88,
+        "ul_bytes_delta": 1312642,
+        "ul_bytes_per_s": 1725.3,
+        "ul_mbps": 0.014,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 5.0,
+        "last_nprb_p50": 5.0,
+        "last_nprb_p90": 5.0,
+        "last_nprb_max": 5
+      },
+      "uav": {
+        "slice": "A",
+        "ul_rounds_delta": 668236,
+        "ul_rounds_per_s": 878.33,
+        "ul_bytes_delta": 2285588474,
+        "ul_bytes_per_s": 3004190.9,
+        "ul_mbps": 24.034,
+        "last_nprb_samples": 885,
+        "last_nprb_mean": 50.89,
+        "last_nprb_p50": 51.0,
+        "last_nprb_p90": 51.0,
+        "last_nprb_max": 51
+      }
+    },
+    "note": "PROXY ONLY \u2014 not per-TTI cell PRB occupancy. ul_rounds_per_s = \u0394ulsch_rounds / window; grant_activity_proxy_pct = 100 * total_rounds_per_s / ul_slots_per_s_nominal (400/s from OAI band78 rfsim 2 UL slots / 5 ms). May exceed 100% under multi-UE FDMA in the same UL slot. last_nprb_* is sticky last-grant size from MAC dumps (do not sum across UEs). share_ul_nprb_pct is between-slice share of those samples, not capacity used."
+  },
+  "rnti_unmapped_note": "'?' = C-RNTI with no role in rntimap (not a third slice); prefer share_ul_nprb_pct for UL contention between slices; use cell_ul_activity for absolute UL load proxies",
+  "prb_proxy_note": "OAI gNB MAC dump (mac_log_level=info): dl_delta_share_pct = delta of UE downlink bytes (MAC TX at gNB, or dlsch_total_bytes when logged); ul_delta_share_pct = delta of UE uplink bytes (MAC RX at gNB / ulsch_total_bytes); share_ul_nprb_pct = UL NPRB between-slice share of last-grant dump samples (not cell occupancy); cell_ul_activity = absolute UL rounds/bytes proxies (still not per-TTI occupancy). Polarity: OAI MAC TX=DL, RX=UL (fixed 2026-10)."
+}

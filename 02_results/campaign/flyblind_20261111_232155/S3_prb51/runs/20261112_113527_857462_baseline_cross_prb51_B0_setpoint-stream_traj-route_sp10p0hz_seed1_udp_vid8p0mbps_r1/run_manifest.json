@@ -1,0 +1,139 @@
+{
+  "schema": "flyblind_run_manifest_v2",
+  "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_113527_857462_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+  "commit_git": null,
+  "commit_git_note": "not available: there is no git repository in this artifacts tree; replaced by scripts_tree_sha256 of the artifacts/01_scripts folder",
+  "scripts_tree_sha256": "ce7fc8b41f917fed0028120944a22961354865e7ac5e27b5a3dd428b3d4f0228",
+  "scripts_tree": {
+    "root": "ARTIFACT_ROOT/01_scripts",
+    "n_files": 129,
+    "sha256": "ce7fc8b41f917fed0028120944a22961354865e7ac5e27b5a3dd428b3d4f0228"
+  },
+  "configs_hash": {
+    "n": 1,
+    "sha256": "f9f740af66a8a1322c488908a3a327a929718ec27ae056475810fde67885c7f9",
+    "files": [
+      {
+        "path": "analysis_params.json",
+        "sha256": "42225f7d226f377370a23377144cd1e1127a8f2ccd0e83fbf23d1f5f6f8e2461"
+      }
+    ],
+    "error": null
+  },
+  "images_hash": {
+    "ok": true,
+    "sha256_of_imageIDs": "274e3bb96f47e5599599e4a3dec55afecd519b6ce921d0229cb729fc9b964823",
+    "imageIDs": [
+      "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+      "docker.io/library/import-2026-11-12@sha256:20030e3e1ad4f285b17d3a672a82c1783db53016ca9f945da51d7114ab7d1be9",
+      "docker.io/library/import-2026-11-12@sha256:6567ca53780352348f8726c706506c6d53bbb8f807a2c4440dc43093d3407028",
+      "docker.io/library/mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b",
+      "docker.io/library/ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+      "docker.io/oaisoftwarealliance/oai-amf@sha256:c6dee19b65b2bf29b73e6647f98e0381d96a2eb4c6f9a68f5c3bc70534afa14c",
+      "docker.io/oaisoftwarealliance/oai-smf@sha256:c1f1452edfc835c36aa96a2efca337da0149212a6561bbb5f9b1994356beee24",
+      "docker.io/oaisoftwarealliance/oai-upf@sha256:03985036c2477a75755ded9b7fe9508b62f49e4ce9e9f059bbb68af63932e7f7",
+      "docker.io/oaisoftwarealliance/trf-gen-cn5g@sha256:3f9ab2e401d2a010b568e78db087b5d1526b8756f1056087939116f6138340a6"
+    ],
+    "n_unique_imageIDs": 9,
+    "source": "image_digests.json",
+    "collector_error": null,
+    "error": null,
+    "raw_ok": true,
+    "commands": [
+      "kubectl --context kind-tm-oranslice-mitigation get pods -n ran -o json",
+      "kubectl --context kind-tm-oranslice-mitigation get pods -n core -o json"
+    ]
+  },
+  "FS_GCS_ENABLE": "1",
+  "FS_GCS_TIMEOUT": "5",
+  "FS_GCS_source": null,
+  "FS_GCS_error": "FS_GCS_TIMEOUT not in run_dir; expected value after plan item 1.16 = 5.FS_GCS_ENABLE not in run_dir; expected value = 1.",
+  "sidecar_profile": "FULL",
+  "versions": {
+    "schema": "flyblind_versions_v2",
+    "ardupilot_sitl": {
+      "commit": "de5add012ea2155c8dabc57270c8520a189c7208",
+      "commit_short": "de5add012e",
+      "tag": null,
+      "describe": "ArduPilot-4.6.0-beta1-7908-gde5add012e",
+      "path": "EXTERNAL_SOURCES/ardupilot",
+      "ok": true,
+      "error": null,
+      "candidates_tried": [
+        "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ardupilot",
+        "EXTERNAL_SOURCES/ardupilot"
+      ]
+    },
+    "oai": {
+      "note": "OAI = core (oai-cn5g-fed) + RAN (ORANSlice). Runtime images may derive from vendor/ORANSlice*.",
+      "oai_cn5g_fed": {
+        "commit": "3beb7e3582ada946f230bf4271673733eb1c4818",
+        "commit_short": "3beb7e3",
+        "tag": "v2.2.1",
+        "describe": "v2.2.1",
+        "path": "EXTERNAL_SOURCES/oai-cn5g-fed",
+        "ok": true,
+        "error": null,
+        "candidates_tried": [
+          "EXTERNAL_SOURCES/oai-cn5g-fed"
+        ]
+      },
+      "ORANSlice": {
+        "commit": "b9bcc9b17fbecfc1041072a7b8d0f01ae874aba2",
+        "commit_short": "b9bcc9b",
+        "tag": null,
+        "describe": "b9bcc9b",
+        "path": "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ORANSlice",
+        "ok": true,
+        "error": null,
+        "candidates_tried": [
+          "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ORANSlice"
+        ]
+      },
+      "ok": true,
+      "error": null
+    }
+  },
+  "ardupilot_sitl": {
+    "commit": "de5add012ea2155c8dabc57270c8520a189c7208",
+    "commit_short": "de5add012e",
+    "tag": null,
+    "describe": "ArduPilot-4.6.0-beta1-7908-gde5add012e",
+    "path": "EXTERNAL_SOURCES/ardupilot",
+    "ok": true,
+    "error": null,
+    "candidates_tried": [
+      "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ardupilot",
+      "EXTERNAL_SOURCES/ardupilot"
+    ]
+  },
+  "oai": {
+    "note": "OAI = core (oai-cn5g-fed) + RAN (ORANSlice). Runtime images may derive from vendor/ORANSlice*.",
+    "oai_cn5g_fed": {
+      "commit": "3beb7e3582ada946f230bf4271673733eb1c4818",
+      "commit_short": "3beb7e3",
+      "tag": "v2.2.1",
+      "describe": "v2.2.1",
+      "path": "EXTERNAL_SOURCES/oai-cn5g-fed",
+      "ok": true,
+      "error": null,
+      "candidates_tried": [
+        "EXTERNAL_SOURCES/oai-cn5g-fed"
+      ]
+    },
+    "ORANSlice": {
+      "commit": "b9bcc9b17fbecfc1041072a7b8d0f01ae874aba2",
+      "commit_short": "b9bcc9b",
+      "tag": null,
+      "describe": "b9bcc9b",
+      "path": "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ORANSlice",
+      "ok": true,
+      "error": null,
+      "candidates_tried": [
+        "ARTIFACT_ROOT/01_scripts/01_testbeds/vendor/ORANSlice"
+      ]
+    },
+    "ok": true,
+    "error": null
+  }
+}

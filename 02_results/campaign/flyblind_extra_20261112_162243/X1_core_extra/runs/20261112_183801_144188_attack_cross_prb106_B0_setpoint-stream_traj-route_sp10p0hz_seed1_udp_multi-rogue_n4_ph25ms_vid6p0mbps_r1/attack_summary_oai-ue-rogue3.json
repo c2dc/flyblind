@@ -1,0 +1,20 @@
+{
+  "mode": "microburst",
+  "run_id": "20261112_183801_144188_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid6p0mbps_r1",
+  "path": "pdu",
+  "requested_mean_mbps": 20.0,
+  "achieved_sender_mbps": 19.854,
+  "achieved_mean_mbps_sender": 19.854,
+  "achieved_receiver_mbps": null,
+  "bytes_sent": 1265800000,
+  "bytes_received": 0,
+  "packets_sent": 1063272,
+  "packets_received": 0,
+  "bursts_requested": 12750,
+  "bursts_completed": 12658,
+  "duration_actual_s": 510.037,
+  "burst_size_payload_bytes": 100000,
+  "inter_burst_period_ms": 40,
+  "seed": 3,
+  "udp_datagram_max_bytes": 1200
+}

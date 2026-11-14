@@ -1,0 +1,474 @@
+{
+  "schema": "flyblind_slack_v1",
+  "rows": [
+    {
+      "condition": "e_base51",
+      "label": "Baseline, video 8 Mb/s, 51 PRB",
+      "category": "campaign",
+      "n_runs": 3,
+      "gnb_prb": 51.0,
+      "video_mbps": 8.0,
+      "video_offered_mbps": {
+        "n": 3,
+        "mean": 7.9999825058261855,
+        "sd": 4.843167498528984e-07,
+        "min": 7.9999819647446255,
+        "max": 7.999982898783359
+      },
+      "video_goodput_mbps": {
+        "n": 3,
+        "mean": 7.9999825058261855,
+        "sd": 4.843167498528984e-07,
+        "min": 7.9999819647446255,
+        "max": 7.999982898783359
+      },
+      "video_lost_pct": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 3,
+        "mean": 8.505666666666666,
+        "sd": 0.0015275252316520691,
+        "min": 8.504,
+        "max": 8.507
+      },
+      "cell_ul_mbps_total": {
+        "n": 3,
+        "mean": 8.841333333333333,
+        "sd": 0.0015275252316520691,
+        "min": 8.84,
+        "max": 8.843
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.013115526666666667,
+        "sd": 7.118872203048245e-05,
+        "min": 0.013050166,
+        "max": 0.013191379
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.026419306666666666,
+        "sd": 0.0008886063192310373,
+        "min": 0.025555958,
+        "max": 0.027331182
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      }
+    },
+    {
+      "condition": "cap51_base_vid16",
+      "label": "Capacity probe, video 16 Mb/s, 51 PRB",
+      "category": "capacity_probe",
+      "n_runs": 3,
+      "gnb_prb": 51.0,
+      "video_mbps": 16.0,
+      "video_offered_mbps": {
+        "n": 3,
+        "mean": 15.999983953960971,
+        "sd": 2.65334724042367e-06,
+        "min": 15.999982171566215,
+        "max": 15.999987003294878
+      },
+      "video_goodput_mbps": {
+        "n": 3,
+        "mean": 15.999983953960971,
+        "sd": 2.65334724042367e-06,
+        "min": 15.999982171566215,
+        "max": 15.999987003294878
+      },
+      "video_lost_pct": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 3,
+        "mean": 16.840666666666667,
+        "sd": 0.001527525231652263,
+        "min": 16.839,
+        "max": 16.842
+      },
+      "cell_ul_mbps_total": {
+        "n": 3,
+        "mean": 17.166,
+        "sd": 0.005567764362829807,
+        "min": 17.161,
+        "max": 17.172
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.014372419333333332,
+        "sd": 0.0007278658537239769,
+        "min": 0.013559198,
+        "max": 0.014962856
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.03301808533333333,
+        "sd": 0.004216106639606536,
+        "min": 0.029493977,
+        "max": 0.037688928
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      }
+    },
+    {
+      "condition": "cap51_base_vid24",
+      "label": "Capacity probe, video 24 Mb/s, 51 PRB",
+      "category": "capacity_probe",
+      "n_runs": 1,
+      "gnb_prb": 51.0,
+      "video_mbps": 24.0,
+      "video_offered_mbps": {
+        "n": 1,
+        "mean": 23.999972430236287,
+        "sd": null,
+        "min": 23.999972430236287,
+        "max": 23.999972430236287
+      },
+      "video_goodput_mbps": {
+        "n": 1,
+        "mean": 23.999972430236287,
+        "sd": null,
+        "min": 23.999972430236287,
+        "max": 23.999972430236287
+      },
+      "video_lost_pct": {
+        "n": 1,
+        "mean": 0.0,
+        "sd": null,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 1,
+        "mean": 24.034,
+        "sd": null,
+        "min": 24.034,
+        "max": 24.034
+      },
+      "cell_ul_mbps_total": {
+        "n": 1,
+        "mean": 24.36,
+        "sd": null,
+        "min": 24.36,
+        "max": 24.36
+      },
+      "return_owd_p50_s": {
+        "n": 1,
+        "mean": 3.467821737,
+        "sd": null,
+        "min": 3.467821737,
+        "max": 3.467821737
+      },
+      "return_owd_p99_s": {
+        "n": 1,
+        "mean": 3.56468398,
+        "sd": null,
+        "min": 3.56468398,
+        "max": 3.56468398
+      },
+      "return_C1": {
+        "true": 1,
+        "of": 1
+      }
+    },
+    {
+      "condition": "a_baseline",
+      "label": "Baseline, video 12 Mb/s",
+      "category": "campaign",
+      "n_runs": 3,
+      "gnb_prb": 106.0,
+      "video_mbps": 12.0,
+      "video_offered_mbps": {
+        "n": 3,
+        "mean": 11.999982571817034,
+        "sd": 1.6452630827084055e-06,
+        "min": 11.999981545871734,
+        "max": 11.999984469516296
+      },
+      "video_goodput_mbps": {
+        "n": 3,
+        "mean": 11.999982571817034,
+        "sd": 1.6452630827084055e-06,
+        "min": 11.999981545871734,
+        "max": 11.999984469516296
+      },
+      "video_lost_pct": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 3,
+        "mean": 12.647666666666666,
+        "sd": 0.004041451884327192,
+        "min": 12.643,
+        "max": 12.65
+      },
+      "cell_ul_mbps_total": {
+        "n": 3,
+        "mean": 12.948333333333332,
+        "sd": 0.0037859388971997264,
+        "min": 12.944,
+        "max": 12.951
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.018400726000000003,
+        "sd": 0.00025092827295265167,
+        "min": 0.018140053,
+        "max": 0.018640617
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.03143956366666667,
+        "sd": 0.0011276688444806547,
+        "min": 0.030143234,
+        "max": 0.032193955
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      }
+    },
+    {
+      "condition": "cap_base_vid24",
+      "label": "Capacity probe, video 24 Mb/s",
+      "category": "capacity_probe",
+      "n_runs": 3,
+      "gnb_prb": 106.0,
+      "video_mbps": 24.0,
+      "video_offered_mbps": {
+        "n": 3,
+        "mean": 23.99997609846002,
+        "sd": 7.085518554957206e-06,
+        "min": 23.999968310118447,
+        "max": 23.999982163085793
+      },
+      "video_goodput_mbps": {
+        "n": 3,
+        "mean": 23.99997609846002,
+        "sd": 7.085518554957206e-06,
+        "min": 23.999968310118447,
+        "max": 23.999982163085793
+      },
+      "video_lost_pct": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 3,
+        "mean": 25.21166666666667,
+        "sd": 0.0023094010767592743,
+        "min": 25.209,
+        "max": 25.213
+      },
+      "cell_ul_mbps_total": {
+        "n": 3,
+        "mean": 25.507333333333335,
+        "sd": 0.0023094010767592743,
+        "min": 25.506,
+        "max": 25.51
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.019969442333333334,
+        "sd": 7.18364520305206e-05,
+        "min": 0.019892487,
+        "max": 0.020034732
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.03446277033333333,
+        "sd": 0.001229521327505275,
+        "min": 0.033254136,
+        "max": 0.035712165
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      }
+    },
+    {
+      "condition": "cap_base_vid32",
+      "label": "Capacity probe, video 32 Mb/s",
+      "category": "capacity_probe",
+      "n_runs": 2,
+      "gnb_prb": 106.0,
+      "video_mbps": 32.0,
+      "video_offered_mbps": {
+        "n": 2,
+        "mean": 31.999984216204567,
+        "sd": 6.08807758166969e-06,
+        "min": 31.999979911283624,
+        "max": 31.99998852112551
+      },
+      "video_goodput_mbps": {
+        "n": 2,
+        "mean": 31.999984216204567,
+        "sd": 6.08807758166969e-06,
+        "min": 31.999979911283624,
+        "max": 31.99998852112551
+      },
+      "video_lost_pct": {
+        "n": 2,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 2,
+        "mean": 30.241999999999997,
+        "sd": 0.3931513703397211,
+        "min": 29.964,
+        "max": 30.52
+      },
+      "cell_ul_mbps_total": {
+        "n": 2,
+        "mean": 30.5415,
+        "sd": 0.393858477120906,
+        "min": 30.263,
+        "max": 30.82
+      },
+      "return_owd_p50_s": {
+        "n": 2,
+        "mean": 2.8405913835,
+        "sd": 0.0384399587490722,
+        "min": 2.813410228,
+        "max": 2.867772539
+      },
+      "return_owd_p99_s": {
+        "n": 2,
+        "mean": 3.0414736744999997,
+        "sd": 0.06810474567814283,
+        "min": 2.993316347,
+        "max": 3.089631002
+      },
+      "return_C1": {
+        "true": 2,
+        "of": 2
+      }
+    },
+    {
+      "condition": "cap_base_vid40",
+      "label": "Capacity probe, video 40 Mb/s",
+      "category": "capacity_probe",
+      "n_runs": 2,
+      "gnb_prb": 106.0,
+      "video_mbps": 40.0,
+      "video_offered_mbps": {
+        "n": 2,
+        "mean": 39.99997983895252,
+        "sd": 1.8618564850326255e-06,
+        "min": 39.99997852242117,
+        "max": 39.999981155483866
+      },
+      "video_goodput_mbps": {
+        "n": 2,
+        "mean": 39.99997983895252,
+        "sd": 1.8618564850326255e-06,
+        "min": 39.99997852242117,
+        "max": 39.999981155483866
+      },
+      "video_lost_pct": {
+        "n": 2,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "uav_mac_ul_mbps": {
+        "n": 2,
+        "mean": 30.6535,
+        "sd": 0.12940054095713807,
+        "min": 30.562,
+        "max": 30.745
+      },
+      "cell_ul_mbps_total": {
+        "n": 2,
+        "mean": 30.951,
+        "sd": 0.13010764773832298,
+        "min": 30.859,
+        "max": 31.043
+      },
+      "return_owd_p50_s": {
+        "n": 2,
+        "mean": 2.7979555255,
+        "sd": 0.009668073736371595,
+        "min": 2.791119165,
+        "max": 2.804791886
+      },
+      "return_owd_p99_s": {
+        "n": 2,
+        "mean": 3.014848324,
+        "sd": 0.004753372601461728,
+        "min": 3.011487182,
+        "max": 3.018209466
+      },
+      "return_C1": {
+        "true": 2,
+        "of": 2
+      }
+    }
+  ],
+  "summary": {
+    "by_prb": {
+      "51": {
+        "n_runs": 7,
+        "reference_condition": "e_base51",
+        "max_offered_without_self_congestion_mbps": 16.0,
+        "min_offered_with_self_congestion_mbps": 24.0,
+        "capacity_bracket_mbps": [
+          16.0,
+          24.0
+        ],
+        "victim_mac_ul_ceiling_mbps": 24.034,
+        "victim_mac_ul_at_reference_mbps": 8.505666666666666,
+        "slack_at_reference_mbps": 15.528333333333332,
+        "pf_share_at_n4_mbps": [
+          3.2,
+          4.8
+        ]
+      },
+      "106": {
+        "n_runs": 10,
+        "reference_condition": "a_baseline",
+        "max_offered_without_self_congestion_mbps": 24.0,
+        "min_offered_with_self_congestion_mbps": 32.0,
+        "capacity_bracket_mbps": [
+          24.0,
+          32.0
+        ],
+        "victim_mac_ul_ceiling_mbps": 30.745,
+        "victim_mac_ul_at_reference_mbps": 12.647666666666666,
+        "slack_at_reference_mbps": 18.097333333333335,
+        "pf_share_at_n4_mbps": [
+          4.8,
+          6.4
+        ]
+      }
+    },
+    "max_offered_without_self_congestion_mbps": 24.0,
+    "min_offered_with_self_congestion_mbps": 24.0,
+    "victim_mac_ul_ceiling_mbps": 30.745,
+    "note": "per cell bandwidth, capacity is bracketed by the offered loads (C1 on the return leg, ATTACK-window, no attack); the ceiling is the largest whole-run victim MAC UL measured; pf_share_at_n4_mbps = bracket/5, the proportional-fair share the victim must exceed for the attack to have anything to starve"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "host_telemetry_v2",
+  "samples": 761,
+  "interval_s": 1.0,
+  "loadavg1_max": 15.89,
+  "loadavg1_median": 12.81,
+  "cpu_busy_pct_max": 61.35,
+  "cpu_busy_pct_median": 47.23,
+  "cpu_iowait_pct_max": 0.15,
+  "cpu_steal_pct_max": 0.0,
+  "psi_cpu_some_avg10_max": 23.18,
+  "psi_io_some_avg10_max": 0.0,
+  "psi_mem_some_avg10_max": 0.0,
+  "mem_available_mib_min": 37553.8,
+  "swap_used_mib_max": 0.0,
+  "sampler_lag_s_max": 0.009,
+  "sample_gap_s_max": 1.008
+}

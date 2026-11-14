@@ -1,0 +1,1 @@
+{"start": {"test_start": {"protocol": "UDP"}}, "end": {"sum": {"bits_per_second": 7999981.964744626, "bytes": 760999760, "packets": 559046, "lost_percent": 0.0, "seconds": 761.0014756069941}}, "shape": "aviator"}

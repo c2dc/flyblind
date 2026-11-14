@@ -1,0 +1,151 @@
+{
+  "schema": "flyblind_batch_wrapper_v1",
+  "seed": 20261123,
+  "orchestrate": "paper",
+  "orchestrate_path": "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+  "validity_gates_doc": {
+    "always": [
+      "clock",
+      "host_instrumentation_integrity",
+      "mission_integrity",
+      "drone_integrity"
+    ],
+    "baseline_extra": [
+      "host",
+      "availability",
+      "mission_success",
+      "baseline_drone_quality"
+    ],
+    "attack_extra": [
+      "attack_integrity"
+    ],
+    "if_c2_proxy": [
+      "proxy"
+    ],
+    "if_setpoint_stream": [
+      "freshness",
+      "stream"
+    ],
+    "if_setpoint_stream_and_baseline": [
+      "c2_health"
+    ],
+    "if_require_prb": [
+      "prb"
+    ],
+    "source": "orchestrate.enforced_validity_gates / run_meta.gates.valid"
+  },
+  "order": [
+    {
+      "order": 1,
+      "id": "pos_control_route_r1",
+      "condition_index": 0
+    }
+  ],
+  "runs": [
+    {
+      "order": 1,
+      "id": "pos_control_route_r1",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--open-qgc",
+        "--results-tag",
+        "POS_CONTROL_ROUTE",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs"
+      ],
+      "rc": 1,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1",
+      "valid": false,
+      "detail": {
+        "valid": false,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [
+          {
+            "gate": "c2_health",
+            "reason": {
+              "pass": false,
+              "heartbeat_gaps_over_threshold": 0,
+              "unexpected_failsafe": true,
+              "unexpected_mode_transitions": [
+                {
+                  "t_rel_s": 132.923,
+                  "from": "GUIDED",
+                  "to": "RTL",
+                  "steady_state": true
+                }
+              ],
+              "position_samples": 2407,
+              "normal_land": false,
+              "min_position_samples": 10
+            }
+          },
+          {
+            "gate": "baseline_drone_quality",
+            "reason": "failsafe; spatial/acquisition; missing GUIDED->LAND; abnormal_land"
+          }
+        ],
+        "run_id": "20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1",
+        "rc": 1
+      },
+      "discard_reason": {
+        "rule": "R1",
+        "summary": "run_meta.valid == false",
+        "failed_gates": [
+          {
+            "gate": "c2_health",
+            "reason": {
+              "pass": false,
+              "heartbeat_gaps_over_threshold": 0,
+              "unexpected_failsafe": true,
+              "unexpected_mode_transitions": [
+                {
+                  "t_rel_s": 132.923,
+                  "from": "GUIDED",
+                  "to": "RTL",
+                  "steady_state": true
+                }
+              ],
+              "position_samples": 2407,
+              "normal_land": false,
+              "min_position_samples": 10
+            }
+          },
+          {
+            "gate": "baseline_drone_quality",
+            "reason": "failsafe; spatial/acquisition; missing GUIDED->LAND; abnormal_land"
+          }
+        ]
+      }
+    }
+  ],
+  "stopped_on_invalid": false,
+  "continue_on_invalid": true,
+  "invalid_runs": [
+    {
+      "order": 1,
+      "id": "pos_control_route_r1",
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X6_poscontrol/runs/20261112_191908_241355_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1"
+    }
+  ],
+  "dry_run": false
+}

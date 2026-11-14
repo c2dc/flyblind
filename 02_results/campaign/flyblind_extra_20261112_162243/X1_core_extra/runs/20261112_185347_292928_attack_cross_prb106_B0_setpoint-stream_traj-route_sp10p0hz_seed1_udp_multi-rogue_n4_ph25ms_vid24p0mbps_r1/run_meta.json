@@ -1,0 +1,1023 @@
+{
+  "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+  "run_slug": "attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps",
+  "run_index": 1,
+  "attack_seed": 1,
+  "setpoint_seed": 1,
+  "condition": "attack",
+  "topology": "cross",
+  "gnb_prb": 106,
+  "attack": "multi-rogue",
+  "reservation": 0,
+  "min_ratio_slice_a": 0,
+  "mitigations": {
+    "rate_limit_a": false,
+    "aqm_ul": false,
+    "ul_rrmpolicy": true,
+    "runtime_tc_audit": {
+      "schema_version": "runtime_mitigation_v1",
+      "enabled": false,
+      "pass": true,
+      "rate_limit_a": null,
+      "aqm_ul": null
+    }
+  },
+  "workload": "setpoint-stream",
+  "c2_proxy": false,
+  "c2_transport": "udp",
+  "require_prb": true,
+  "companion_video_mbps": 24.0,
+  "attack_path": "pdu",
+  "mean_rate_mbps": 20.0,
+  "burst_size_bytes": 100000,
+  "period_ms": 40,
+  "attack_start_after_s": 45.0,
+  "attack_burst_duration_s": 510.0,
+  "duration_s": 600,
+  "warmup_s": 10,
+  "timing": {
+    "requested_duration_s": 600,
+    "network_measurement_duration_s": 600,
+    "warmup_s": 10,
+    "envelope_s": 761.0,
+    "mission_len_s": 420,
+    "trajectory_active_duration_s": 571.0,
+    "proxy_watchdog_s": null,
+    "wall_runtime_s": 802.857,
+    "proxy_runtime_s": null,
+    "proxy_shutdown": null,
+    "prb_capture_grace_s": 15.0,
+    "prb_wait_timeout_s": 9.15,
+    "prb_wait_status": "completed"
+  },
+  "port_check": {
+    "proxy_port_5760": "free",
+    "sitl_port_5761": "busy"
+  },
+  "cleanup_audit": {
+    "port_check": {
+      "proxy_port_5760": "free",
+      "sitl_port_5761": "busy"
+    },
+    "gcs_mission_alive": "dead",
+    "companion_iperf_gcs_alive": "dead",
+    "companion_iperf_uav_alive": "dead",
+    "companion_iperf_alive": "dead",
+    "proxy_alive": "dead",
+    "rogue_attack_alive": "dead",
+    "clean": true
+  },
+  "mission_len_s": null,
+  "mission_commands": null,
+  "setpoint_rate_hz": 10.0,
+  "trajectory_duration_s": 571.0,
+  "setpoints_generated": 5710,
+  "proxy_match_ratio": 1.0,
+  "centralization_margin_s": 90.0,
+  "T0_mono_ns": 70609529618458,
+  "T0_unix_ns": 1794520514123270772,
+  "layer_offsets_ns": {
+    "sidecars_ns": 205800,
+    "host_telemetry_ns": 1811549,
+    "upf_telemetry_ns": 2189067,
+    "network_ns": 2659313,
+    "probe_ready_ns": 14251985841,
+    "c2_arrival_capture_ns": 15011797997,
+    "prb_ns": 15012417568,
+    "companion_video_ns": 15012932683,
+    "attack_ns": 16061136255,
+    "mission_ns": 90000271913
+  },
+  "layer_offsets_s": {
+    "sidecars_ns": 0.0002058,
+    "host_telemetry_ns": 0.001811549,
+    "upf_telemetry_ns": 0.002189067,
+    "network_ns": 0.002659313,
+    "probe_ready_ns": 14.251985841,
+    "c2_arrival_capture_ns": 15.011797997,
+    "prb_ns": 15.012417568,
+    "companion_video_ns": 15.012932683,
+    "attack_ns": 16.061136255,
+    "mission_ns": 90.000271913
+  },
+  "returncodes": {
+    "probe": 0,
+    "prb": 0,
+    "mission": 0,
+    "proxy": null,
+    "host_telemetry": 0,
+    "upf_telemetry": 0,
+    "attack": 0,
+    "sink": 0,
+    "companion_video": 0
+  },
+  "host_loadavg1": {
+    "before": 8.23,
+    "after": 7.64,
+    "nproc": 16
+  },
+  "upf_telemetry": {
+    "schema_version": "upf_telemetry_v1",
+    "deploy": "oai-upf",
+    "core_namespace": "core",
+    "samples": 650,
+    "samples_ok": 650,
+    "sample_errors": 0,
+    "cpu_pct_max": 4.1,
+    "cpu_pct_p50": 0.0,
+    "cpu_pct_p95": 3.6454999999999997,
+    "cpu_pct_p99": 3.835699999999999,
+    "cpu_pct_mean": 0.361,
+    "saturate_pct_threshold": 85.0,
+    "saturated": false,
+    "mechanism_hint": "upf_headroom_ok"
+  },
+  "sync_open_loop": false,
+  "sync_phase_ms": null,
+  "sync_skew": null,
+  "gates": {
+    "clock": {
+      "pass": true,
+      "probe_rc": 0,
+      "ordering_violations": 0,
+      "negative_owd_samples": 0,
+      "temporal_trend_us": -347.8811908554708,
+      "temporal_trend_cap_us": 10000.0,
+      "time_namespace_match": true,
+      "temporal_trend_note": "shared time namespace: OWD trend is path/attack signal, not skew",
+      "reason": null
+    },
+    "host": {
+      "pass": true,
+      "gate_type": "host_quality",
+      "enforced": false,
+      "host_telemetry_rc": 0,
+      "loadavg1_max": 11.93,
+      "cpu_busy_pct_max": 53.9,
+      "cpu_busy_max_pct_threshold": 90.0,
+      "loadavg1_before": 8.23,
+      "loadavg1_after": 7.64,
+      "nproc": 16
+    },
+    "upf_cpu": {
+      "pass": true,
+      "enforced": false,
+      "upf_telemetry_rc": 0,
+      "cpu_pct_max": 4.1,
+      "cpu_pct_p50": 0.0,
+      "cpu_pct_p99": 3.835699999999999,
+      "saturated": false,
+      "saturate_pct_threshold": 85.0,
+      "mechanism_hint": "upf_headroom_ok",
+      "samples_ok": 650,
+      "note": "soft: UPF busy \u21d2 do not claim pure PRB/MAC; UPF headroom + PRB correlation supports RAN attribution"
+    },
+    "host_instrumentation_integrity": {
+      "pass": true,
+      "enforced": true,
+      "probe_rc": 0,
+      "host_rc": 0,
+      "prb_rc": 0,
+      "mission_rc": 0,
+      "proxy_rc": null,
+      "attack_rc": 0,
+      "host_samples": 761,
+      "host_min_samples": 684,
+      "oom_or_kill": [],
+      "subchecks": {
+        "clock": {
+          "pass": true
+        },
+        "probe_rc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "host_telemetry_proc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "host_telemetry_span": {
+          "pass": true,
+          "detail": "samples=761 min=684"
+        },
+        "prb_capture_rc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "prb_capture_gate": {
+          "pass": true
+        },
+        "proxy_rc": {
+          "pass": true,
+          "detail": "rc=None"
+        },
+        "proxy_gate": {
+          "pass": true
+        },
+        "freshness_gate": {
+          "pass": true
+        },
+        "stream_gate": {
+          "pass": true
+        },
+        "attack_rc": {
+          "pass": true,
+          "detail": "rc=0"
+        },
+        "oom_or_kill": {
+          "pass": true
+        }
+      },
+      "failed_subchecks": [],
+      "failures": []
+    },
+    "mission_integrity": {
+      "pass": true,
+      "mission_started": true,
+      "mission_rc": 0,
+      "summary_valid": true,
+      "artifacts_required": [
+        "setpoints.csv",
+        "freshness_summary.json"
+      ],
+      "artifacts_missing": [],
+      "silent_crash": false
+    },
+    "mission_success": {
+      "pass": true,
+      "mission_rc": 0,
+      "reason": null
+    },
+    "prb": {
+      "pass": true,
+      "required": true,
+      "dump_samples": 6036,
+      "window_s": 760.5,
+      "per_slice_slices": [
+        "A"
+      ],
+      "roles_mapped": [
+        "gcs",
+        "rogue",
+        "rogue2",
+        "rogue3",
+        "rogue4",
+        "uav"
+      ],
+      "capture_meta": {
+        "schema_version": "prb_capture_v2",
+        "requested_duration_s": 761.0,
+        "capture_process_started_mono": 70624.582640887,
+        "first_dump_mono": 70624.822413081,
+        "last_dump_mono": 71385.31649103,
+        "raw_lines": 39881,
+        "kubectl_restarts": 0,
+        "idle_restarts": 0,
+        "idle_restart_threshold_s": 15.0,
+        "max_silence_s": 1.677,
+        "restart_events": [],
+        "stderr_path": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X1_core_extra/runs/20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1/mac-prb-raw.log.kubectl.err",
+        "termination_reason": "duration_elapsed",
+        "effective_capture_span_s": 760.494,
+        "wall_capture_span_s": 761.01,
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1"
+      },
+      "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+      "slice_source": "gnb_native_active_slices",
+      "role_identity_source": "companion_video_signature_colocated",
+      "kubectl_restarts": 0,
+      "idle_restarts": 0,
+      "max_silence_s": 1.677,
+      "run_id_match": true,
+      "envelope_s": 761.0,
+      "min_window_s": 684.9,
+      "span_ok": true,
+      "identity_ok": true,
+      "uav_ul_mbps": 12.07,
+      "gcs_dl_mbps": 11.379,
+      "identity_floor_mbps": 4.8,
+      "roles_ok": true,
+      "scheduler_ok": true,
+      "rogue_rnti": "2f73",
+      "gcs_rnti": "1051",
+      "uav_rnti": "3fc3",
+      "audit_checklist": {
+        "run_scoped_artifacts": "yes \u2014 mac-prb-raw.log + capture_meta.run_id per run",
+        "experimental_window_overlap": "yes \u2014 span >= 90% envelope when --require-prb",
+        "parser_no_error": "partial \u2014 dump_samples>0 and per_slice populated",
+        "rnti_role_map": "yes \u2014 rogue/gcs/uav with RNTI when --require-prb",
+        "rnti_slice_map": "partial \u2014 per_slice shares; reservation via preflight",
+        "topology_reservation_match": "preflight + stamp on run_meta"
+      },
+      "pilot_completed": {
+        "intra_B0_gnb106_180s_N1": true
+      }
+    },
+    "availability": {
+      "pass": true,
+      "availability_post_warmup_pct": 99.9864,
+      "min_pct": 99.9,
+      "enforced_on_baseline_only": true
+    },
+    "drone_integrity": {
+      "pass": true,
+      "position_samples": 1023,
+      "setpoint_track_samples": 5710,
+      "flight_state_csv": false,
+      "setpoints_csv": true,
+      "heartbeats_seen": 211,
+      "max_heartbeat_gap_s": 24.107,
+      "bootstrap_land_then_guided": true,
+      "physics_metrics_complete": true
+    },
+    "baseline_drone_quality": {
+      "pass": false,
+      "baseline_only": true,
+      "mission_rc": 0,
+      "heartbeat_gaps_over_threshold": 104,
+      "commands_lost": 0,
+      "failsafe": false,
+      "trajectory_acquisition_completed": true,
+      "cross_track_p99_steady_m": 53.5,
+      "cross_track_p99_m": 53.5,
+      "cross_track_gate_m": 53.5,
+      "max_deviation_m": 60.85,
+      "mode_transition_integrity": true,
+      "land_to_guided": true,
+      "guided_to_land": true,
+      "normal_land": true,
+      "reason": "heartbeat_gaps; spatial/acquisition"
+    },
+    "drone_outcome": {
+      "mission_success": true,
+      "mission_rc": 0,
+      "acquisition_completed": true,
+      "acquisition_time_s": 2.001,
+      "acquisition_cross_track_max_m": 3.82,
+      "paper_comparable": false,
+      "paper_comparable_reasons": [
+        "stream_start_radius_m=101.02 not within 5.0m of R=30.0"
+      ],
+      "stream_start_radius_m": 101.021,
+      "cross_track_p99_steady_m": 53.5,
+      "cross_track_p99_m": 53.5,
+      "tracking_error_p99_m": 73.89,
+      "failsafe": false,
+      "failsafe_mode": null,
+      "landing_requested": true,
+      "landing_normal": true,
+      "final_mode": "LAND",
+      "final_armed": false,
+      "max_deviation_m": 60.85,
+      "landing_completed": true,
+      "mode_transitions": [
+        {
+          "t_rel_s": 12.071,
+          "from": "LAND",
+          "to": "GUIDED",
+          "steady_state": false
+        },
+        {
+          "t_rel_s": 626.768,
+          "from": "GUIDED",
+          "to": "LAND",
+          "steady_state": true
+        }
+      ]
+    },
+    "paper_comparable_orbit": {
+      "pass": false,
+      "enforced": false,
+      "paper_comparable": false,
+      "reasons": [
+        "stream_start_radius_m=101.02 not within 5.0m of R=30.0"
+      ],
+      "stream_start_radius_m": 101.021,
+      "acquisition_duration_s": 2.001,
+      "note": "false if stream started far from circle or acq > 2.5s; enable PREPOSITION_ORBIT_ENTRY=1 for new repros"
+    },
+    "mitigation_integrity": {
+      "pass": true,
+      "runtime_tc": {
+        "schema_version": "runtime_mitigation_v1",
+        "enabled": false,
+        "pass": true,
+        "rate_limit_a": null,
+        "aqm_ul": null
+      },
+      "testbed": {
+        "enabled": true,
+        "pass": true,
+        "ul_rrmpolicy_stamp": {
+          "enabled": "1"
+        },
+        "ul_rrmpolicy_runtime": {
+          "enabled": true,
+          "pass": true,
+          "policy_path": "/tmp/tm_ul_rrmpolicy.conf",
+          "keying": "s_nssai",
+          "ratios_source": "/opt/oai-gnb/etc/rrmPolicy.json",
+          "rrm_policy_ratio": [
+            {
+              "sst": 1,
+              "sd": 16777215,
+              "min_ratio": 0,
+              "max_ratio": 100,
+              "dedicated_ratio": 0
+            },
+            {
+              "sst": 1,
+              "sd": 1,
+              "min_ratio": 0,
+              "max_ratio": 100,
+              "dedicated_ratio": 0
+            }
+          ],
+          "scheduler_ack": "[TM_UL_RRMPOLICY] active",
+          "semantics": "3gpp_ts28541_dedicated_prioritized_shared_two_level_pf",
+          "policy": "enabled=1\n"
+        }
+      }
+    },
+    "freshness_measurement_integrity": {
+      "pass": true,
+      "gate_type": "measurement_integrity",
+      "n_setpoints": 5710,
+      "delivery_ratio": 0.9998248686514886,
+      "capture_ratio": 0.9998248686514886,
+      "correlation_ratio": 1.0,
+      "proxy_match_ratio": 1.0,
+      "min_delivery_ratio": null,
+      "min_capture_ratio": null,
+      "min_correlation_ratio": null,
+      "merge_ok": true,
+      "setpoint_accounting": null,
+      "freshness_sanity": {}
+    },
+    "freshness": {
+      "pass": true,
+      "gate_type": "measurement_integrity",
+      "n_setpoints": 5710,
+      "delivery_ratio": 0.9998248686514886,
+      "capture_ratio": 0.9998248686514886,
+      "correlation_ratio": 1.0,
+      "proxy_match_ratio": 1.0,
+      "min_delivery_ratio": null,
+      "min_capture_ratio": null,
+      "min_correlation_ratio": null,
+      "merge_ok": true,
+      "setpoint_accounting": null,
+      "freshness_sanity": {}
+    },
+    "stream": {
+      "pass": true,
+      "rate_hz_requested": 10.0,
+      "rate_hz_achieved": 10.0,
+      "setpoints_expected": 5710,
+      "setpoints_generated": 5710,
+      "stream_cut_validation": null
+    },
+    "c2_health": {
+      "pass": true,
+      "heartbeat_gaps_over_threshold": 104,
+      "unexpected_failsafe": false,
+      "unexpected_mode_transitions": [],
+      "position_samples": 1023,
+      "normal_land": true,
+      "min_position_samples": 10
+    },
+    "attack_integrity": {
+      "pass": true,
+      "attack": "multi-rogue",
+      "attack_started": true,
+      "attack_rc": 0,
+      "sink_rc": 0,
+      "rate_gate_sender_pass": true,
+      "rate_gate_receiver_pass": true,
+      "identity_gate_pass": true,
+      "sink_gate_pass": true,
+      "run_id_match": true,
+      "summary": {
+        "mode": "multi-rogue",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "rogue_count": 4,
+        "rogue_count_requested": 4,
+        "rogue_summaries_missing": [],
+        "requested_mean_mbps_per_rogue": 20.0,
+        "requested_aggregate_mbps": 80.0,
+        "achieved_sender_mbps": 79.373,
+        "bytes_sent": 5060200000,
+        "per_rogue": [
+          {
+            "deploy": "oai-ue-rogue",
+            "phase_ms": 0,
+            "source_path": "/tmp/attack_summary_0.json",
+            "mode": "microburst",
+            "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+            "path": "pdu",
+            "requested_mean_mbps": 20.0,
+            "achieved_sender_mbps": 19.844,
+            "achieved_mean_mbps_sender": 19.844,
+            "achieved_receiver_mbps": null,
+            "bytes_sent": 1265100000,
+            "bytes_received": 0,
+            "packets_sent": 1062684,
+            "packets_received": 0,
+            "bursts_requested": 12750,
+            "bursts_completed": 12651,
+            "duration_actual_s": 510.012,
+            "burst_size_payload_bytes": 100000,
+            "inter_burst_period_ms": 40,
+            "seed": 1,
+            "udp_datagram_max_bytes": 1200
+          },
+          {
+            "deploy": "oai-ue-rogue2",
+            "phase_ms": 25,
+            "source_path": "/tmp/attack_summary_25.json",
+            "mode": "microburst",
+            "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+            "path": "pdu",
+            "requested_mean_mbps": 20.0,
+            "achieved_sender_mbps": 19.841,
+            "achieved_mean_mbps_sender": 19.841,
+            "achieved_receiver_mbps": null,
+            "bytes_sent": 1264900000,
+            "bytes_received": 0,
+            "packets_sent": 1062516,
+            "packets_received": 0,
+            "bursts_requested": 12750,
+            "bursts_completed": 12649,
+            "duration_actual_s": 510.027,
+            "burst_size_payload_bytes": 100000,
+            "inter_burst_period_ms": 40,
+            "seed": 2,
+            "udp_datagram_max_bytes": 1200
+          },
+          {
+            "deploy": "oai-ue-rogue3",
+            "phase_ms": 50,
+            "source_path": "/tmp/attack_summary_50.json",
+            "mode": "microburst",
+            "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+            "path": "pdu",
+            "requested_mean_mbps": 20.0,
+            "achieved_sender_mbps": 19.841,
+            "achieved_mean_mbps_sender": 19.841,
+            "achieved_receiver_mbps": null,
+            "bytes_sent": 1264900000,
+            "bytes_received": 0,
+            "packets_sent": 1062516,
+            "packets_received": 0,
+            "bursts_requested": 12750,
+            "bursts_completed": 12649,
+            "duration_actual_s": 510.015,
+            "burst_size_payload_bytes": 100000,
+            "inter_burst_period_ms": 40,
+            "seed": 3,
+            "udp_datagram_max_bytes": 1200
+          },
+          {
+            "deploy": "oai-ue-rogue4",
+            "phase_ms": 75,
+            "source_path": "/tmp/attack_summary_75.json",
+            "mode": "microburst",
+            "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+            "path": "pdu",
+            "requested_mean_mbps": 20.0,
+            "achieved_sender_mbps": 19.847,
+            "achieved_mean_mbps_sender": 19.847,
+            "achieved_receiver_mbps": null,
+            "bytes_sent": 1265300000,
+            "bytes_received": 0,
+            "packets_sent": 1062852,
+            "packets_received": 0,
+            "bursts_requested": 12750,
+            "bursts_completed": 12653,
+            "duration_actual_s": 510.034,
+            "burst_size_payload_bytes": 100000,
+            "inter_burst_period_ms": 40,
+            "seed": 4,
+            "udp_datagram_max_bytes": 1200
+          }
+        ]
+      },
+      "receiver_summary": {
+        "mode": "udp_sink",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "listen": "0.0.0.0",
+        "port": 5202,
+        "duration_actual_s": 766.182,
+        "bytes_received": 1488461600,
+        "packets_received": 1249802,
+        "achieved_receiver_mbps": 15.542
+      }
+    },
+    "enforced": [
+      "clock",
+      "host_instrumentation_integrity",
+      "mission_integrity",
+      "drone_integrity",
+      "freshness",
+      "stream",
+      "prb",
+      "mitigation_integrity",
+      "attack_integrity"
+    ],
+    "valid": true
+  },
+  "valid": true,
+  "testbed": {
+    "git": null
+  },
+  "topology_stamp": {
+    "TOPOLOGY": "cross",
+    "GNB_PRB": "106",
+    "MIN_RATIO_SLICE_A": "0",
+    "MIN_RATIO_SLICE_B": "0",
+    "PIN_CORES": "0",
+    "CORES_GNB": "0-4",
+    "CORES_GCS": "5",
+    "CORES_UAV": "6",
+    "CORES_ROGUE": "7-9",
+    "CORES_ATTACK": "10-13",
+    "SITL_TCP_PORT": "5760",
+    "ACK_PROBE_SOCAT": "1",
+    "ACK_PROBE_UDP_PORT": "5763",
+    "ACK_PROBE_SITL_TCP": "5762",
+    "EXTRA_ROGUE_COUNT": "3",
+    "ROGUE_5QI": "9",
+    "C2_5QI": "82",
+    "VICTIM_IN_EMBB": "1",
+    "VICTIM_5QI": "9",
+    "EQUAL_5QI": "0",
+    "MITIGATION_AQM": "0",
+    "MITIGATION_UL_RRMPOLICY": "1",
+    "ATTACKER_LABEL": "A0",
+    "PRB_LABEL": "B0"
+  },
+  "pinning": {
+    "TOPOLOGY": "cross",
+    "GNB_PRB": "106",
+    "MIN_RATIO_SLICE_A": "0",
+    "MIN_RATIO_SLICE_B": "0",
+    "PIN_CORES": "0",
+    "CORES_GNB": "0-4",
+    "CORES_GCS": "5",
+    "CORES_UAV": "6",
+    "CORES_ROGUE": "7-9",
+    "CORES_ATTACK": "10-13",
+    "SITL_TCP_PORT": "5760",
+    "ACK_PROBE_SOCAT": "1",
+    "ACK_PROBE_UDP_PORT": "5763",
+    "ACK_PROBE_SITL_TCP": "5762",
+    "EXTRA_ROGUE_COUNT": "3",
+    "ROGUE_5QI": "9",
+    "C2_5QI": "82",
+    "VICTIM_IN_EMBB": "1",
+    "VICTIM_5QI": "9",
+    "EQUAL_5QI": "0",
+    "MITIGATION_AQM": "0",
+    "MITIGATION_UL_RRMPOLICY": "1",
+    "ATTACKER_LABEL": "A0",
+    "PRB_LABEL": "B0"
+  },
+  "attack_summary": {
+    "mode": "multi-rogue",
+    "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+    "rogue_count": 4,
+    "rogue_count_requested": 4,
+    "rogue_summaries_missing": [],
+    "requested_mean_mbps_per_rogue": 20.0,
+    "requested_aggregate_mbps": 80.0,
+    "achieved_sender_mbps": 79.373,
+    "bytes_sent": 5060200000,
+    "per_rogue": [
+      {
+        "deploy": "oai-ue-rogue",
+        "phase_ms": 0,
+        "source_path": "/tmp/attack_summary_0.json",
+        "mode": "microburst",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "path": "pdu",
+        "requested_mean_mbps": 20.0,
+        "achieved_sender_mbps": 19.844,
+        "achieved_mean_mbps_sender": 19.844,
+        "achieved_receiver_mbps": null,
+        "bytes_sent": 1265100000,
+        "bytes_received": 0,
+        "packets_sent": 1062684,
+        "packets_received": 0,
+        "bursts_requested": 12750,
+        "bursts_completed": 12651,
+        "duration_actual_s": 510.012,
+        "burst_size_payload_bytes": 100000,
+        "inter_burst_period_ms": 40,
+        "seed": 1,
+        "udp_datagram_max_bytes": 1200
+      },
+      {
+        "deploy": "oai-ue-rogue2",
+        "phase_ms": 25,
+        "source_path": "/tmp/attack_summary_25.json",
+        "mode": "microburst",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "path": "pdu",
+        "requested_mean_mbps": 20.0,
+        "achieved_sender_mbps": 19.841,
+        "achieved_mean_mbps_sender": 19.841,
+        "achieved_receiver_mbps": null,
+        "bytes_sent": 1264900000,
+        "bytes_received": 0,
+        "packets_sent": 1062516,
+        "packets_received": 0,
+        "bursts_requested": 12750,
+        "bursts_completed": 12649,
+        "duration_actual_s": 510.027,
+        "burst_size_payload_bytes": 100000,
+        "inter_burst_period_ms": 40,
+        "seed": 2,
+        "udp_datagram_max_bytes": 1200
+      },
+      {
+        "deploy": "oai-ue-rogue3",
+        "phase_ms": 50,
+        "source_path": "/tmp/attack_summary_50.json",
+        "mode": "microburst",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "path": "pdu",
+        "requested_mean_mbps": 20.0,
+        "achieved_sender_mbps": 19.841,
+        "achieved_mean_mbps_sender": 19.841,
+        "achieved_receiver_mbps": null,
+        "bytes_sent": 1264900000,
+        "bytes_received": 0,
+        "packets_sent": 1062516,
+        "packets_received": 0,
+        "bursts_requested": 12750,
+        "bursts_completed": 12649,
+        "duration_actual_s": 510.015,
+        "burst_size_payload_bytes": 100000,
+        "inter_burst_period_ms": 40,
+        "seed": 3,
+        "udp_datagram_max_bytes": 1200
+      },
+      {
+        "deploy": "oai-ue-rogue4",
+        "phase_ms": 75,
+        "source_path": "/tmp/attack_summary_75.json",
+        "mode": "microburst",
+        "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+        "path": "pdu",
+        "requested_mean_mbps": 20.0,
+        "achieved_sender_mbps": 19.847,
+        "achieved_mean_mbps_sender": 19.847,
+        "achieved_receiver_mbps": null,
+        "bytes_sent": 1265300000,
+        "bytes_received": 0,
+        "packets_sent": 1062852,
+        "packets_received": 0,
+        "bursts_requested": 12750,
+        "bursts_completed": 12653,
+        "duration_actual_s": 510.034,
+        "burst_size_payload_bytes": 100000,
+        "inter_burst_period_ms": 40,
+        "seed": 4,
+        "udp_datagram_max_bytes": 1200
+      }
+    ]
+  },
+  "receiver_summary": {
+    "mode": "udp_sink",
+    "run_id": "20261112_185347_292928_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid24p0mbps_r1",
+    "listen": "0.0.0.0",
+    "port": 5202,
+    "duration_actual_s": 766.182,
+    "bytes_received": 1488461600,
+    "packets_received": 1249802,
+    "achieved_receiver_mbps": 15.542
+  },
+  "companion_video_summary": {
+    "offered_mbps": 24.0,
+    "port": 5202,
+    "direction": "uav_to_gcs",
+    "path": "uav_ul_gcs_dl",
+    "protocol": "udp",
+    "ok": true,
+    "achieved_mbps": 24.0,
+    "lost_percent": 0.0,
+    "iperf_end_keys": [
+      "sum"
+    ],
+    "returncode": 0,
+    "gcs_ip": "12.1.1.133",
+    "uav_ip": "12.1.1.135"
+  },
+  "outcomes": {
+    "mission_success": true,
+    "mission_rc": 0,
+    "acquisition_completed": true,
+    "acquisition_time_s": 2.001,
+    "acquisition_cross_track_max_m": 3.82,
+    "paper_comparable": false,
+    "paper_comparable_reasons": [
+      "stream_start_radius_m=101.02 not within 5.0m of R=30.0"
+    ],
+    "stream_start_radius_m": 101.021,
+    "cross_track_p99_steady_m": 53.5,
+    "cross_track_p99_m": 53.5,
+    "tracking_error_p99_m": 73.89,
+    "failsafe": false,
+    "failsafe_mode": null,
+    "landing_requested": true,
+    "landing_normal": true,
+    "final_mode": "LAND",
+    "final_armed": false,
+    "max_deviation_m": 60.85,
+    "landing_completed": true,
+    "mode_transitions": [
+      {
+        "t_rel_s": 12.071,
+        "from": "LAND",
+        "to": "GUIDED",
+        "steady_state": false
+      },
+      {
+        "t_rel_s": 626.768,
+        "from": "GUIDED",
+        "to": "LAND",
+        "steady_state": true
+      }
+    ],
+    "companion_video": {
+      "offered_mbps": 24.0,
+      "port": 5202,
+      "direction": "uav_to_gcs",
+      "path": "uav_ul_gcs_dl",
+      "protocol": "udp",
+      "ok": true,
+      "achieved_mbps": 24.0,
+      "lost_percent": 0.0,
+      "iperf_end_keys": [
+        "sum"
+      ],
+      "returncode": 0,
+      "gcs_ip": "12.1.1.133",
+      "uav_ip": "12.1.1.135"
+    }
+  },
+  "timestamp_utc": "2026-11-12T22:08:38.059045+00:00",
+  "paper_artifacts": {
+    "schema_version": "paper_artifacts_v1",
+    "multi_rogue_count": 4,
+    "companion_video_mbps": 24.0,
+    "capture": {
+      "c2_arrival_capture": true,
+      "telemetry_arrival_capture": true,
+      "delivery_aoi_ready": true,
+      "note": "delivery AoI (UAV egress \u2192 GCS arrival) needs both flags; gap-only needs --telemetry-arrival-capture"
+    },
+    "attack_onset": {
+      "requested_start_after_s": 45.0,
+      "resolved_delay_s": 174.3,
+      "burst_duration_s": 510.0,
+      "mission_start_s": 90.0,
+      "envelope_s": 761.0,
+      "adjusted_for_takeoff": true,
+      "attack_start_s_abs": 190.361,
+      "attack_end_s_abs": 700.361
+    },
+    "offered_attack_load": {
+      "attack": "multi-rogue",
+      "mean_rate_mbps_per_rogue": 20.0,
+      "period_ms": 40.0,
+      "burst_size_bytes": 100000,
+      "rogue_count": 4,
+      "direction": "ul",
+      "offered_aggregate_mbps": 80.0,
+      "offered_bursts_per_s_per_rogue": 25.0,
+      "offered_bursts_per_s_aggregate": 100.0
+    },
+    "artifact_paths": {
+      "telemetry_downlink_gcs_csv": "telemetry_downlink_gcs.csv",
+      "c2_telemetry_uav_csv": "c2_telemetry_uav.csv",
+      "c2_arrival_csv": "c2_arrival.csv",
+      "prb_csv": "prb.csv",
+      "prb_raw_log": "mac-prb-raw.log",
+      "prb_json": "prb.json",
+      "event_markers_csv": "event_markers.csv",
+      "analysis_params_json": "analysis_params.json",
+      "host_telemetry_csv": "host_timeseries.csv",
+      "run_meta_json": "run_meta.json"
+    },
+    "analysis_params": {
+      "schema_version": "analysis_params_v1",
+      "T_safe_ms": 500.0,
+      "E_safe_m": 5.0,
+      "geofence_radius_m": 50.0,
+      "landing_radius_m": 5.0,
+      "notes": "Constants for post-processing only. T_safe_ms / E_safe_m feed Semantic Availability offline; geofence/landing radii feed HMI detectors offline."
+    },
+    "event_markers": [
+      {
+        "event": "run_start",
+        "t_rel_s": 0.0,
+        "note": "T0"
+      },
+      {
+        "event": "mission_start",
+        "t_rel_s": 90.0,
+        "note": "centralization margin / mission launch"
+      },
+      {
+        "event": "attack_onset",
+        "t_rel_s": 190.361,
+        "note": "resolved radio-contention attack start"
+      },
+      {
+        "event": "attack_end",
+        "t_rel_s": 700.361,
+        "note": "resolved radio-contention attack end"
+      },
+      {
+        "event": "run_end",
+        "t_rel_s": 802.857,
+        "note": "wall runtime"
+      }
+    ],
+    "written": {
+      "analysis_params_json": "analysis_params.json",
+      "event_markers_csv": "event_markers.csv"
+    }
+  },
+  "multi_rogue_count": 4,
+  "schedule_optc": {
+    "schema": "flyblind_schedule_optc_v1",
+    "time_base": "s since T0",
+    "duration_s": 600.0,
+    "warmup_s": 10.0,
+    "mission_start_s": 90.0,
+    "base_envelope_s": 630.0,
+    "legacy_onset_delay_s": 120.0,
+    "burst_s": 510,
+    "onset_anchor_s": 188.3,
+    "onset_delay_s": 174.3,
+    "planned_onset_s": [
+      188.3,
+      192.3
+    ],
+    "planned_attack_end_s": [
+      698.3,
+      702.3
+    ],
+    "virtual_attack_onset_s": 188.3,
+    "virtual_attack_end_s": 698.3,
+    "orbit_acquired_nominal_s": 143.3,
+    "orbit_acquired_bound_s": 158.3,
+    "trajectory_start_nominal_s": 141.3,
+    "trajectory_end_s": 712.3,
+    "trajectory_duration_s": 571.0,
+    "trajectory_tail_s": 10.0,
+    "drain_ceiling_s": 0.0,
+    "capture_end_s": 760.3,
+    "capture_envelope_s": 761,
+    "constants": {
+      "T_TRAJ_START_FROM_LAUNCH_S": 51.3,
+      "T_ORBIT_FROM_LAUNCH_S": 53.3,
+      "ORBIT_MARGIN_S": 15.0,
+      "P_PRE_S": 30.0,
+      "POST_ATTACK_TAIL_S": 10.0,
+      "LAND_BOUND_S": 28.0,
+      "CAPTURE_SLACK_S": 5.0,
+      "ATTACK_LAUNCH_MIN_S": 14.0,
+      "ATTACK_LAUNCH_MAX_S": 18.0,
+      "takeoff_guard_s": 30.0
+    }
+  },
+  "c2_arrival_capture": true,
+  "telemetry_arrival_capture": true,
+  "sidecars": {
+    "profile": "FULL",
+    "duration_s": 761.0
+  },
+  "drain_policy": {
+    "schema": "flyblind_drain_policy_v2",
+    "enabled": false,
+    "video_mode": "a_continue",
+    "window_s": 10.0,
+    "delta_abs_s": 0.05,
+    "delta_factor": 1.5,
+    "belief_abs_m": 0.3,
+    "belief_factor": 1.5,
+    "drain_ceiling_s": 180.0,
+    "baseline_delta_p50_s": null,
+    "baseline_belief_p50_m": null,
+    "baseline_ref_run": null,
+    "baseline_source": "unset",
+    "baseline_source_note": "source not resolved yet; filled in during post-processing",
+    "criterion_text": "Back to baseline when, in a sliding window of 10 s after attack_end, delta_p50 <= max(baseline_delta_p50 + 0.05s, baseline_delta_p50 * 1.5) AND belief_p50 <= max(baseline_belief_p50 + 0.3m, baseline_belief_p50 * 1.5), or when the ceiling drain_ceiling_s=180s is reached. Baseline source: unset.",
+    "live_early_stop": "envelope extended by drain_ceiling_s; live early-stop requires telemetry polling (NOT VERIFIED on the offline bench)",
+    "drain_ceiling_applied_s": 0.0
+  },
+  "video_stop_t_rel_s": null
+}

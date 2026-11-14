@@ -1,0 +1,252 @@
+FlyBlind -- formulas and predicates, computed step by step on real runs
+----------------------------------------------------------------------------------------------------
+  baseline: 02_results/campaign/flyblind_20261111_232155/S1_core/runs/20261112_021025_584929_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid12p0mbps_r1
+  attack:   02_results/campaign/flyblind_20261111_232155/S1_core/runs/20261112_012557_045177_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid12p0mbps_r1
+  thresholds: tau_fresh 150 ms | tau_owd 1.0 s | tau_avail 99.9 % | tau_trk 20 m | detector 1 s | Q 80 Mbit
+
+====================================================================================================
+ 1. Delivery age   delta_i = t_arrival_GCS(i) - t_egress_UAV(i)
+====================================================================================================
+Age of the vehicle state carried by telemetry sample i when it reaches the GCS. Sample i is paired
+across the two captures by (system_id, time_boot_ms) or sequence; the egress time is stamped at the
+UAV before the uplink, so delta_i includes every queue the sample waited in.
+  code:  freshness_metrics.merge_telemetry_downlink        file: telemetry_downlink_summary.json
+         field telemetry_arrival_delay_ms
+
+  baseline: 20261112_021025 ... baseline
+     t_rel (s)   phase    t_egress (ns)   t_arrival (ns)     delta_i
+         188.3  ATTACK   10585596497535   10585614792436      18.3 ms
+         288.3  ATTACK   10685625901704   10685645584065      19.7 ms
+         388.4  ATTACK   10785650780593   10785667924824      17.1 ms
+    p50 whole run   recomputed 18.3 ms   pipeline 18.3 ms
+    p50 ATTACK win  recomputed 18.1 ms
+
+  attack: 20261112_012557 ... attack
+     t_rel (s)   phase    t_egress (ns)   t_arrival (ns)     delta_i
+         190.2  ATTACK    7929239722945    7929258532077      18.8 ms
+         363.3  ATTACK    8089272157981    8102297212458   13025.1 ms
+         534.8  ATTACK    8261076411625    8273858543533   12782.1 ms
+    p50 whole run   recomputed 13008.5 ms   pipeline 13008.5 ms
+    p50 ATTACK win  recomputed 13092.1 ms
+
+  => 18.3 ms at baseline  ->  13.01 s under attack.
+
+====================================================================================================
+ 2. Belief vs truth   b_i = || p_GCS[i-1] - p_truth(t_arrival_i) ||
+====================================================================================================
+At each arrival i, the operator still holds the PREVIOUS sample (the frozen belief); the truth is the
+latest SITL egress position with t_egress <= t_arrival_i (where the vehicle actually is right then).
+It never looks at the plan, so route geometry cannot enter it. It needs the simulator's truth, so it
+is the experiment's ruler, not something a real operator can compute (see section 9 for that).
+  code:  freshness_metrics.merge_telemetry_downlink -> belief_vs_truth_m
+  file:  telemetry_downlink_summary.json  belief_vs_truth_m;  validated in belief_validation
+
+  baseline: 20261112_021025 ... baseline
+     t_rel (s)        belief (frozen) NED                  truth NED       b_i
+         188.3 (   91.0,  137.7,-10.0) (   90.2,  138.5,-10.0)     1.1 m
+         263.3 (   82.2,  117.4,-10.0) (   81.4,  116.6,-10.0)     1.1 m
+         338.4 ( -101.4,  -85.8,-10.0) ( -101.0,  -86.7,-10.0)     1.0 m
+    p50 whole run   recomputed 1.00 m   pipeline 1.00 m   MATCH   belief_validation: validated
+    p50 ATTACK win  recomputed 1.00 m
+
+  attack: 20261112_012557 ... attack
+     t_rel (s)        belief (frozen) NED                  truth NED       b_i
+         190.2 (   85.2,  144.1,-10.0) (   84.6,  145.0,-10.0)     1.0 m
+         323.3 (  -59.3,   -0.3,-10.0) ( -100.6,  -34.4,-10.0)    53.6 m
+         446.2 (  -75.4, -187.3,-10.0) ( -102.8, -185.1,-10.0)    27.5 m
+    p50 whole run   recomputed 38.82 m   pipeline 38.82 m   MATCH   belief_validation: validated
+    p50 ATTACK win  recomputed 47.82 m
+
+  Why the attack-window value is larger: the whole run includes the pre-attack segment and the final
+  drain, where the state is fresh and b_i ~ 1 m. Both are correct; always say which window you quote.
+
+====================================================================================================
+ 3. Sample freshness   F_GCS,i = 1{delta_i < tau_fresh},  tau_fresh = 150 ms
+====================================================================================================
+F = 1 means sample i reached the GCS fresh. A_fresh is the share of fresh deliveries in a window.
+tau_fresh sits above the baseline tail (delta p99 ~ tens of ms) and far below the attack regime (seconds).
+  baseline  ATTACK window:  2040/ 2040 fresh  ->  A_fresh = 1.0000     whole run: A_fresh = 1.0000
+  attack    ATTACK window:     2/ 1208 fresh  ->  A_fresh = 0.0017     whole run: A_fresh = 0.1730
+
+  Note: the baseline has no adversary, so its ATTACK window is the same time span with nothing
+  injected (a 'virtual' attack window). It is the like-for-like comparison.
+
+====================================================================================================
+ 4. Network health   H_net = 1{ OWD_cmd_p99 < tau_owd  AND  avail > tau_avail  AND  linkloss = 0 }
+====================================================================================================
+What the operator's monitors look at: the COMMAND leg (GCS -> UAV) and loss-of-link declarations.
+  tau_owd = 1.0 s (1.0 s at >= 95 %, Honeywell TestReport-263 citing DO-377A)
+  tau_avail = 99.9 % (campaign validity gate)
+  linkloss = loss-of-link declarations a QGC-style monitor would raise (K8)
+  file: run_kpi_report.json -> legs_table.command  (owd_p99_s, delivery_rate_post_warmup,
+        criterion_C4.checks.QGC_style_gap_3_5s.loss_declarations)
+  baseline  OWD_cmd_p99 = 38.6 ms < 1 s  |  avail = 100.000 % > 99.9 %  |  linkloss = 0  (max heartbeat gap 0.14 s)  ->  H_net = 1
+  attack    OWD_cmd_p99 = 39.8 ms < 1 s  |  avail = 99.965 % > 99.9 %  |  linkloss = 0  (max heartbeat gap 0.72 s)  ->  H_net = 1
+
+  => H_net = 1 in BOTH runs: the link looks the same to the operator with and without the attack.
+
+====================================================================================================
+ 5. Vehicle health   H_veh = 1{ trk_truth_p95 < tau_trk  AND  failsafe = 0  AND  mode = GUIDED }
+====================================================================================================
+trk_truth(t) = || p_truth(t) - p_plan(t) ||: the SITL egress position against the reference at the
+same instant. It is PHYSICAL: the truth is immune to delivery delay, and the join only accepts a truth
+sample within max_join_gap_ms (500 ms) of the reference instant.
+  code: freshness_metrics.compute_trk_truth     file: trk_truth.json -> tracking_error_truth_m
+        run_meta.json -> outcomes.failsafe, outcomes.mode_transitions
+  baseline  trk_truth p50/p95/p99 = 7.9 / 9.7 / 50.9 m  join rejected: 0  |  failsafe = False  |  modes [('LAND', 'GUIDED'), ('GUIDED', 'LAND')]  ->  H_veh = 1
+  attack    trk_truth p50/p95/p99 = 7.9 / 9.6 / 50.5 m  join rejected: 0  |  failsafe = False  |  modes [('LAND', 'GUIDED'), ('GUIDED', 'LAND')]  ->  H_veh = 1
+
+  Sensitivity to tau_trk (p95, the statistic the predicate uses):
+     tau_trk (m)   H_veh baseline   H_veh attack
+               5                0              0
+              10                1              1
+              15                1              1
+              20                1              1
+              30                1              1
+              50                1              1
+              60                1              1
+    Baseline and attack get the SAME H_veh at every tau, because trk_truth does not move under attack.
+    Any tau above the baseline p95 (9.7 m) gives H_veh = 1 in both.
+
+  Why p95 and not p99 -- the historical problem, reproduced:
+    trk_truth p99 = 50.9 m at BASELINE and 50.5 m under attack. That tail is NOT
+    route curves: it is the start-up transient. When the stream begins, the vehicle is still at its
+    hover point after takeoff, far from the first reference point, and the error is large until it
+    reaches the route. physics_truth.py separates it (harness rule: error < 10 m held for 2 s):
+      baseline start-up 8.9 s = 1.6 % of samples, from 97.1 m  |  after it: p95 9.5, p99 10.1, max 12.3 m
+               along-track -7.8 m (trailing by 1.96 s), cross-track p50 0.09 m, p99 5.4 m -> the vehicle is ON the path
+      attack   start-up 8.9 s = 1.6 % of samples, from 97.1 m  |  after it: p95 9.5, p99 10.1, max 12.3 m
+               along-track -7.8 m (trailing by 1.96 s), cross-track p50 0.09 m, p99 5.4 m -> the vehicle is ON the path
+    About 1.6 % of the samples is enough to set the p99 but not the p95. With p99 and a tau_trk sized
+    for the flight (~10 m), H_veh = 0 in both runs, so SSS_i = 0 everywhere and the predicate would
+    never fire -- for a reason unrelated to the attack. p95 keeps the physical reading and leaves the
+    start-up transient out.
+
+====================================================================================================
+ 6. The predicate   SSS_i = H_net * H_veh * (1 - F_GCS,i)
+====================================================================================================
+H_net and H_veh are WINDOW indicators; only F_GCS,i varies per delivery. When the window holds
+H_net = H_veh = 1 the predicate reduces to  SSS_i = 1 - F_GCS,i : the network and the vehicle look
+healthy and the sample at the GCS is stale. That is the false-healthy condition, made testable.
+  baseline  H_net*H_veh = 1   ATTACK window: 0/2040 deliveries with SSS_i = 1   -> share 0.0000   (1 - A_fresh = 0.0000)
+  attack    H_net*H_veh = 1   ATTACK window: 1206/1208 deliveries with SSS_i = 1   -> share 0.9983   (1 - A_fresh = 0.9983)
+
+  => baseline: the gates are open but every sample is fresh, so SSS_i = 0.
+     attack:   the gates are open AND almost every sample is stale, so SSS_i = 1. When H = 1 the share
+     of SSS_i = 1 is exactly 1 - A_fresh.
+
+  Closing evidence (not part of the formula, but what makes it 'silent'): operator alerts.
+    baseline  STATUSTEXT with severity <= 4 inside the ATTACK window: 0
+    attack    STATUSTEXT with severity <= 4 inside the ATTACK window: 0
+
+====================================================================================================
+ 7. Effect criterion C1   effect = 1{ OWD_p50 >= 1 s  OR  OWD_p99 >= 150 ms }  (per leg)
+====================================================================================================
+Pre-registered before the campaign. Evaluated on each leg separately; 'tail only' when p99 crosses
+but p50 stays below 100 ms. file: run_kpi_report.json -> legs_table.<leg>.criterion_C1
+  baseline command   p50       20.1 ms  p99       38.6 ms  -> effect False   (pipeline: False)
+  baseline return    p50       18.1 ms  p99       30.1 ms  -> effect False   (pipeline: False)
+  attack   command   p50       20.2 ms  p99       39.8 ms  -> effect False   (pipeline: False)
+  attack   return    p50    13092.1 ms  p99    13779.6 ms  -> effect True   (pipeline: True)
+
+  => under attack the RETURN leg has the effect and the COMMAND leg does not. That pair is the
+     false-healthy condition in two lines: the leg the operator monitors stays green.
+
+====================================================================================================
+ 8. Queueing model   AoI = (Q / C) * (N + 1)
+====================================================================================================
+With N backlogged co-tenants, proportional-fair gives the victim a share C/(N+1) of the uplink. If the
+victim offers more than that share, its RLC buffer fills; the age of a sample at the head is buffer
+over drain rate, Q / (C/(N+1)). Q = RLC_TX_MAXSIZE = 10 MB = 80 Mbit; C = cell uplink capacity.
+Valid only while demand > C/(N+1); below that there is no backlog and the age stays at baseline.
+
+  Least squares over the N with a backlog:  AoI = 2.565 * (N+1) + 0.193 s
+  slope = Q / C   ->   C = 80 / 2.565 = 31.2 Mb/s
+
+      N   k   measured      model    error   note
+      1   3      0.02s         --       --   share C/(N+1) = 15.6 Mb/s > 12 Mb/s offered: no backlog, as the model says
+      2   3      7.88s      7.69s     2.5%
+      3   3     10.46s     10.26s     2.0%
+      4   5     13.01s     12.82s     1.5%
+
+  Independent check: the capacity probe (no adversary, victim video raised until it
+  self-congests) brackets C(106 PRB) in [24, 32] Mb/s. The fitted C = 31.2 Mb/s is INSIDE it.
+
+====================================================================================================
+ 9. Destination-side detector   A_i = t_i - (T0_hat + boot_i),  alarm when A_i > 1 s
+====================================================================================================
+Needs nothing but what the telemetry already carries: boot_i = time_boot_ms stamped at the source
+before the uplink, and t_i = the local arrival time at the GCS.
+    implied_i = t_i - boot_i          = T0 + D_i      (D_i = transport delay >= 0)
+    T0_hat    = running min(implied)  ~ T0            (the fastest sample, D ~ 0, calibrates the epoch)
+    A_i       = t_i - (T0_hat + boot_i) = D_i - D_min
+No simulator truth is used, so unlike belief_vs_truth this runs on a real ground station (shipped as
+the QGroundControl detector build, --open-qgc-mitigation).
+
+  baseline  ATTACK window: detector A p50 = 84.6 ms   oracle delta p50 = 18.1 ms
+            samples above 1 s: 0/2040
+
+  attack    ATTACK window: detector A p50 = 13159.8 ms   oracle delta p50 = 13092.1 ms
+            samples above 1 s: 1203/1208   first alarm at t_rel 192.6 s, attack onset 190.2 s (+2.4 s)
+
+  Why the detector does not equal the oracle exactly -- clock drift:
+    On the baseline run, where D_i is ~constant, implied_i drifts at 0.2627 ms/s (263 ppm): the autopilot's
+    boot clock and the GCS clock do not tick at exactly the same rate (in SITL, simulated time runs
+    slightly behind wall time). The running minimum is captured early and never moves again, so A_i
+    grows by drift x (time since calibration). That is the tens-of-ms gap to the oracle above --
+    irrelevant against a 1 s threshold and a 13 s effect, but it does not stay irrelevant forever:
+    at this rate a fresh link would cross the 1 s threshold after 3806 s (~63 min) of mission,
+    i.e. a FALSE alarm on a long flight. A deployed detector needs a leaky minimum (or a drift
+    estimate from a known-good phase) rather than a minimum held for the whole mission.
+
+  Second limitation, reproduced -- calibration needs a FRESH sample:
+    If the ground station only connected once the backlog was already established, every D_i it ever
+    sees is already ~13 s, T0_hat absorbs that delay, and the detector reads only the variation around
+    it. Calibrating only from the first sample whose delay already reached steady state (delta > 11.8 s)
+    gives A p50 = 1146.0 ms and 855/1160 alarms,
+    instead of 13159.8 ms and 1203/1208. In the campaign the GCS connects before the attack, so
+    calibration is clean; a deployment must calibrate during a known-good phase.
+
+====================================================================================================
+ 10. Traps -- numbers that look right and are not
+====================================================================================================
+  (a) 'Tracking error' computed from the BELIEF is not physical.
+      The testbed also reports cross_track / max_deviation (run_meta.json -> outcomes). They are
+      computed from p_GCS, the position as received (setpoint_stream.py: cur = poll.ned_cache[0]),
+      against the plan now -- so they restate delta_i in meters (~ speed x age).
+                   cross_track p99 (belief)   trk_truth p95 (truth)   trk_truth p99 (truth)
+      baseline                        5.4 m                   9.7 m                  50.9 m
+      attack                         50.4 m                   9.6 m                  50.5 m
+      The belief-derived column jumps under attack; the truth columns do not move. The airframe flies
+      its path. Never use cross_track or max_deviation as evidence of physical deviation, and never
+      put them in H_veh: they rise exactly when the attack works, which would switch the predicate off.
+
+  (b) Whole-run belief understates the attack.
+      attack run: whole run 38.82 m   vs   ATTACK window 47.82 m
+      The pipeline's per-run belief covers the whole measurement window, which includes fresh
+      pre-attack and drain samples. Both numbers are right; quote the window with the number.
+
+  (c) Two t_rel origins, about 90 s apart.
+      flyblind_phase_windows.json, event_markers.csv and clock_anchor.json count from T0 (run start).
+      The MAVLink captures' own t_rel_s column (telemetry_downlink_gcs.csv, statustext_gcs.csv, and
+      c2.json times) counts from the mission start. Slicing those columns against the phase windows
+      shifts every event by the offset. Measure it from a file that carries both clocks:
+        offset = (t_mono_ns - t_rel_s * 1e9 - T0_mono_ns) / 1e9
+      baseline   offset = 90.277 s
+      attack     offset = 90.326 s
+      Every script here assigns phases from t_mono_ns against T0_mono_ns, never from that column.
+
+====================================================================================================
+ SUMMARY
+====================================================================================================
+                                           baseline         attack
+  delivery age p50 (whole run)              18.3 ms        13.01 s
+  belief vs truth p50 (whole run)             1.0 m         38.8 m
+  belief vs truth p50 (ATTACK win.)           1.0 m         47.8 m
+  A_fresh (ATTACK window)                    1.0000         0.0017
+  H_net / H_veh                               1 / 1          1 / 1
+  share of SSS_i = 1 (ATTACK window)         0.0000         0.9983
+  operator alerts (ATTACK window)                 0              0
+
+  Same link health, same airframe, same silence from the operator's tools -- and a state that is
+  seconds old. That is Silent State Staleness.

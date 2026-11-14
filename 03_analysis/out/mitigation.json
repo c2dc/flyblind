@@ -1,0 +1,295 @@
+{
+  "schema": "flyblind_mitigation_v1",
+  "phase": "ATTACK",
+  "alert_severity_max": 4,
+  "rows": [
+    {
+      "condition": "a_baseline",
+      "series": "S1",
+      "testbed": "default-106",
+      "label": "Baseline, video 12 Mb/s",
+      "n_runs": 3,
+      "aoi_p50_ms": {
+        "n": 3,
+        "mean": 18.401,
+        "sd": 0.251159311991412,
+        "min": 18.14,
+        "max": 18.641
+      },
+      "belief_p50_m": {
+        "n": 3,
+        "mean": 0.999,
+        "sd": 0.0,
+        "min": 0.999,
+        "max": 0.999
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.018400726000000003,
+        "sd": 0.00025092827295265167,
+        "min": 0.018140053,
+        "max": 0.018640617
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.03143956366666667,
+        "sd": 0.0011276688444806547,
+        "min": 0.030143234,
+        "max": 0.032193955
+      },
+      "command_owd_p50_s": {
+        "n": 3,
+        "mean": 0.020050286,
+        "sd": 0.00015848788283020108,
+        "min": 0.019870048,
+        "max": 0.020167866
+      },
+      "command_owd_p99_s": {
+        "n": 3,
+        "mean": 0.0387136,
+        "sd": 0.000453072830802072,
+        "min": 0.038299434,
+        "max": 0.039197495000000006
+      },
+      "telemetry_delivery_ratio": {
+        "n": 3,
+        "mean": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "n_alerts_attack": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "failsafe_triggered": {
+        "true": 0,
+        "of": 3
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      },
+      "verdict": "state stays fresh (C1 absent in every replicate)"
+    },
+    {
+      "condition": "a_atk_n4",
+      "series": "S1",
+      "testbed": "default-106",
+      "label": "Attack N=4, video 12 Mb/s (headline)",
+      "n_runs": 5,
+      "aoi_p50_ms": {
+        "n": 5,
+        "mean": 13114.2742,
+        "sd": 27.201256711777617,
+        "min": 13092.131,
+        "max": 13161.29
+      },
+      "belief_p50_m": {
+        "n": 5,
+        "mean": 47.8386,
+        "sd": 0.2598245561912887,
+        "min": 47.456,
+        "max": 48.136
+      },
+      "return_owd_p50_s": {
+        "n": 5,
+        "mean": 13.114274294200001,
+        "sd": 0.027201124587946667,
+        "min": 13.09213092,
+        "max": 13.161289752
+      },
+      "return_owd_p99_s": {
+        "n": 5,
+        "mean": 13.791142042799999,
+        "sd": 0.08286426678651113,
+        "min": 13.666677154,
+        "max": 13.896395723
+      },
+      "command_owd_p50_s": {
+        "n": 5,
+        "mean": 0.0203104534,
+        "sd": 0.00010635121386143174,
+        "min": 0.020164786,
+        "max": 0.020453018
+      },
+      "command_owd_p99_s": {
+        "n": 5,
+        "mean": 0.0400143292,
+        "sd": 0.00048774821245823127,
+        "min": 0.039531523,
+        "max": 0.040588219
+      },
+      "telemetry_delivery_ratio": {
+        "n": 5,
+        "mean": 0.6225352681533624,
+        "sd": 0.012028924103729374,
+        "min": 0.6066699362432565,
+        "max": 0.636096125551741
+      },
+      "n_alerts_attack": {
+        "n": 5,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "failsafe_triggered": {
+        "true": 0,
+        "of": 5
+      },
+      "return_C1": {
+        "true": 5,
+        "of": 5
+      },
+      "verdict": "state ages (C1 present in every replicate)"
+    },
+    {
+      "condition": "f1_slicing_n4",
+      "series": "S4",
+      "testbed": "slicing-106",
+      "label": "Defence: UL slice enforcement (victim on its own slice, B0)",
+      "n_runs": 3,
+      "aoi_p50_ms": {
+        "n": 3,
+        "mean": 18.984333333333336,
+        "sd": 0.1029287779648297,
+        "min": 18.911,
+        "max": 19.102
+      },
+      "belief_p50_m": {
+        "n": 3,
+        "mean": 0.999,
+        "sd": 0.0,
+        "min": 0.999,
+        "max": 0.999
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 0.018984266666666666,
+        "sd": 0.00010293598217500648,
+        "min": 0.018910981,
+        "max": 0.019101951
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 0.029413731,
+        "sd": 0.0006633712062827271,
+        "min": 0.028648726,
+        "max": 0.029829951
+      },
+      "command_owd_p50_s": {
+        "n": 3,
+        "mean": 0.020505333333333334,
+        "sd": 6.300121789563838e-05,
+        "min": 0.020447966999999997,
+        "max": 0.020572759000000003
+      },
+      "command_owd_p99_s": {
+        "n": 3,
+        "mean": 0.037992049666666666,
+        "sd": 0.00031711739971394814,
+        "min": 0.037787667,
+        "max": 0.038357365000000004
+      },
+      "telemetry_delivery_ratio": {
+        "n": 3,
+        "mean": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "n_alerts_attack": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "failsafe_triggered": {
+        "true": 0,
+        "of": 3
+      },
+      "return_C1": {
+        "true": 0,
+        "of": 3
+      },
+      "verdict": "state stays fresh (C1 absent in every replicate)"
+    },
+    {
+      "condition": "f2_aqm_n4",
+      "series": "S5",
+      "testbed": "aqm-106",
+      "label": "Defence: host AQM (fq_codel on the victim uplink)",
+      "n_runs": 3,
+      "aoi_p50_ms": {
+        "n": 3,
+        "mean": 12902.864000000001,
+        "sd": 46.72541445509054,
+        "min": 12855.44,
+        "max": 12948.858
+      },
+      "belief_p50_m": {
+        "n": 3,
+        "mean": 47.42666666666667,
+        "sd": 0.2331465919402081,
+        "min": 47.16,
+        "max": 47.592
+      },
+      "return_owd_p50_s": {
+        "n": 3,
+        "mean": 12.902863854333333,
+        "sd": 0.046725251864121325,
+        "min": 12.855440072,
+        "max": 12.948857752
+      },
+      "return_owd_p99_s": {
+        "n": 3,
+        "mean": 13.587219668666668,
+        "sd": 0.19672333207876458,
+        "min": 13.422399086,
+        "max": 13.805002413
+      },
+      "command_owd_p50_s": {
+        "n": 3,
+        "mean": 0.020814065,
+        "sd": 0.00026002952126056856,
+        "min": 0.020622988,
+        "max": 0.021110184
+      },
+      "command_owd_p99_s": {
+        "n": 3,
+        "mean": 0.040555535,
+        "sd": 7.258468408693191e-05,
+        "min": 0.040504485,
+        "max": 0.040638627
+      },
+      "telemetry_delivery_ratio": {
+        "n": 3,
+        "mean": 0.643943109367337,
+        "sd": 0.010484334637779272,
+        "min": 0.6356056890632663,
+        "max": 0.6557135850907307
+      },
+      "n_alerts_attack": {
+        "n": 3,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "failsafe_triggered": {
+        "true": 0,
+        "of": 3
+      },
+      "return_C1": {
+        "true": 3,
+        "of": 3
+      },
+      "verdict": "state ages (C1 present in every replicate)"
+    }
+  ]
+}

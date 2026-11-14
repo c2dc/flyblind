@@ -1,0 +1,594 @@
+--- a/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_ulsch.c	2026-08-07 20:33:47.610362776 -0300
++++ b/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_ulsch.c	2026-08-16 13:39:43.025178671 -0300
+@@ -37,6 +37,9 @@
+ #include "LAYER2/NR_MAC_COMMON/nr_mac_extern.h"
+ #include "LAYER2/nr_rlc/nr_rlc_oai_api.h"
+ #include "LAYER2/RLC/rlc.h"
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ //#define SRS_IND_DEBUG
+ 
+@@ -1723,6 +1726,7 @@
+ }
+ 
+ uint32_t ul_pf_tbs[3][29]; // pre-computed, approximate TBS values for PF coefficient
++
+ typedef struct UEsched_s {
+   float coef;
+   NR_UE_info_t * UE;
+@@ -1732,6 +1736,548 @@
+   return ((UEsched_t*)p)->coef < ((UEsched_t*)q)->coef;
+ }
+ 
++/* ==========================================================================
++ * TM_UL_RRMPOLICY_V1 — NSSAI-keyed uplink RRMPolicyRatio enforcement.
++ *
++ * Faithful uplink counterpart of the ORANSlice two-level DL scheduler
++ * (gNB_scheduler_dlsch.c: dl_sched_unit + pf_dl_slice), completed with the
++ * full 3GPP TS 28.541 NRM RRMPolicyRatio tri-partition:
++ *   - Dedicated resources (dedicated_ratio): reserved for the slice and never
++ *     lent to other slices, even when idle.
++ *   - Prioritized resources (min_ratio - dedicated_ratio): guaranteed to the
++ *     slice when it has demand; lent to other slices when idle
++ *     (work-conserving).
++ *   - Shared resources (up to max_ratio): best-effort.
++ *
++ * Structure mirrors the DL path:
++ *   - slices keyed by S-NSSAI via mac->SL_info (ratios come from the same
++ *     rrmPolicy.json parsed by nr_update_slice_policy; no RNTI lists);
++ *   - stage 1 schedules HARQ retransmissions for all UEs (like dl_sched_unit);
++ *   - stage 2 schedules new transmissions slice by slice, thin-first
++ *     (ascending demand, like the DL qsort on prb_est), each slice capped at
++ *     max_prbs = cell - sum(reserved by other slices), clamped to max_ratio;
++ *   - PF within the slice uses per-slice throughput (ul_thr_ue_slice), the
++ *     UL analog of dl_thr_ue_slice in pf_dl_slice;
++ *   - no victim-first priority, no per-UE hard caps, no role knowledge.
++ *
++ * The only structural difference vs DL is the demand input: DL sees per-LCID
++ * RLC queues, UL sees the BSR-derived estimated_ul_buffer (aggregate per UE).
++ * Slice membership is static per UE (DRB S-NSSAI), so per-slice accounting
++ * remains exact for single-PDU-session UEs.
++ *
++ * Enabled by /tmp/tm_ul_rrmpolicy.conf (enabled=1). When active, pf_ul
++ * delegates entirely to this NSSAI-keyed path.
++ * ========================================================================== */
++#define TM_UL_RRMPOLICY_PATH "/tmp/tm_ul_rrmpolicy.conf"
++
++typedef struct {
++  bool enabled;
++} tm_ul_rrmpolicy_t;
++
++static tm_ul_rrmpolicy_t tm_ul_rrmpolicy;
++static int tm_ul_rrmpolicy_last_frame = -1;
++static bool tm_ul_rrmpolicy_acked = false;
++
++static void tm_reload_ul_rrmpolicy(frame_t frame)
++{
++  if ((frame % 128) != 0 || tm_ul_rrmpolicy_last_frame == frame)
++    return;
++  tm_ul_rrmpolicy_last_frame = frame;
++
++  tm_ul_rrmpolicy_t next = {0};
++  FILE *fp = fopen(TM_UL_RRMPOLICY_PATH, "r");
++  if (fp == NULL) {
++    if (tm_ul_rrmpolicy.enabled)
++      LOG_I(NR_MAC, "[TM_UL_RRMPOLICY] disabled (policy file removed)\n");
++    tm_ul_rrmpolicy = next;
++    tm_ul_rrmpolicy_acked = false;
++    return;
++  }
++  char line[256];
++  while (fgets(line, sizeof(line), fp) != NULL) {
++    char *eq = strchr(line, '=');
++    if (eq == NULL)
++      continue;
++    *eq++ = '\0';
++    line[strcspn(line, " \t\r\n")] = '\0';
++    eq += strspn(eq, " \t");
++    if (strcmp(line, "enabled") == 0)
++      next.enabled = strtol(eq, NULL, 10) == 1;
++  }
++  fclose(fp);
++
++  const bool changed = next.enabled != tm_ul_rrmpolicy.enabled;
++  tm_ul_rrmpolicy = next;
++  if (!tm_ul_rrmpolicy.enabled) {
++    tm_ul_rrmpolicy_acked = false;
++  } else if (changed || !tm_ul_rrmpolicy_acked) {
++    LOG_I(NR_MAC, "[TM_UL_RRMPOLICY] active: NSSAI-keyed UL two-level scheduler (rrmPolicy.json ratios)\n");
++    tm_ul_rrmpolicy_acked = true;
++  }
++}
++
++/* Slice id of a UE for UL purposes: the S-NSSAI of its data DRB, resolved via
++ * the same lcid->sid map the DL uses (nr_store_dl_slice_info fills dl_sl_info
++ * from lc_config every DL preprocessor pass). 0 = default slice (SRB-only). */
++static int tm_ul_ue_sid(NR_UE_sched_ctrl_t *sched_ctrl)
++{
++  for (int i = 0; i < seq_arr_size(&sched_ctrl->lc_config); ++i) {
++    const nr_lc_config_t *lc = seq_arr_at(&sched_ctrl->lc_config, i);
++    if (lc->lcid < 4)
++      continue; /* SRBs stay on the default slice */
++    const int sid = sched_ctrl->dl_sl_info[lc->lcid].sid;
++    if (sid > 0)
++      return sid;
++  }
++  return 0;
++}
++
++typedef struct tm_ul_slice_s {
++  int16_t sid;
++  uint8_t max_ratio;
++  int active; /* nonzero when the slice has BSR-reported UL demand */
++  int min_prbs;
++  int dedi_prbs;
++  int max_prbs;
++  int used_prbs; /* PRBs actually granted (work-conserving update, like DL) */
++  int scheduled; /* slice already served in this round */
++  uint32_t demand_bytes; /* thin-first sort key (UL analog of DL prb_est) */
++} tm_ul_slice_t;
++
++static int tm_ul_slice_cmp(const void *a, const void *b)
++{
++  const tm_ul_slice_t *sa = a;
++  const tm_ul_slice_t *sb = b;
++  if (sa->demand_bytes != sb->demand_bytes)
++    return (sa->demand_bytes > sb->demand_bytes) - (sa->demand_bytes < sb->demand_bytes);
++  return (int)sa->sid - (int)sb->sid;
++}
++
++/* Plain descending-PF comparator (no isolation groups). */
++static int tm_ul_pf_cmp(const void *p, const void *q)
++{
++  const UEsched_t *a = p;
++  const UEsched_t *b = q;
++  if (a->UE == NULL)
++    return b->UE == NULL ? 0 : 1;
++  if (b->UE == NULL)
++    return -1;
++  return (a->coef < b->coef) - (a->coef > b->coef);
++}
++
++/* Stage 1: UL HARQ retransmissions for every UE, outside slice quotas
++ * (mirrors the DL first stage in dl_sched_unit). */
++static void tm_ul_retx_stage(module_id_t module_id,
++                              frame_t frame,
++                              sub_frame_t slot,
++                              NR_UE_info_t *UE_list[],
++                              int *remainUEs,
++                              int *n_rb_sched,
++                              uint16_t *rballoc_mask)
++{
++  const int CC_id = 0;
++  gNB_MAC_INST *nrmac = RC.nrmac[module_id];
++  NR_ServingCellConfigCommon_t *scc = nrmac->common_channels[CC_id].ServingCellConfigCommon;
++
++  UE_iterator(UE_list, UE) {
++    NR_UE_sched_ctrl_t *sched_ctrl = &UE->UE_sched_ctrl;
++    if (UE->Msg4_ACKed != true || sched_ctrl->ul_failure)
++      continue;
++    if (*remainUEs == 0)
++      return;
++    NR_sched_pusch_t *sched_pusch = &sched_ctrl->sched_pusch;
++    sched_pusch->ul_harq_pid = sched_ctrl->retrans_ul_harq.head;
++    if (sched_pusch->ul_harq_pid < 0)
++      continue;
++    const int tda = get_ul_tda(nrmac, scc, sched_pusch->frame, sched_pusch->slot);
++    bool r = allocate_ul_retransmission(nrmac, frame, slot, rballoc_mask, n_rb_sched, UE, sched_pusch->ul_harq_pid, scc, tda);
++    if (!r) {
++      LOG_D(NR_MAC, "[TM_UL_RRMPOLICY][UE %04x][%4d.%2d] UL retransmission could not be allocated\n", UE->rnti, frame, slot);
++      continue;
++    }
++    (*remainUEs)--;
++  }
++}
++
++/* Stage 2 (per slice): SR/no-data pre-allocation + PF new transmissions for
++ * the UEs of target_sid, bounded by slice_cap PRBs (UL analog of pf_dl_slice).
++ * Returns the PRBs actually consumed by the slice, so the driver can perform
++ * the same work-conserving budget update the DL does (pf_dl_slice line
++ * "SL_sched->min_prbs = n_rb_sched_s"). */
++static int tm_pf_ul_slice_newtx(module_id_t module_id,
++                                  frame_t frame,
++                                  sub_frame_t slot,
++                                  NR_UE_info_t *UE_list[],
++                                  int target_sid,
++                                  int slice_cap,
++                                  int *remainUEs,
++                                  int *n_rb_sched,
++                                  uint16_t *rballoc_mask)
++{
++  const int CC_id = 0;
++  gNB_MAC_INST *nrmac = RC.nrmac[module_id];
++  NR_ServingCellConfigCommon_t *scc = nrmac->common_channels[CC_id].ServingCellConfigCommon;
++  const int min_rb = nrmac->min_grant_prb;
++  int slice_used = 0;
++  UEsched_t UE_sched[MAX_MOBILES_PER_GNB] = {0};
++  int curUE = 0;
++
++  UE_iterator(UE_list, UE) {
++    NR_UE_sched_ctrl_t *sched_ctrl = &UE->UE_sched_ctrl;
++    if (UE->Msg4_ACKed != true || sched_ctrl->ul_failure)
++      continue;
++    if (tm_ul_ue_sid(sched_ctrl) != target_sid)
++      continue;
++
++    NR_UE_UL_BWP_t *current_BWP = &UE->current_UL_BWP;
++    int rbStart = 0;
++    const uint16_t bwpSize = current_BWP->BWPSize;
++    NR_sched_pusch_t *sched_pusch = &sched_ctrl->sched_pusch;
++    const NR_mac_dir_stats_t *stats = &UE->mac_stats.ul;
++
++    /* Cell-wide and per-slice PF throughput (mirrors pf_ul / pf_dl_slice). */
++    const float a = 0.01f;
++    const uint32_t b = stats->current_bytes;
++    UE->ul_thr_ue = (1 - a) * UE->ul_thr_ue + a * b;
++    UE->ul_thr_ue_slice[target_sid] = (1 - a) * UE->ul_thr_ue_slice[target_sid] + a * b;
++
++    if (*remainUEs == 0)
++      continue;
++
++    /* Retransmissions were handled in stage 1. */
++    if (sched_ctrl->retrans_ul_harq.head >= 0)
++      continue;
++
++    if (sched_ctrl->available_ul_harq.head < 0) {
++      LOG_D(NR_MAC, "[UE %04x][%4d.%2d] has no free UL HARQ process, skipping\n", UE->rnti, frame, slot);
++      continue;
++    }
++
++    const int B = max(0, sched_ctrl->estimated_ul_buffer - sched_ctrl->sched_ul_bytes);
++    const bool do_sched = nr_UE_is_to_be_scheduled(scc, 0, UE, sched_pusch->frame, sched_pusch->slot, nrmac->ulsch_max_frame_inactivity);
++    if ((B == 0 && !do_sched) || (sched_ctrl->rrc_processing_timer > 0))
++      continue;
++
++    const NR_bler_options_t *bo = &nrmac->ul_bler;
++    const int max_mcs_table = (current_BWP->mcs_table == 0 || current_BWP->mcs_table == 2) ? 28 : 27;
++    const int max_mcs = min(bo->max_mcs, max_mcs_table);
++    if (bo->harq_round_max == 1)
++      sched_pusch->mcs = max_mcs;
++    else
++      sched_pusch->mcs = get_mcs_from_bler(bo, stats, &sched_ctrl->ul_bler_stats, max_mcs, frame);
++
++    /* Schedule UE on SR or UL inactivity and no data (same as pf_ul). */
++    if (B == 0 && do_sched) {
++      if (slice_cap - slice_used < min_rb || *n_rb_sched < min_rb)
++        continue;
++      int CCEIndex = get_cce_index(nrmac,
++                                   CC_id, slot, UE->rnti,
++                                   &sched_ctrl->aggregation_level,
++                                   sched_ctrl->search_space,
++                                   sched_ctrl->coreset,
++                                   &sched_ctrl->sched_pdcch,
++                                   false);
++      if (CCEIndex < 0) {
++        LOG_D(NR_MAC, "[UE %04x][%4d.%2d] no free CCE for UL DCI (BSR 0)\n", UE->rnti, frame, slot);
++        continue;
++      }
++
++      sched_pusch->nrOfLayers = sched_ctrl->srs_feedback.ul_ri + 1;
++      sched_pusch->time_domain_allocation = get_ul_tda(nrmac, scc, sched_pusch->frame, sched_pusch->slot);
++      sched_pusch->tda_info = get_ul_tda_info(current_BWP,
++                                              sched_ctrl->coreset->controlResourceSetId,
++                                              sched_ctrl->search_space->searchSpaceType->present,
++                                              TYPE_C_RNTI_,
++                                              sched_pusch->time_domain_allocation);
++      AssertFatal(sched_pusch->tda_info.valid_tda, "Invalid TDA from get_ul_tda_info\n");
++      sched_pusch->dmrs_info = get_ul_dmrs_params(scc,
++                                                  current_BWP,
++                                                  &sched_pusch->tda_info,
++                                                  sched_pusch->nrOfLayers);
++
++      const uint16_t slbitmap = SL_to_bitmap(sched_pusch->tda_info.startSymbolIndex, sched_pusch->tda_info.nrOfSymbols);
++      while (rbStart < bwpSize && (rballoc_mask[rbStart] & slbitmap) != slbitmap)
++        rbStart++;
++      if (rbStart + min_rb >= bwpSize) {
++        LOG_D(NR_MAC, "[UE %04x][%4d.%2d] could not allocate continuous UL data: no resources (rbStart %d, min_rb %d, bwpSize %d)\n",
++              UE->rnti, frame, slot, rbStart, min_rb, bwpSize);
++        continue;
++      }
++
++      sched_ctrl->cce_index = CCEIndex;
++      fill_pdcch_vrb_map(nrmac,
++                         CC_id,
++                         &sched_ctrl->sched_pdcch,
++                         CCEIndex,
++                         sched_ctrl->aggregation_level);
++
++      sched_pusch->mcs = min(nrmac->min_grant_mcs, sched_pusch->mcs);
++      update_ul_ue_R_Qm(sched_pusch->mcs, current_BWP->mcs_table, current_BWP->pusch_Config, &sched_pusch->R, &sched_pusch->Qm);
++      sched_pusch->rbStart = rbStart;
++      sched_pusch->rbSize = min_rb;
++      sched_pusch->tb_size = nr_compute_tbs(sched_pusch->Qm,
++                                            sched_pusch->R,
++                                            sched_pusch->rbSize,
++                                            sched_pusch->tda_info.nrOfSymbols,
++                                            sched_pusch->dmrs_info.N_PRB_DMRS * sched_pusch->dmrs_info.num_dmrs_symb,
++                                            0, // nb_rb_oh
++                                            0,
++                                            sched_pusch->nrOfLayers) >> 3;
++      long *deltaMCS = current_BWP->pusch_Config ? current_BWP->pusch_Config->pusch_PowerControl->deltaMCS : NULL;
++      sched_pusch->phr_txpower_calc = compute_ph_factor(current_BWP->scs,
++                                                        sched_pusch->tb_size << 3,
++                                                        sched_pusch->rbSize,
++                                                        sched_pusch->nrOfLayers,
++                                                        sched_pusch->tda_info.nrOfSymbols,
++                                                        sched_pusch->dmrs_info.N_PRB_DMRS * sched_pusch->dmrs_info.num_dmrs_symb,
++                                                        deltaMCS,
++                                                        false);
++
++      *n_rb_sched -= sched_pusch->rbSize;
++      for (int rb = 0; rb < sched_pusch->rbSize; rb++)
++        rballoc_mask[rb + sched_pusch->rbStart] ^= slbitmap;
++      slice_used += sched_pusch->rbSize;
++      (*remainUEs)--;
++      continue;
++    }
++
++    /* Eligible for new data: PF coefficient on per-slice throughput. */
++    const uint32_t tbs = ul_pf_tbs[current_BWP->mcs_table][sched_pusch->mcs];
++    float coeff_ue = (float)tbs / UE->ul_thr_ue_slice[target_sid];
++    LOG_D(NR_MAC, "[TM_UL_RRMPOLICY][UE %04x][%4d.%2d] sid %d b %d, thr_slice %f, tbs %d, coeff_ue %f\n",
++          UE->rnti, frame, slot, target_sid, b, UE->ul_thr_ue_slice[target_sid], tbs, coeff_ue);
++    UE_sched[curUE].coef = coeff_ue;
++    UE_sched[curUE].UE = UE;
++    curUE++;
++  }
++
++  qsort(UE_sched, sizeofArray(UE_sched), sizeof(UEsched_t), tm_ul_pf_cmp);
++  UEsched_t *iterator = UE_sched;
++
++  while (*remainUEs > 0 && *n_rb_sched >= min_rb && slice_cap - slice_used >= min_rb && iterator->UE != NULL) {
++
++    NR_UE_sched_ctrl_t *sched_ctrl = &iterator->UE->UE_sched_ctrl;
++    int CCEIndex = get_cce_index(nrmac,
++                                 CC_id, slot, iterator->UE->rnti,
++                                 &sched_ctrl->aggregation_level,
++                                 sched_ctrl->search_space,
++                                 sched_ctrl->coreset,
++                                 &sched_ctrl->sched_pdcch,
++                                 false);
++    if (CCEIndex < 0) {
++      LOG_D(NR_MAC, "[UE %04x][%4d.%2d] no free CCE for UL DCI\n", iterator->UE->rnti, frame, slot);
++      iterator++;
++      continue;
++    }
++
++    NR_UE_UL_BWP_t *current_BWP = &iterator->UE->current_UL_BWP;
++    NR_sched_pusch_t *sched_pusch = &sched_ctrl->sched_pusch;
++
++    sched_pusch->nrOfLayers = sched_ctrl->srs_feedback.ul_ri + 1;
++    sched_pusch->time_domain_allocation = get_ul_tda(nrmac, scc, sched_pusch->frame, sched_pusch->slot);
++    sched_pusch->tda_info = get_ul_tda_info(current_BWP,
++                                            sched_ctrl->coreset->controlResourceSetId,
++                                            sched_ctrl->search_space->searchSpaceType->present,
++                                            TYPE_C_RNTI_,
++                                            sched_pusch->time_domain_allocation);
++    AssertFatal(sched_pusch->tda_info.valid_tda, "Invalid TDA from get_ul_tda_info\n");
++    sched_pusch->dmrs_info = get_ul_dmrs_params(scc,
++                                                current_BWP,
++                                                &sched_pusch->tda_info,
++                                                sched_pusch->nrOfLayers);
++
++    int rbStart = 0;
++    const uint16_t slbitmap = SL_to_bitmap(sched_pusch->tda_info.startSymbolIndex, sched_pusch->tda_info.nrOfSymbols);
++    const uint16_t bwpSize = current_BWP->BWPSize;
++    while (rbStart < bwpSize && (rballoc_mask[rbStart] & slbitmap) != slbitmap)
++      rbStart++;
++    sched_pusch->rbStart = rbStart;
++    uint16_t max_rbSize = 1;
++    while (rbStart + max_rbSize < bwpSize && (rballoc_mask[rbStart + max_rbSize] & slbitmap) == slbitmap)
++      max_rbSize++;
++
++    /* Slice quota: same role as max_prbs/n_rb_remain_s in pf_dl_slice. */
++    const int slice_remaining = slice_cap - slice_used;
++    if ((int)max_rbSize > slice_remaining)
++      max_rbSize = (uint16_t)slice_remaining;
++    if ((int)max_rbSize > *n_rb_sched)
++      max_rbSize = (uint16_t)*n_rb_sched;
++
++    if (rbStart + min_rb >= bwpSize || max_rbSize < min_rb) {
++      LOG_D(NR_MAC, "[UE %04x][%4d.%2d] could not allocate UL data: no resources (rbStart %d, min_rb %d, bwpSize %d)\n",
++            iterator->UE->rnti, frame, slot, rbStart, min_rb, bwpSize);
++      iterator++;
++      continue;
++    }
++
++    /* Current scheduling bytes; adjust rbSize/MCS according to PHR and BPRE. */
++    const int B = cmax(sched_ctrl->estimated_ul_buffer - sched_ctrl->sched_ul_bytes, 0);
++    if (sched_ctrl->pcmax != 0 || sched_ctrl->ph != 0)
++      nr_ue_max_mcs_min_rb(current_BWP->scs, sched_ctrl->ph, sched_pusch, current_BWP, min_rb, B, &max_rbSize, &sched_pusch->mcs);
++
++    if (sched_pusch->mcs < sched_ctrl->ul_bler_stats.mcs)
++      sched_ctrl->ul_bler_stats.mcs = sched_pusch->mcs; /* force estimated MCS down */
++
++    update_ul_ue_R_Qm(sched_pusch->mcs, current_BWP->mcs_table, current_BWP->pusch_Config, &sched_pusch->R, &sched_pusch->Qm);
++    uint16_t rbSize = 0;
++    uint32_t TBS = 0;
++    nr_find_nb_rb(sched_pusch->Qm,
++                  sched_pusch->R,
++                  current_BWP->transform_precoding,
++                  sched_pusch->nrOfLayers,
++                  sched_pusch->tda_info.nrOfSymbols,
++                  sched_pusch->dmrs_info.N_PRB_DMRS * sched_pusch->dmrs_info.num_dmrs_symb,
++                  B,
++                  min_rb,
++                  max_rbSize,
++                  &TBS,
++                  &rbSize);
++
++    long *deltaMCS = current_BWP->pusch_Config ? current_BWP->pusch_Config->pusch_PowerControl->deltaMCS : NULL;
++    int tbs_bits = TBS << 3;
++    sched_pusch->phr_txpower_calc = compute_ph_factor(current_BWP->scs,
++                                                      tbs_bits,
++                                                      rbSize,
++                                                      sched_pusch->nrOfLayers,
++                                                      sched_pusch->tda_info.nrOfSymbols,
++                                                      sched_pusch->dmrs_info.N_PRB_DMRS * sched_pusch->dmrs_info.num_dmrs_symb,
++                                                      deltaMCS,
++                                                      false);
++
++    sched_pusch->rbSize = rbSize;
++    sched_pusch->tb_size = TBS;
++    LOG_D(NR_MAC, "[TM_UL_RRMPOLICY] sid %d rbSize %d (max_rbSize %d), TBS %d, est buf %d, sched_ul %d, B %d\n",
++          target_sid, rbSize, max_rbSize, sched_pusch->tb_size, sched_ctrl->estimated_ul_buffer, sched_ctrl->sched_ul_bytes, B);
++
++    sched_ctrl->cce_index = CCEIndex;
++    fill_pdcch_vrb_map(nrmac,
++                       CC_id,
++                       &sched_ctrl->sched_pdcch,
++                       CCEIndex,
++                       sched_ctrl->aggregation_level);
++
++    *n_rb_sched -= sched_pusch->rbSize;
++    for (int rb = 0; rb < sched_pusch->rbSize; rb++)
++      rballoc_mask[rb + sched_pusch->rbStart] ^= slbitmap;
++
++    slice_used += sched_pusch->rbSize;
++    (*remainUEs)--;
++    iterator++;
++  }
++
++  return slice_used;
++}
++
++/* Two-level driver: budgets per S-NSSAI slice (Dedicated / Prioritized /
++ * Shared), thin-first slice ordering, then per-slice PF (UL counterpart of
++ * dl_sched_unit + nr_fr1_dlsch_preprocessor slice logic). */
++static void tm_pf_ul_rrmpolicy(module_id_t module_id,
++                                frame_t frame,
++                                sub_frame_t slot,
++                                NR_UE_info_t *UE_list[],
++                                int max_num_ue,
++                                int n_rb_sched,
++                                uint16_t *rballoc_mask)
++{
++  gNB_MAC_INST *nrmac = RC.nrmac[module_id];
++  NR_Slices_t *SL_info = &nrmac->SL_info;
++  int remainUEs = max_num_ue;
++  const int n_rb_sched_init = n_rb_sched;
++
++  /* Stage 1: HARQ retransmissions, all UEs, outside slice quotas. */
++  tm_ul_retx_stage(module_id, frame, slot, UE_list, &remainUEs, &n_rb_sched, rballoc_mask);
++
++  /* Build the per-slice budget table from the same rrmPolicy the DL uses. */
++  tm_ul_slice_t slices[MAX_NUM_SLICE + 1];
++  int nslices = 0;
++  SL_iterator(SL_info->list, SL) {
++    if (SL->sid <= 0)
++      continue;
++    tm_ul_slice_t *e = &slices[nslices++];
++    e->sid = SL->sid;
++    e->max_ratio = SL->spolicy.max_ratio;
++    e->active = 0;
++    e->demand_bytes = 0;
++    e->dedi_prbs = (n_rb_sched_init * SL->spolicy.dedicated_ratio) / 100;
++    e->min_prbs = (n_rb_sched_init * SL->spolicy.min_ratio) / 100;
++    e->max_prbs = n_rb_sched_init;
++    e->used_prbs = 0;
++    e->scheduled = 0;
++  }
++
++  /* Per-slice BSR-derived demand (the UL analog of slice_prb_estimate). */
++  UE_iterator(UE_list, UE) {
++    NR_UE_sched_ctrl_t *sched_ctrl = &UE->UE_sched_ctrl;
++    if (UE->Msg4_ACKed != true || sched_ctrl->ul_failure)
++      continue;
++    const int sid = tm_ul_ue_sid(sched_ctrl);
++    if (sid <= 0)
++      continue;
++    const int B = max(0, sched_ctrl->estimated_ul_buffer - sched_ctrl->sched_ul_bytes);
++    for (int k = 0; k < nslices; k++) {
++      if (slices[k].sid == sid) {
++        slices[k].demand_bytes += (uint32_t)B;
++        if (B > 0)
++          slices[k].active = 1;
++        break;
++      }
++    }
++  }
++
++  /* Thin-first slice ordering, like the DL qsort(compare_s) on prb_est. */
++  qsort(slices, nslices, sizeof(tm_ul_slice_t), tm_ul_slice_cmp);
++
++  /* Stage 2: default slice first (SRB-only UEs, e.g. during attach), no cap
++   * beyond the shared pool; then data slices thin-first under their budgets. */
++  tm_pf_ul_slice_newtx(module_id, frame, slot, UE_list, 0, n_rb_sched_init, &remainUEs, &n_rb_sched, rballoc_mask);
++
++  /* Per-slice budgets, computed at each slice's turn exactly like
++   * dl_sched_unit: slices already served reserve their ACTUAL usage
++   * (work-conserving, mirrors "SL_sched->min_prbs = n_rb_sched_s" in
++   * pf_dl_slice), slices not yet served reserve their configured band.
++   * 3GPP TS 28.541 tri-partition on top of the DL formula:
++   *   - dedicated_j is never lendable (reserved even when slice j is idle or
++   *     under-used);
++   *   - the prioritized band (min_j - dedicated_j) is reserved only while
++   *     slice j has BSR demand; when idle it is lent (Prioritized semantics);
++   *   - the result is clamped to cell * max_ratio_i (Shared upper bound).
++   * With every slice active this reduces exactly to the DL computation
++   * max_i = cell - sum_j(min_j), preserving each slice's min guarantee. */
++  for (int i = 0; i < nslices; i++) {
++    int reserved_by_others = 0;
++    for (int j = 0; j < nslices; j++) {
++      if (j == i)
++        continue;
++      if (slices[j].scheduled) {
++        /* Actual grants of already-served slices; dedicated stays reserved. */
++        reserved_by_others += slices[j].used_prbs > slices[j].dedi_prbs ? slices[j].used_prbs : slices[j].dedi_prbs;
++      } else {
++        int prioritized = slices[j].min_prbs - slices[j].dedi_prbs;
++        if (prioritized < 0)
++          prioritized = 0;
++        reserved_by_others += slices[j].dedi_prbs + (slices[j].active ? prioritized : 0);
++      }
++    }
++    int m = n_rb_sched_init - reserved_by_others;
++    const int cap = (n_rb_sched_init * slices[i].max_ratio) / 100;
++    if (m > cap)
++      m = cap;
++    if (m < 0)
++      m = 0;
++    slices[i].max_prbs = m;
++
++    slices[i].used_prbs = tm_pf_ul_slice_newtx(module_id, frame, slot, UE_list, slices[i].sid, slices[i].max_prbs, &remainUEs, &n_rb_sched, rballoc_mask);
++    slices[i].scheduled = 1;
++  }
++
++  if ((frame & 127) == 0 && slot == 0) {
++    for (int i = 0; i < nslices; i++)
++      LOG_I(NR_MAC, "[TM_UL_RRMPOLICY] %4d.%2d sid %d active %d demand %u B dedi %d min %d max %d used %d PRB (cell %d)\n",
++            frame, slot, slices[i].sid, slices[i].active, slices[i].demand_bytes,
++            slices[i].dedi_prbs, slices[i].min_prbs, slices[i].max_prbs, slices[i].used_prbs, n_rb_sched_init);
++  }
++}
++
+ static void pf_ul(module_id_t module_id,
+                   frame_t frame,
+                   sub_frame_t slot,
+@@ -1740,6 +2286,12 @@
+                   int n_rb_sched,
+                   uint16_t *rballoc_mask)
+ {
++  /* TM_UL_RRMPOLICY: NSSAI-keyed UL two-level scheduler (3GPP RRMPolicyRatio). */
++  tm_reload_ul_rrmpolicy(frame);
++  if (tm_ul_rrmpolicy.enabled) {
++    tm_pf_ul_rrmpolicy(module_id, frame, slot, UE_list, max_num_ue, n_rb_sched, rballoc_mask);
++    return;
++  }
+ 
+   const int CC_id = 0;
+   gNB_MAC_INST *nrmac = RC.nrmac[module_id];
+--- a/openair2/LAYER2/NR_MAC_gNB/nr_mac_gNB.h	2026-08-07 20:33:47.611132173 -0300
++++ b/openair2/LAYER2/NR_MAC_gNB/nr_mac_gNB.h	2026-08-16 11:38:20.444616344 -0300
+@@ -779,6 +779,9 @@
+   float dl_thr_ue;
+   long pdsch_HARQ_ACK_Codebook;
+   float dl_thr_ue_slice[MAX_NUM_PDU_SESSION+1];
++  /* TM_UL_RRMPOLICY_V1: per-slice UL PF throughput tracking (NSSAI-keyed UL
++   * two-level scheduler, mirrors dl_thr_ue_slice used by the DL pf_dl_slice). */
++  float ul_thr_ue_slice[MAX_NUM_PDU_SESSION+1];
+ 
+   bool is_GBR;
+   uint32_t guaranteed_tbs_bytes_ul;

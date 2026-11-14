@@ -1,0 +1,19 @@
+{
+  "schema": "flyblind_drain_policy_v2",
+  "enabled": true,
+  "video_mode": "b_stop_at_attack_end",
+  "window_s": 10.0,
+  "delta_abs_s": 0.05,
+  "delta_factor": 1.5,
+  "belief_abs_m": 0.3,
+  "belief_factor": 1.5,
+  "drain_ceiling_s": 180.0,
+  "baseline_delta_p50_s": null,
+  "baseline_belief_p50_m": null,
+  "baseline_ref_run": null,
+  "baseline_source": "pre_window_same_run",
+  "baseline_source_note": "baseline_delta_p50 and baseline_belief_p50 come from the PRE window ([mission_start, attack_onset)) of the same run, via phase_windows",
+  "criterion_text": "Back to baseline when, in a sliding window of 10 s after attack_end, delta_p50 <= max(baseline_delta_p50 + 0.05s, baseline_delta_p50 * 1.5) AND belief_p50 <= max(baseline_belief_p50 + 0.3m, baseline_belief_p50 * 1.5), or when the ceiling drain_ceiling_s=180s is reached. Baseline source: pre_window_same_run.",
+  "live_early_stop": "envelope extended by drain_ceiling_s; live early-stop requires telemetry polling (NOT VERIFIED on the offline bench)",
+  "drain_ceiling_applied_s": 180.0
+}

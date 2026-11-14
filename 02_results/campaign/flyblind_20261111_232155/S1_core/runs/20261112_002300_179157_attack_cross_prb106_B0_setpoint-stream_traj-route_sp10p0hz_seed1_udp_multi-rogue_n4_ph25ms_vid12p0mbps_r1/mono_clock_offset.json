@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "n_requested": 10,
+  "kube_context": "kind-tm-oranslice-mitigation",
+  "namespace": "ran",
+  "failures": 0,
+  "host_minus_uav_ms": {
+    "n": 10,
+    "median_ms": -56.426,
+    "mean_ms": -58.424,
+    "p5_ms": -72.326,
+    "p95_ms": -48.077,
+    "spread_p95_p5_ms": 24.249,
+    "max_abs_ms": 72.885
+  },
+  "host_minus_gcs_ms": {
+    "n": 10,
+    "median_ms": -60.429,
+    "mean_ms": -59.375,
+    "p5_ms": -67.291,
+    "p95_ms": -49.004,
+    "spread_p95_p5_ms": 18.287,
+    "max_abs_ms": 68.723
+  },
+  "uav_minus_gcs_ms": {
+    "n": 10,
+    "median_ms": 2.576,
+    "mean_ms": 0.951,
+    "p5_ms": -19.636,
+    "p95_ms": 16.054,
+    "spread_p95_p5_ms": 35.689,
+    "max_abs_ms": 23.076
+  },
+  "skew_abs_median_ms": 2.576,
+  "jitter_spread_ms": 35.689,
+  "appendix_line": "measured inter-pod CLOCK_MONOTONIC offset (UAV\u2212GCS): median 2.576 ms, spread(p95\u2212p5) 35.689 ms (N=10)"
+}

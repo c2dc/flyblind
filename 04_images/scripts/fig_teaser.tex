@@ -1,0 +1,34 @@
+% Standalone teaser for FlyBlind (USENIX Security 2027).
+% Compile from this directory:
+%   pdflatex fig_teaser.tex && cp -f fig_teaser.pdf ../pdfs/
+% Or: ./build_fig_teaser.sh
+%
+% Icons: ../icons/ (and ../icons/paper/)
+% Output PDF: ../pdfs/fig_teaser.pdf
+% No title/subtitle in the figure.
+\documentclass[tikz,border=3pt]{standalone}  % 3pt as in the paper build (then pdfcrop --margins 2)
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,fit,positioning,shapes.geometric,backgrounds}
+
+\graphicspath{{../icons/}{icons/}}
+
+\definecolor{fbGreen}{HTML}{1B7A3A}
+\definecolor{fbGreenBorder}{HTML}{2E8B4F}
+\definecolor{fbGreenFill}{HTML}{EDF7F0}
+\definecolor{fbGreenNum}{HTML}{146C2E}
+\definecolor{fbRed}{HTML}{A11D16}
+\definecolor{fbRedBorder}{HTML}{C62828}
+\definecolor{fbRedFill}{HTML}{FCF3F2}
+\definecolor{fbNum}{HTML}{8B1A14}
+\definecolor{fbBlue}{HTML}{1A5FB4}
+\definecolor{fbOrange}{HTML}{B35C00}
+\definecolor{fbMuted}{HTML}{5B6573}
+\definecolor{fbInk}{HTML}{1F2933}
+\definecolor{fbDash}{HTML}{6B7280}
+
+\begin{document}
+\input{fig_teaser_body}
+\end{document}

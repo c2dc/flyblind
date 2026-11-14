@@ -1,0 +1,9 @@
+event,t_rel_s,note
+run_start,0.0,T0
+mission_start,90.0,centralization margin / mission launch
+orbit_acquired,140.442,c2.json orbit_stream_started_at_rel_s mapped via first logical setpoint
+attack_onset,189.861,resolved radio-contention attack start
+attack_end,699.861,resolved radio-contention attack end
+land_command,874.992,last logical setpoint generated; LAND is sent right after the stream
+guided_to_land_observed,875.509,observed mode transition (informational)
+run_end,975.281,wall runtime

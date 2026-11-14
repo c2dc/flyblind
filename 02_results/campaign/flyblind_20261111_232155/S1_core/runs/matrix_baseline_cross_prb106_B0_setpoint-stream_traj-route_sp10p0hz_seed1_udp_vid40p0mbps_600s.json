@@ -1,0 +1,17 @@
+{
+  "requested_runs": 1,
+  "executed_runs": 1,
+  "valid_runs": 0,
+  "min_valid_runs": 1,
+  "all_runs": [
+    "20261112_014053_876430_baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid40p0mbps_r1"
+  ],
+  "run_slug": "baseline_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid40p0mbps",
+  "condition": "baseline",
+  "topology": "cross",
+  "gnb_prb": 106,
+  "workload": "setpoint-stream",
+  "attack": null,
+  "duration_s": 600,
+  "wall_total_s": 884.9
+}

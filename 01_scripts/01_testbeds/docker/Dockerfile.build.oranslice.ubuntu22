@@ -1,0 +1,25 @@
+# ORANSlice TM — slim RAN build (gNB + nrUE, RFsimulator only)
+# Based on ORANSlice/oai_ran/docker/Dockerfile.build.ubuntu22
+
+FROM ran-base:latest AS ran-build
+ARG BUILD_OPTION
+
+RUN rm -Rf /oai-ran
+WORKDIR /oai-ran
+COPY . .
+
+# ORANSlice fork always links E2 protobuf-c sources into nr-softmodem (static SliceConf still needs this).
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libprotobuf-c-dev && \
+    apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+RUN /bin/sh oaienv && \
+    cd cmake_targets && \
+    mkdir -p log && \
+    ./build_oai -c --ninja \
+      --gNB --nrUE \
+      -w SIMU \
+      --noavx512 \
+      $BUILD_OPTION && \
+    echo "---- ldd on executables ----" && \
+    ldd ran_build/build/nr-softmodem ran_build/build/nr-uesoftmodem

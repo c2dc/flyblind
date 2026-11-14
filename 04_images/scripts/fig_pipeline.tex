@@ -1,0 +1,28 @@
+% Standalone: FlyBlind attack pipeline (fig:pipeline).
+% Build: ./build_fig_pipeline.sh → ../pdfs/fig_pipeline.pdf
+% No title/subtitle; pad so side labels/icons are not clipped.
+% border = left bottom right top
+\documentclass[tikz,border={5pt 0pt 8pt 4.5pt}]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.misc}
+
+\graphicspath{{../icons/}{icons/}}
+
+\definecolor{pipeBlueFill}{HTML}{D6EAF8}
+\definecolor{pipeBlueBorder}{HTML}{2E86C1}
+\definecolor{pipeGreyFill}{HTML}{F2F3F4}
+\definecolor{pipeGreyBorder}{HTML}{7F8C8D}
+\definecolor{pipeRedFill}{HTML}{FADBD8}
+\definecolor{pipeRedBorder}{HTML}{C0392B}
+\definecolor{pipeInk}{HTML}{1F2933}
+\definecolor{pipeMuted}{HTML}{5B6573}
+
+\begin{document}
+\input{fig_pipeline_body}
+\end{document}

@@ -1,0 +1,10 @@
+{
+  "mode": "udp_sink",
+  "run_id": "20261112_050118_548309_attack_cross_prb106_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n1_ph25ms_vid12p0mbps_r1",
+  "listen": "0.0.0.0",
+  "port": 5202,
+  "duration_actual_s": 766.041,
+  "bytes_received": 949958400,
+  "packets_received": 798946,
+  "achieved_receiver_mbps": 9.921
+}

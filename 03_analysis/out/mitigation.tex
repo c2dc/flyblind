@@ -1,0 +1,10 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Configuration & $n$ & AoI p50 (s) & Belief p50 (m) & Cmd OWD p50 (ms) & Deliv. & Alerts \\
+\midrule
+Baseline, video 12 Mb/s & 3 & 0.02 $\pm$ 0.00 & 1.0 $\pm$ 0.0 & 20.1 $\pm$ 0.2 & 1.000 $\pm$ 0.000 & 0 \\
+Attack N=4, video 12 Mb/s (headline) & 5 & 13.11 $\pm$ 0.03 & 47.8 $\pm$ 0.3 & 20.3 $\pm$ 0.1 & 0.623 $\pm$ 0.012 & 0 \\
+Defence: UL slice enforcement (victim on its own slice, B0) & 3 & 0.02 $\pm$ 0.00 & 1.0 $\pm$ 0.0 & 20.5 $\pm$ 0.1 & 1.000 $\pm$ 0.000 & 0 \\
+Defence: host AQM (fq\_codel on the victim uplink) & 3 & 12.90 $\pm$ 0.05 & 47.4 $\pm$ 0.2 & 20.8 $\pm$ 0.3 & 0.644 $\pm$ 0.010 & 0 \\
+\bottomrule
+\end{tabular}

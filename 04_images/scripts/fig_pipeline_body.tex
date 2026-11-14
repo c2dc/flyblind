@@ -1,0 +1,145 @@
+% fig:pipeline — FlyBlind attack pipeline (5 elongated octagons).
+\begin{tikzpicture}[
+  font=\sffamily,
+  >=Latex,
+  stage blue/.style={
+    chamfered rectangle,
+    chamfered rectangle xsep=6pt,
+    chamfered rectangle ysep=6pt,
+    draw=pipeBlueBorder,
+    fill=pipeBlueFill,
+    line width=0.9pt,
+    minimum width=2.95cm,
+    minimum height=1.05cm,
+    align=center,
+    inner xsep=2pt,
+    inner ysep=2pt,
+    font=\sffamily\bfseries\fontsize{8.0}{9.4}\selectfont,
+    text=pipeInk,
+  },
+  stage grey/.style={
+    chamfered rectangle,
+    chamfered rectangle xsep=6pt,
+    chamfered rectangle ysep=6pt,
+    draw=pipeGreyBorder,
+    fill=pipeGreyFill,
+    line width=0.9pt,
+    minimum width=2.95cm,
+    minimum height=1.05cm,
+    align=center,
+    inner xsep=2pt,
+    inner ysep=2pt,
+    font=\sffamily\bfseries\fontsize{8.0}{9.4}\selectfont,
+    text=pipeInk,
+  },
+  stage red/.style={
+    chamfered rectangle,
+    chamfered rectangle xsep=6pt,
+    chamfered rectangle ysep=6pt,
+    draw=pipeRedBorder,
+    fill=pipeRedFill,
+    line width=1.05pt,
+    minimum width=2.95cm,
+    minimum height=1.05cm,
+    align=center,
+    inner xsep=2pt,
+    inner ysep=2pt,
+    font=\sffamily\bfseries\fontsize{8.0}{9.4}\selectfont,
+    text=pipeInk,
+  },
+  above lab/.style={
+    font=\sffamily\fontsize{8.6}{10.0}\selectfont,
+    text=pipeMuted,
+    align=center,
+    inner sep=1pt,
+  },
+  below lab/.style={
+    font=\sffamily\fontsize{8.4}{9.8}\selectfont,
+    text=pipeInk,
+    align=center,
+    inner sep=0pt,
+  },
+]
+
+% Same overall span (~4*4.05); more clearance between tips for arrows
+\def\gap{4.05}
+\node[stage blue] (s1) at (0,0) {%
+  \begin{tabular}{@{}c@{}}
+  Stage 1:\\[-1.2pt]
+  UL Contention
+  \end{tabular}%
+};
+\node[stage grey] (s2) at (\gap,0) {%
+  \begin{tabular}{@{}c@{}}
+  Stage 2:\\[-1.2pt]
+  Shared Uplink
+  \end{tabular}%
+};
+\node[stage red] (s3) at (2*\gap,0) {%
+  \begin{tabular}{@{}c@{}}
+  Stage 3:\\[-1.2pt]
+  Video Conditioner
+  \end{tabular}%
+};
+\node[stage grey] (s4) at (3*\gap,0) {%
+  \begin{tabular}{@{}c@{}}
+  Stage 4:\\[-1.2pt]
+  State Aging
+  \end{tabular}%
+};
+\node[stage blue] (s5) at (4*\gap,0) {%
+  \begin{tabular}{@{}c@{}}
+  Stage 5:\\[-1.2pt]
+  Silent Staleness
+  \end{tabular}%
+};
+
+% Centered black arrows (visible shaft between tips)
+\foreach \a/\b in {s1/s2, s2/s3, s3/s4, s4/s5} {
+  \draw[pipeInk, line width=0.95pt,
+        shorten >=0.8pt, shorten <=0.8pt,
+        -{Latex[length=2.3mm, width=1.9mm]}]
+    (\a.east) -- (\b.west);
+}
+
+% Above
+\node[above lab, above=5.2pt of s1] {Authorized UL demand};
+\node[above lab, above=5.2pt of s2] {Shared gNB scheduler};
+\node[above lab, above=5.2pt of s3] {Victim load at frontier};
+\node[above lab, above=5.2pt of s4] {Telemetry backlog};
+\node[above lab, above=5.2pt of s5] {False-healthy at GCS};
+
+% Below
+\node[below lab, below=7.5pt of s1] {%
+  \begin{tabular}{@{}c@{}}
+  \includegraphics[height=0.70cm]{ues_rogues}\\[-1.0pt]
+  Co-tenant
+  \end{tabular}%
+};
+\node[below lab, below=7.5pt of s2] {%
+  \begin{tabular}{@{}c@{}}
+  {\fontsize{7.6}{9.0}\selectfont\color{pipeMuted}( one eMBB slice )}\\[-1.0pt]
+  Contended PRBs
+  \end{tabular}%
+};
+\node[below lab, below=7.5pt of s3] {%
+  \begin{tabular}{@{}c@{}}
+  {\fontsize{7.6}{9.0}\selectfont\color{pipeMuted}( 1080p FHD video )}\\[-1.0pt]
+  Conditioner, not attacker
+  \end{tabular}%
+};
+\node[below lab, below=7.5pt of s4] {%
+  \begin{tabular}{@{}c@{}}
+  \includegraphics[height=0.60cm]{delta_i}\\[-1.0pt]
+  delta rises
+  \end{tabular}%
+};
+\node[below lab, below=7.5pt of s5] {%
+  \begin{tabular}{@{}c@{}}
+  \includegraphics[height=0.60cm]{kpi}\hspace{0.12cm}%
+  \includegraphics[height=0.60cm]{drone_delay}\\[-1.0pt]
+  Command-leg KPIs green, belief stale
+  \end{tabular}%
+};
+
+\end{tikzpicture}

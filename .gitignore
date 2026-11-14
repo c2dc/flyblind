@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Testbed runtime state (regenerated on every bring-up)
+01_scripts/01_testbeds/runtime/
+01_scripts/01_testbeds/runtime-mitigation/
+
+# Third-party source cloned by the image builder (see 01_testbeds/build/)
+01_scripts/01_testbeds/vendor/
+
+# QGroundControl binaries: 187 MB each, fetched/built separately
+# (see 01_scripts/03_sitl/bin/README.md and 01_scripts/03_sitl/qgc_detector/README.md)
+01_scripts/03_sitl/bin/*.AppImage
+01_scripts/03_sitl/ardupilot-sitl-runtime/
+
+# Per-sample captures no table depends on
+02_results/**/aoi_timeseries.csv
+02_results/**/aoi_generation_timeseries.csv
+02_results/**/mavlink_rx_gcs.csv
+02_results/**/c2_arrival.csv
+02_results/**/prb.csv
+02_results/**/receiver_timeseries.csv
+02_results/**/host_timeseries.csv
+02_results/**/upf_timeseries.csv
+02_results/**/*.live.log
+
+# Scratch
+02_results/smoke*/
+*.bak
+*.bak-*
+*.bak_*
+*~
+.DS_Store

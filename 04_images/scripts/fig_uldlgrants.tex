@@ -1,0 +1,26 @@
+% Standalone: UL vs DL scheduling asymmetry (fig:uldlgrants).
+% Build: ./build_fig_uldlgrants.sh → ../pdfs/fig_uldlgrants.pdf
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+
+\graphicspath{{../icons/}{icons/}}
+
+\definecolor{uav_color}{RGB}{34, 139, 34}
+\definecolor{video_color}{RGB}{210, 105, 30}
+\definecolor{pdsch_color}{RGB}{0, 85, 170}
+\definecolor{grey_box}{RGB}{245, 245, 247}
+\definecolor{yellow_box}{RGB}{254, 249, 231}
+\definecolor{yellow_border}{RGB}{241, 196, 15}
+\definecolor{grey_border}{RGB}{215, 215, 215}
+\definecolor{grey_text}{RGB}{110, 110, 110}
+
+\begin{document}
+\input{fig_uldlgrants_body}
+\end{document}

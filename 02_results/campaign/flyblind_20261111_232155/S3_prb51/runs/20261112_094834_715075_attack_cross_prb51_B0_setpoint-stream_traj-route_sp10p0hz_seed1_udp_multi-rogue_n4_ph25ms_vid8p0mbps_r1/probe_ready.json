@@ -1,0 +1,8 @@
+{
+  "status": "ready",
+  "time_namespace_match": true,
+  "loopback_samples": 497662,
+  "handshake_samples": 100,
+  "ordering_violations": 0,
+  "ready_at_unix_ns": 1794487822779824086
+}

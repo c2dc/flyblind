@@ -1,0 +1,8 @@
+t_mono_ns,t_rel_s,severity,text,steady_state
+19811476598852,0.054,2,PreArm: GCS failsafe on,False
+19811728347794,0.305,4,GCS Failsafe Cleared,False
+19850345875318,38.923,6,Arming motors,False
+19856018691141,44.596,6,EKF3 IMU0 MAG0 in-flight yaw alignment complete,True
+19856022504158,44.6,6,EKF3 IMU1 MAG0 in-flight yaw alignment complete,True
+20446786362506,635.363,6,SIM Hit ground at 0.475631 m/s,True
+20448870585065,637.448,6,Disarming motors,True

@@ -1,0 +1,576 @@
+{
+  "schema": "flyblind_batch_wrapper_v1",
+  "seed": 20261113,
+  "orchestrate": "paper",
+  "orchestrate_path": "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+  "validity_gates_doc": {
+    "always": [
+      "clock",
+      "host_instrumentation_integrity",
+      "mission_integrity",
+      "drone_integrity"
+    ],
+    "baseline_extra": [
+      "host",
+      "availability",
+      "mission_success",
+      "baseline_drone_quality"
+    ],
+    "attack_extra": [
+      "attack_integrity"
+    ],
+    "if_c2_proxy": [
+      "proxy"
+    ],
+    "if_setpoint_stream": [
+      "freshness",
+      "stream"
+    ],
+    "if_setpoint_stream_and_baseline": [
+      "c2_health"
+    ],
+    "if_require_prb": [
+      "prb"
+    ],
+    "source": "orchestrate.enforced_validity_gates / run_meta.gates.valid"
+  },
+  "order": [
+    {
+      "order": 1,
+      "id": "e_atk51_n4_r2",
+      "condition_index": 4
+    },
+    {
+      "order": 2,
+      "id": "e_atk51_n4_r1",
+      "condition_index": 3
+    },
+    {
+      "order": 3,
+      "id": "e_atk51_n4_r3",
+      "condition_index": 5
+    },
+    {
+      "order": 4,
+      "id": "cap51_base_vid16_r1",
+      "condition_index": 6
+    },
+    {
+      "order": 5,
+      "id": "cap51_base_vid24_r1",
+      "condition_index": 7
+    },
+    {
+      "order": 6,
+      "id": "e_base51_r2",
+      "condition_index": 1
+    },
+    {
+      "order": 7,
+      "id": "e_base51_r1",
+      "condition_index": 0
+    },
+    {
+      "order": 8,
+      "id": "e_base51_r3",
+      "condition_index": 2
+    }
+  ],
+  "runs": [
+    {
+      "order": 1,
+      "id": "e_atk51_n4_r2",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "attack",
+        "--attack",
+        "multi-rogue",
+        "--attack-start-after-s",
+        "45",
+        "--gnb-prb",
+        "51",
+        "--multi-rogue-count",
+        "4",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_ATK51_N4",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_094834_715075_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "prb",
+          "mitigation_integrity",
+          "attack_integrity"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_094834_715075_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_094834_715075_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "rc": 0
+      }
+    },
+    {
+      "order": 2,
+      "id": "e_atk51_n4_r1",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "attack",
+        "--attack",
+        "multi-rogue",
+        "--attack-start-after-s",
+        "45",
+        "--gnb-prb",
+        "51",
+        "--multi-rogue-count",
+        "4",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_ATK51_N4",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_100450_050751_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "prb",
+          "mitigation_integrity",
+          "attack_integrity"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_100450_050751_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_100450_050751_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "rc": 0
+      }
+    },
+    {
+      "order": 3,
+      "id": "e_atk51_n4_r3",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "attack",
+        "--attack",
+        "multi-rogue",
+        "--attack-start-after-s",
+        "45",
+        "--gnb-prb",
+        "51",
+        "--multi-rogue-count",
+        "4",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_ATK51_N4",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "prb",
+          "mitigation_integrity",
+          "attack_integrity"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_102039_434932_attack_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_multi-rogue_n4_ph25ms_vid8p0mbps_r1",
+        "rc": 0
+      }
+    },
+    {
+      "order": 4,
+      "id": "cap51_base_vid16_r1",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--gnb-prb",
+        "51",
+        "--companion-video-mbps",
+        "16",
+        "--open-qgc",
+        "--results-tag",
+        "CAP51_BASE_VID16",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 1,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_103554_670559_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1",
+      "valid": false,
+      "detail": {
+        "valid": false,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [
+          {
+            "gate": "host",
+            "reason": {
+              "pass": false,
+              "gate_type": "host_quality",
+              "enforced": true,
+              "host_telemetry_rc": 0,
+              "loadavg1_max": 15.42,
+              "cpu_busy_pct_max": 56.3,
+              "cpu_busy_max_pct_threshold": 90.0,
+              "loadavg1_before": 6.95,
+              "loadavg1_after": 10.09,
+              "nproc": 16
+            }
+          }
+        ],
+        "run_id": "20261112_103554_670559_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_103554_670559_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1",
+        "rc": 1
+      },
+      "discard_reason": {
+        "rule": "R1",
+        "summary": "run_meta.valid == false",
+        "failed_gates": [
+          {
+            "gate": "host",
+            "reason": {
+              "pass": false,
+              "gate_type": "host_quality",
+              "enforced": true,
+              "host_telemetry_rc": 0,
+              "loadavg1_max": 15.42,
+              "cpu_busy_pct_max": 56.3,
+              "cpu_busy_max_pct_threshold": 90.0,
+              "loadavg1_before": 6.95,
+              "loadavg1_after": 10.09,
+              "nproc": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "order": 5,
+      "id": "cap51_base_vid24_r1",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--gnb-prb",
+        "51",
+        "--companion-video-mbps",
+        "24",
+        "--open-qgc",
+        "--results-tag",
+        "CAP51_BASE_VID24",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 1,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_105053_921298_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid24p0mbps_r1",
+      "valid": false,
+      "detail": {
+        "valid": false,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [
+          {
+            "gate": "host",
+            "reason": {
+              "pass": false,
+              "gate_type": "host_quality",
+              "enforced": true,
+              "host_telemetry_rc": 0,
+              "loadavg1_max": 15.89,
+              "cpu_busy_pct_max": 61.35,
+              "cpu_busy_max_pct_threshold": 90.0,
+              "loadavg1_before": 7.47,
+              "loadavg1_after": 11.15,
+              "nproc": 16
+            }
+          },
+          {
+            "gate": "c2_health",
+            "reason": {
+              "pass": false,
+              "heartbeat_gaps_over_threshold": 22,
+              "unexpected_failsafe": false,
+              "unexpected_mode_transitions": [],
+              "position_samples": 2458,
+              "normal_land": true,
+              "min_position_samples": 10
+            }
+          },
+          {
+            "gate": "baseline_drone_quality",
+            "reason": "heartbeat_gaps"
+          }
+        ],
+        "run_id": "20261112_105053_921298_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid24p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_105053_921298_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid24p0mbps_r1",
+        "rc": 1
+      },
+      "discard_reason": {
+        "rule": "R1",
+        "summary": "run_meta.valid == false",
+        "failed_gates": [
+          {
+            "gate": "host",
+            "reason": {
+              "pass": false,
+              "gate_type": "host_quality",
+              "enforced": true,
+              "host_telemetry_rc": 0,
+              "loadavg1_max": 15.89,
+              "cpu_busy_pct_max": 61.35,
+              "cpu_busy_max_pct_threshold": 90.0,
+              "loadavg1_before": 7.47,
+              "loadavg1_after": 11.15,
+              "nproc": 16
+            }
+          },
+          {
+            "gate": "c2_health",
+            "reason": {
+              "pass": false,
+              "heartbeat_gaps_over_threshold": 22,
+              "unexpected_failsafe": false,
+              "unexpected_mode_transitions": [],
+              "position_samples": 2458,
+              "normal_land": true,
+              "min_position_samples": 10
+            }
+          },
+          {
+            "gate": "baseline_drone_quality",
+            "reason": "heartbeat_gaps"
+          }
+        ]
+      }
+    },
+    {
+      "order": 6,
+      "id": "e_base51_r2",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--gnb-prb",
+        "51",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_BASE51",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_110543_121161_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_110543_121161_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_110543_121161_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "rc": 0
+      }
+    },
+    {
+      "order": 7,
+      "id": "e_base51_r1",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--gnb-prb",
+        "51",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_BASE51",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_112038_470212_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_112038_470212_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_112038_470212_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "rc": 0
+      }
+    },
+    {
+      "order": 8,
+      "id": "e_base51_r3",
+      "cmd": [
+        "/usr/bin/python3",
+        "ARTIFACT_ROOT/01_scripts/02_experiments/orchestrate.py",
+        "--sidecars",
+        "FULL",
+        "--condition",
+        "baseline",
+        "--gnb-prb",
+        "51",
+        "--companion-video-mbps",
+        "8",
+        "--open-qgc",
+        "--results-tag",
+        "E_BASE51",
+        "--out",
+        "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs"
+      ],
+      "rc": 0,
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_113527_857462_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+      "valid": true,
+      "detail": {
+        "valid": true,
+        "enforced": [
+          "clock",
+          "host",
+          "host_instrumentation_integrity",
+          "mission_integrity",
+          "drone_integrity",
+          "freshness",
+          "stream",
+          "c2_health",
+          "prb",
+          "mitigation_integrity",
+          "availability",
+          "mission_success",
+          "baseline_drone_quality"
+        ],
+        "failed_gates": [],
+        "run_id": "20261112_113527_857462_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_113527_857462_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid8p0mbps_r1",
+        "rc": 0
+      }
+    }
+  ],
+  "stopped_on_invalid": false,
+  "continue_on_invalid": true,
+  "invalid_runs": [
+    {
+      "order": 4,
+      "id": "cap51_base_vid16_r1",
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_103554_670559_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1"
+    },
+    {
+      "order": 5,
+      "id": "cap51_base_vid24_r1",
+      "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_20261111_232155/S3_prb51/runs/20261112_105053_921298_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid24p0mbps_r1"
+    }
+  ],
+  "dry_run": false
+}
