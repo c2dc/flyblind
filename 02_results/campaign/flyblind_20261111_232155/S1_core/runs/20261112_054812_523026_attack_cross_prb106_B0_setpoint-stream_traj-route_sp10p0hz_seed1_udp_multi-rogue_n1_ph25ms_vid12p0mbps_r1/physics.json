@@ -103,7 +103,7 @@
       "t_active_end_ns_original": 24173783633789,
       "t_last_send_ns": 24173683781378,
       "t_last_arrival_ns": 24173705414127,
-      "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send) (plan item 1.3b)"
+      "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send)"
     },
     "measurement_window_ns": {
       "t_start_ns": 23602783633789,
@@ -326,7 +326,7 @@
       "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
       "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
       "aoi_generation_ms": "AoI vs setpoint generation time (legacy direct-UDP path without arrival capture): t_sample \u2212 t_generation; structural ~10 Hz sawtooth, blind to network delay.",
-      "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) (plan item 1.3b). Not an alias of aoi_network_ms.",
+      "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) Not an alias of aoi_network_ms.",
       "delivery_ratio": "correlated_setpoints / generated_setpoints (active window).",
       "capture_ratio": "unique_setpoints_seen_by_proxy / successful_send_calls.",
       "correlation_ratio": "correlated_setpoints / unique_setpoints_seen_by_proxy."
@@ -436,7 +436,7 @@
         "network_arrival_delay_ms": "Per-setpoint one-way delay: t_arrival_uav_proxy \u2212 t_send_gcs (ms). Used for miss_ratio_network / owd_miss@D ms.",
         "aoi_network_ms": "Continuous Age of Information at 100 Hz: t_sample \u2212 t_generation of the latest setpoint whose proxy arrival \u2264 t_sample. Grows between arrivals; used for miss_ratio_aoi_network / aoi_miss@D ms.",
         "aoi_generation_ms": "AoI vs setpoint generation time (legacy direct-UDP path without arrival capture): t_sample \u2212 t_generation; structural ~10 Hz sawtooth, blind to network delay.",
-        "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) (plan item 1.3b). Not an alias of aoi_network_ms.",
+        "aoi_arrival_ms": "Continuous AoI (100 Hz) using generation time of the latest setpoint that has already arrived at the UAV proxy. Series cut at min(active_end, last_arrival) Not an alias of aoi_network_ms.",
         "delivery_ratio": "correlated_setpoints / generated_setpoints (active window).",
         "capture_ratio": "unique_setpoints_seen_by_proxy / successful_send_calls.",
         "correlation_ratio": "correlated_setpoints / unique_setpoints_seen_by_proxy."
@@ -446,7 +446,7 @@
         "t_active_end_ns_original": 24173783633789,
         "t_last_send_ns": 24173683781378,
         "t_last_arrival_ns": 24173705414127,
-        "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send) (plan item 1.3b)"
+        "cut_reason": "min(active_end, last_arrival) if there is an arrival; otherwise min(active_end, last_send)"
       }
     },
     "telemetry_downlink": {

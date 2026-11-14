@@ -1,0 +1,54 @@
+1
+00:00:02,000 --> 00:00:14,000
+ATTACK — four co-tenant UEs now
+share the same uplink.
+
+2
+00:00:20,000 --> 00:00:33,000
+Nothing is spoofed or injected.
+Only the uplink queue is contested.
+
+3
+00:01:05,000 --> 00:01:17,000
+Telemetry age at the GCS: 19 ms.
+Still fresh — same as the baseline.
+
+4
+00:01:46,000 --> 00:02:00,000
+The adversary starts now.
+Nothing on this screen will change.
+
+5
+00:02:10,000 --> 00:02:23,000
+The age is already 10 s.
+The map is falling behind.
+
+6
+00:02:40,000 --> 00:02:54,000
+Telemetry age at the GCS: 13 s.
+Median over the attack window.
+
+7
+00:03:40,000 --> 00:03:55,000
+Link KPIs green. Heartbeat alive.
+No failsafe. No operator alert.
+
+8
+00:04:40,000 --> 00:04:56,000
+The symbol on the map is ~48 m from
+where the aircraft actually is.
+
+9
+00:06:00,000 --> 00:06:16,000
+The aircraft is fine: true tracking
+error 7.9 m, as in the baseline.
+
+10
+00:07:30,000 --> 00:07:46,000
+Only the operator's picture broke —
+stale state that reads as healthy.
+
+11
+00:09:30,000 --> 00:09:46,000
+Silent state staleness.
+No alarm will ever fire.

@@ -1,6 +1,6 @@
 {
   "schema": "flyblind_campaign_manifest_v1",
-  "generated_utc": "2026-11-14T00:15:14+00:00",
+  "generated_utc": "2026-11-14T02:47:36+00:00",
   "sources": [
     "02_results/campaign/flyblind_20261111_232155/S1_core/batch_log.json",
     "02_results/campaign/flyblind_20261111_232155/S3_prb51/batch_log.json",

@@ -103,6 +103,8 @@ queue that ages the state is in the radio scheduler, not in the host.
 ├── 02_results/campaign/                  the 65 recorded runs (see section 7.2 on what is included)
 ├── 03_analysis/                          read-only analysis; out/ holds the 37 generated outputs
 ├── 04_images/                            every paper figure: scripts/, pdfs/, pngs/, icons/
+├── 05_videos/                            the operator's screen, one recording per condition (+ .srt captions)
+├── .gitignore
 ├── install_dependencies.sh
 ├── LICENSE
 └── README.md
@@ -143,7 +145,7 @@ configuration the measurements describe:
 
 | item | size |
 |---|---|
-| This repository | 256 MB |
+| This repository | 342 MB (256 MB code, results and figures; 86 MB screen recordings) |
 | OAI/ORANSlice images after the build (gNB 470 MB + nr-UE 390 MB) | 860 MB |
 | `kindest/node` base image | 1.4 GB |
 | Build intermediates and Docker layer cache | several GB; `docker system prune` reclaims them afterwards |
@@ -391,7 +393,37 @@ The released manifest is `53 campaign + 11 capacity_probe + 1 positive_control`,
 
 ---
 
-## 8. Figures
+## 8. The operator's screen (`05_videos/`)
+
+Three screen recordings of the QGroundControl window, one per condition. They are the same evidence
+as the tables, seen the way the operator sees it: nothing here is a reconstruction or an animation.
+
+| file | condition | what it shows |
+|---|---|---|
+| `1_BASELINE.mp4` | no adversary | the reference flight. Telemetry age 18 ms, displayed position within 1.0 m of ground truth, every link KPI green. |
+| `2_ATTACK.mp4` | four co-tenants, no defence | the attack starts mid-flight and **nothing on the screen changes**. Age reaches 13 s, the symbol sits ~48 m from the aircraft, and no alarm of any kind fires. |
+| `3_ATTACK_WITH_DETECTOR.mp4` | same attack, detector build | identical network, identical autopilot. Only the ground station differs: the STALE STATE alarm raises about 2 s after the attack begins and shows the live age. |
+
+Each video ships with a `.srt` subtitle track of the same name; most players load it automatically.
+The captions carry the measured values, so the numbers on screen can be checked against
+`03_analysis/out/`.
+
+Watch them in order. The point of the second is what **does not** happen in it, and that only reads
+as a result once the first has established what a healthy screen looks like.
+
+**On the audio.** The recordings carry the real sound of the session, unedited. In `2_ATTACK.mp4`
+that means silence: the native monitors emit no warning, which is the finding, not an omission. The
+detector's alarm in `3_ATTACK_WITH_DETECTOR.mp4` is **visual only** — this build raises an on-screen
+overlay and plays no sound.
+
+Why the third video does not end the attack: the detector does not mitigate anything. The state is
+just as stale (~51 m) and the aircraft is just as unaffected. What changes is that the operator can
+see it. The defence that does remove the effect is uplink slice enforcement, measured in
+`out/mitigation.csv`, not shown here.
+
+---
+
+## 9. Figures
 
 ```bash
 cd 04_images/scripts
@@ -403,7 +435,7 @@ Each figure has exactly one generator (`04_images/README.md` maps them). The num
 
 ---
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
 - **`kubectl`/cluster context errors after a crash** — `./stop_testbed.sh` clears every partial state
   (Kind clusters, leftover containers, host helpers, runtime directories); then start again.
@@ -426,7 +458,7 @@ Each figure has exactly one generator (`04_images/README.md` maps them). The num
 
 ---
 
-## 10. License and anonymity
+## 11. License and anonymity
 
 Released under the MIT License (see `LICENSE`).
 

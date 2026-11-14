@@ -1,4 +1,4 @@
-# Per-run report (plan item 1.13)
+# Per-run report
 
 run_dir: `ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/runs/20261112_201028_837998_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1`
 run_meta.valid: False
@@ -56,7 +56,7 @@ run_meta.valid: False
 {
   "criterion": "C2",
   "pass": null,
-  "note": "C2 compares instrumentation on vs off (plan item 2.2). A single-run report does not evaluate C2; use compare_ni_runs.",
+  "note": "C2 compares instrumentation on vs off. A single-run report does not evaluate C2; use compare_ni_runs.",
   "run_dir": "ARTIFACT_ROOT/02_results/campaign/flyblind_extra_20261112_162243/X3_prb51_extra/runs/20261112_201028_837998_baseline_cross_prb51_B0_setpoint-stream_traj-route_sp10p0hz_seed1_udp_vid16p0mbps_r1"
 }
 ```

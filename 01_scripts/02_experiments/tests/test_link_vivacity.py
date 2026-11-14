@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ##################################################################################################################################
-# Module: test_link_vivacity.py (Bench tests for K7/K8 link vivacity + phase slice (plan items 1.4b/1.4c/1.7))                   #
+# Module: test_link_vivacity.py (bench tests for K7/K8 link vivacity and phase slicing)                                          #
 # Part of the paper: FlyBlind: Silent State Staleness in UAS Command and Control over 5G                                         #
 #                                                                                                                                #
 # Author: (anonymous; double-blind submission).                                                                                  #
@@ -9,7 +9,7 @@
 # License: MIT License                                                                                                           #
 #                                                                                                                                #
 ##################################################################################################################################
-"""Bench tests for K7/K8 link vivacity + phase slice (plan items 1.4b/1.4c/1.7)."""
+"""Bench tests for K7/K8 link vivacity and phase slicing."""
 from __future__ import annotations
 
 import csv

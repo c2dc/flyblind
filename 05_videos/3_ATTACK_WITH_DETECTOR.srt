@@ -1,0 +1,58 @@
+1
+00:00:02,000 --> 00:00:14,000
+ATTACK WITH DETECTOR — same attack,
+same autopilot, same network.
+
+2
+00:00:20,000 --> 00:00:34,000
+Only the ground station changed.
+No new sensor, no extra message.
+
+3
+00:00:50,000 --> 00:01:04,000
+It times each report against its
+own arrival clock. Nothing else.
+
+4
+00:01:20,000 --> 00:01:33,000
+Telemetry age at the GCS: 18 ms.
+The detector stays quiet.
+
+5
+00:01:45,000 --> 00:01:52,000
+The adversary starts now.
+
+6
+00:01:53,000 --> 00:02:08,000
+STALE STATE — the alarm fires about
+2 s after the attack begins.
+
+7
+00:02:40,000 --> 00:02:55,000
+The age is shown live, in seconds,
+and the track turns red.
+
+8
+00:03:40,000 --> 00:03:56,000
+Telemetry age at the GCS: 14 s.
+Exactly the same attack as before.
+
+9
+00:04:40,000 --> 00:04:56,000
+The detector does not stop it.
+The state is just as stale: ~51 m.
+
+10
+00:06:00,000 --> 00:06:16,000
+What changed is that the operator
+can now see it. That is the point.
+
+11
+00:07:30,000 --> 00:07:46,000
+Still no failsafe, still no link
+alarm — those monitors see nothing.
+
+12
+00:09:30,000 --> 00:09:46,000
+Silent state staleness,
+no longer silent.

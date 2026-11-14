@@ -10,7 +10,7 @@
 #                                                                                                                                #
 # Description: Importable offline. Does not start the testbed.                                                                   #
 ##################################################################################################################################
-"""Hooks shared by the orchestrates (plan items 1.8, 1.10, 1.11, 1.15).
+"""Hooks the orchestrator shares across runs: manifest, phase windows, drain policy, image digests.
 
 Importable offline. Does not start the testbed.
 """

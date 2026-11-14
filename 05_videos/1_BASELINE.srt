@@ -1,0 +1,33 @@
+1
+00:00:02,000 --> 00:00:13,000
+BASELINE — no adversary
+
+2
+00:00:16,000 --> 00:00:29,000
+The UAV is an ordinary 5G subscriber
+(5QI 9), with no uplink guarantee.
+
+3
+00:01:05,000 --> 00:01:16,000
+This is the operator's only view
+of the vehicle.
+
+4
+00:02:30,000 --> 00:02:43,000
+Telemetry age at the GCS: 18 ms
+(median over this flight)
+
+5
+00:05:00,000 --> 00:05:13,000
+The position shown tracks ground truth
+within 1.0 m.
+
+6
+00:08:00,000 --> 00:08:15,000
+Link KPIs green, heartbeat alive,
+no failsafe — and the state IS fresh.
+
+7
+00:10:25,000 --> 00:10:39,000
+Reference condition.
+Compare with the attack.

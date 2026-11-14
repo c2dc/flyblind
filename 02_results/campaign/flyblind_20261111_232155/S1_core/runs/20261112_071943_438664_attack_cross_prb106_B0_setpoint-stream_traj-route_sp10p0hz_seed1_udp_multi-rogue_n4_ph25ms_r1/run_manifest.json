@@ -47,7 +47,7 @@
   "FS_GCS_ENABLE": "1",
   "FS_GCS_TIMEOUT": "5",
   "FS_GCS_source": null,
-  "FS_GCS_error": "FS_GCS_TIMEOUT not in run_dir; expected value after plan item 1.16 = 5.FS_GCS_ENABLE not in run_dir; expected value = 1.",
+  "FS_GCS_error": "FS_GCS_TIMEOUT not in run_dir; expected value = 5.FS_GCS_ENABLE not in run_dir; expected value = 1.",
   "sidecar_profile": "FULL",
   "versions": {
     "schema": "flyblind_versions_v2",
